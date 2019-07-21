@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ExpressJS</title>
+  <link href="../assets/prism.css" type="text/css" rel="stylesheet" media="all" />
+  <link href="../assets/styles.css" type="text/css" rel="stylesheet" media="all" />
+  <script src="../assets/prism.js"></script>
+</head>
+
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="#expressInstall">Installation</a></li>
+    </ul>
+  </nav>
+
+  <h1>ExpressJS</h1>
+  <p>Express builds on top of its features to provide easy to use functionality that satisfy the needs of the Web
+    Server use case.</p>
+
+  <h2 id="expressInstall">Installation</h2>
+  <pre><code class="language-js">
+  // create project 
+  npm init
+  // install express
+  npm install express --save
+  npm install cors --save
+  </code></pre>
+
+  <pre><code class="language-js">
+  // Create index.js file and paste this code. Run "node index.js" command and open "http://localhost:3000/" on browser.
+  const express = require('express')
+  const app = express()
+
+  app.get('/', (req, res) => { 
+    // console.log("request", req);
+    // console.log("response", res);
+    res.send('Hello Worldd!')
+  })
+
+  app.listen(3000, () => console.log('Server ready')) 
+  </code></pre>
+
+  <p>There is a method for every HTTP verb: get() , post() , put() , delete() , patch() :</p>
+  <pre><code class="language-js">
+  app.get('/', (req, res) => { /* */ })
+  app.post('/', (req, res) => { /* */ })
+  app.put('/', (req, res) => { /* */ })
+  app.delete('/', (req, res) => { /* */ })
+  app.patch('/', (req, res) => { /* */ }) 
+  </code></pre>
+
+  <p>Express sends us two objects in this callback, which we called <code class="language-js">req</code> and <code
+      class="language-js">res</code> , that
+    represent the Request and the Response objects.</p>
+
+  <p>Request is the HTTP request. It can give us all the info about that, including the request parameters, the
+    headers, the body of the request, and more.</p>
+
+  <p>Response is the HTTP response object that we'll send to the client. <code class="language-js">Response.send()</code>
+    method sets
+    string as the body, and it closes the connection.</p>
+
+  <p><code class="language-js">app.listen(3000, () => {})</code> starts the server, and tells it to listen on port 3000
+    . We pass in a
+    callback that is called when the server is ready to accept new requests.</p>
+
+  <h3>Request parameters</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>.app</td>
+        <td>holds a reference to the Express app object</td>
+      </tr>
+      <tr>
+        <td>.baseUrl</td>
+        <td>the base path on which the app responds</td>
+      </tr>
+      <tr>
+        <td>.body</td>
+        <td>contains the data submitted in the request body (must be parsed and populated manually before you can
+          access it)</td>
+      </tr>
+      <tr>
+        <td>.cookies</td>
+        <td>contains the cookies sent by the request (needs the cookie-parser middleware)</td>
+      </tr>
+      <tr>
+        <td>.hostname</td>
+        <td>the server hostname</td>
+      </tr>
+      <tr>
+        <td>.ip</td>
+        <td>the server IP</td>
+      </tr>
+      <tr>
+        <td>.method</td>
+        <td>the HTTP method used</td>
+      </tr>
+      <tr>
+        <td>.params</td>
+        <td>the route named parameters</td>
+      </tr>
+      <tr>
+        <td>.path</td>
+        <td>the URL path</td>
+      </tr>
+      <tr>
+        <td>.protocol</td>
+        <td>the request protocol</td>
+      </tr>
+      <tr>
+        <td>.query</td>
+        <td>an object containing all the query strings used in the request</td>
+      </tr>
+      <tr>
+        <td>.secure</td>
+        <td>true if the request is secure (uses HTTPS)</td>
+      </tr>
+      <tr>
+        <td>.signedCookies</td>
+        <td>contains the signed cookies sent by the request (needs the cookieparser middleware)</td>
+      </tr>
+      <tr>
+        <td>.xhr</td>
+        <td>true if the request is an XMLHttpRequest</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>How to retrieve the GET query string parameters</h3>
+
+  <pre><code class="language-js">
+  //?name=flavio&age=35
+  for (const key in req.query) {
+    console.log(key, req.query[key])
+  }  
+  </code></pre>
+
+  <h3>How to retrieve the POST query string parameters</h3>
+
+  <p>If the data was sent as JSON, using Content-Type: application/json , you will use the express.json() middleware:</p>
+
+  <pre><code class="language-js">
+  app.use(express.json())
+  </code></pre>
+
+  <p>If the data was sent as JSON, using Content-Type: application/x-www-form-urlencoded , you will use the
+    express.urlencoded() middleware:</p>
+
+  <pre><code class="language-js">
+  app.use(express.urlencoded())
+  </code></pre>
+
+  <p>In both cases you can access the data by referencing it from Request.body :</p>
+
+  <pre><code class="language-js">
+  app.post('/form', (req, res) => {
+    const name = req.body.name
+  })
+  </code></pre>
+
+  <p class="note">Note: older Express versions required the use of the <strong>body-parser</strong> module to process
+    POST data. This is no longer
+    the case as of Express 4.16 (released in September 2017) and later versions.</p>
+
+  <h3>Sending a response</h3>
+
+  <p>We used the Response.send() method to send a simple string as a response, and to close the connection:</p>
+
+  <pre><code class="language-js">
+  (req, res) => res.send('Hello World!') 
+  </code></pre>
+
+  <p>If you pass in a string, it sets the <code class="language-js">Content-Type</code> header to <code class="language-js">text/html</code>.</p>
+
+  <p>if you pass in an object or an array, it sets the application/json Content-Type header, and
+    parses that parameter into JSON.</p>
+
+  <p><code class="language-js">send()</code> automatically sets the <code class="language-js">Content-Length</code>
+    HTTP response header.</p>
+
+  <p><code class="language-js">send()</code> also automatically closes the connection.</p>
+
+  <h3>Use end() to send an empty response</h3>
+
+  <pre><code class="language-js">
+  res.end()
+  </code></pre>
+
+  <h3>Set the HTTP response status</h3>
+
+  <pre><code class="language-js">
+  res.status(404).send('File not found')
+  </code></pre>
+  <p><code class="language-js">sendStatus()</code> is a shortcut:</p>
+  <pre><code class="language-js">
+  res.sendStatus(200)
+  // === res.status(200).send('OK')
+  res.sendStatus(403)
+  // === res.status(403).send('Forbidden')
+  res.sendStatus(404)
+  // === res.status(404).send('Not Found')
+  res.sendStatus(500)
+  // === res.status(500).send('Internal Server Error')
+  </code></pre>
+
+  <h3>Sending a JSON response</h3>
+
+  <pre><code class="language-js">
+  res.json({ username: 'Flavio' })
+  </code></pre>
+
+  <h3>Manage Cookies</h3>
+
+  <p>Use the <code class="language-js">Response.cookie()</code> method to manipulate your cookies.</p>
+
+  <pre><code class="language-js">
+  res.cookie('username', 'Flavio', { domain: '.flaviocopes.com', path: '/administrator', secure: true })
+  res.cookie('username', 'Flavio', { expires: new Date(Date.now() + 900000), httpOnly: true })  
+  </code></pre>
+
+  <h4>The most useful parameters you can set are:</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Value</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>domain</td>
+        <td>the cookie domain name</td>
+      </tr>
+      <tr>
+        <td>expires</td>
+        <td>set the cookie expiration date. If missing, or 0, the cookie is a session
+          cookie</td>
+      </tr>
+      <tr>
+        <td>httpOnly</td>
+        <td>set the cookie to be accessible only by the web server. See HttpOnly</td>
+      </tr>
+      <tr>
+        <td>maxAge</td>
+        <td>set the expiry time relative to the current time, expressed in milliseconds</td>
+      </tr>
+      <tr>
+        <td>path</td>
+        <td>the cookie path. Defaults to /</td>
+      </tr>
+      <tr>
+        <td>secure</td>
+        <td>Marks the cookie HTTPS only</td>
+      </tr>
+      <tr>
+        <td>signed</td>
+        <td>set the cookie to be signed</td>
+      </tr>
+      <tr>
+        <td>sameSite</td>
+        <td>Value of SameSite</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>cookie can be cleared</p>
+
+  <pre><code class="language-js">
+  res.clearCookie('username')
+  </code></pre>
+
+  <h3>HTTP headers</h3>
+
+  <p>Access HTTP headers values</p>
+
+  <pre><code class="language-js">
+  app.get('/', (req, res) => {
+    // console.log(req.headers)
+    req.header('User-Agent')    
+  })
+  </code></pre>
+
+  <p>Change any HTTP header value of a response</p>
+  <pre><code class="language-js">
+  res.set('Content-Type', 'text/html')
+  //res.set({ multiple property  })
+
+  // There is a shortcut for the Content-Type header however:
+  res.type('.html')
+  // => 'text/html'
+  res.type('html')
+  // => 'text/html'
+  res.type('json')
+  // => 'application/json'
+  res.type('application/json')
+  // => 'application/json'
+  res.type('png')
+  // => image/png:
+  </code></pre>
+
+  <h3>Redirects</h3>
+  <pre><code class="language-js">
+  res.redirect(301, '/go-there')
+  </code></pre>
+
+  <p>You can specify an absolute path ( /go-there ), an absolute url ( https://anothersite.com ), a relative path (
+    go-there ) or use the .. to go back one level:</p>
+
+  <pre><code class="language-js">
+  res.redirect('../go-there')
+  res.redirect('..') 
+  </code></pre>
+
+  <p>Also redirect back to the Referer HTTP header value (defaulting to / if not set) using</p>
+
+  <pre><code class="language-js">
+  res.redirect('back')
+  </code></pre>
+
+  <h3>Routing</h3>
+
+  <p>Routing is the process of determining what should happen when a URL is called, or also which parts of the
+    application should handle a specific incoming request.</p>
+
+  <pre><code class="language-js">
+  app.get('/', (req, res) => { /* */ })
+  // Named parameters
+  app.get('/uppercase/:theValue', (req, res) => res.send(req.params.theValue.toUpperCase()))
+  // Use a regular expression to match a path
+  app.get(/post/, (req, res) => { /* */ })
+  </code></pre>
+
+  <h3>CORS(Cross-Origin Resource Sharing.)</h3>
+  <p>One very important thing that needs CORS is ES Modules, recently introduced in modern browsers.</p>
+  <p>A Cross-Origin resource fails if it's:</p>
+  <ul>
+    <li>
+      to a different domain</li>
+    <li>to a different subdomain</li>
+    <li>to a different port</li>
+    <li>to a different protocol</li>
+  </ul>
+  <p>use the CORS middleware package.</p>
+
+  <pre><code class="language-js">
+  const express = require('express')
+  const cors = require('cors')
+  const app = express()
+  app.get('/with-cors', cors(), (req, res, next) => {
+    res.json({ msg: 'WHOAH with CORS it works!' })
+  })  
+  </code></pre>
+  <p>Allow only specific origins</p>
+
+  <pre><code class="language-js"> 
+  const cors = require('cors')
+  const corsOptions = {
+    origin: 'https://yourdomain.com'
+  }
+  app.get('/products/:id', cors(corsOptions), (req, res, next) => {
+    //...
+  })
+  </code></pre>
+
+  <p>You can serve more as well:</p>
+
+  <pre><code class="language-js">
+  const whitelist = ['http://example1.com', 'http://example2.com']
+  const corsOptions = {
+    origin: function(origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }
+  </code></pre>
+
+  <h3>Preflight</h3>
+  <p>All other requests must run through a pre-approval phase, called preflight. The browser does this to determine if
+    it has the permission to perform an action, by issuing an <code class="language-js">OPTIONS</code> request.</p>
+
+  <p>A preflight request contains a few headers that the server will use to check permissions</p>
+
+  <pre><code class="language-js">
+  OPTIONS /the/resource/you/request
+  Access-Control-Request-Method: POST
+  Access-Control-Request-Headers: origin, x-requested-with, accept
+  Origin: https://your-origin.com
+  </code></pre>
+
+  <p>The server will respond with something like this(irrelevant fields omitted):</p>
+  <pre><code class="language-js">
+  HTTP/1.1 200 OK
+  Access-Control-Allow-Origin: https://your-origin.com
+  Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE 
+  </code></pre>
+
+  <p>Following the Node.js Expre +//ss example above, the server must also handle the OPTIONS request:</p>
+  <pre><code class="language-js"> 
+  var express = require('express')
+  var cors = require('cors')
+  var app = express()
+  //allow OPTIONS on just one resource
+  app.options('/the/resource/you/request', cors())
+  //allow OPTIONS on all resources
+  app.options('*', cors())
+  </code></pre>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+React Element must start with capital later.
+
+set state function call batch
+
+npm i enzyme-adapter-react-16
+npm i enzyme
+
+
+JSX is anextension of JavaScript that’s similar to XML and is only intended for use by code­transformation tools(Babel). 
+
+JSX helps by allowing you to write XML­style (think HTML) code in place of usingReact.createClass. In other words, it lets you write code that looks like HTML butisn’t. A JSX preprocessor program like Babel—a transpiler that turns your JavaScriptcode into code that’s compatible with older browsers—will go through and convert allyour JSX code to regular JavaScript like we’ve written so far.
+
+In other words, it lets you write code that looks like HTML butisn’t. A JSX preprocessor program like Babel—a transpiler that turns your JavaScriptcode into code that’s compatible with older browsers—will go through and convert allyour JSX code to regular JavaScript like we’ve written so far.
+
+Attribute expressions— When you want to use a JavaScript expression as anattribute value, wrap the expression in a pair of curly braces (<Comment a={this.props.b}/>) instead of quotes (<User a="this.props.b"/>) asshown in listing 2.8.Boolean attributes— Omitting the value of an attribute (<Plan active/>,<Input checked/>) causes JSX to treat it as true. To pass a false value, youhave to use an attribute expression (attribute={false}).Nested expressions— To insert the value of an expression inside an element, youalso use a pair of curly braces (<p>{this.props.content}</p>).
+
+
+
+
+
+There are two main types of elements that we work with to create components inReact: React elements and React classes. React elements are “what you want to seeon the screen” and are comparable to DOM elements. React classes, on the otherhand, are JavaScript classes that inherit from the React.Component class. Theseare what we normally call components in general. They’re created from eitherclasses (usually extending React.Component) or functions (stateless functionalcomponents, covered in later chapters).
+
+React classes get access to state that can change over time (mutable state), but allReact elements get access to props that shouldn’t be modified (immutable state).
+
+React classes also have special methods called lifecycle methods that will be calledby React in a particular order during the rendering and update process. This makesyour components more predictable to work with and allows you to easily hook intothe component update process.
+
+React classes can have custom methods defined on them to perform tasks such asmutating state.
+
+React components communicate via props and have child­parent relationships.Parent components can pass data to children, but children can’t modify parents.They can pass data back to parents via callbacks, but don’t have direct access toparents.
+
+
+
+
+you can communicate andinteract with state in your React components fall into these two categories. In React,these are known as state (data you can change within a component) and props (data acomponent receives that shouldn’t be changed by the component).
+
+In React components, state is generally mutable, andprops shouldn’t be changed. 
+
+we call state mutable we mean we can overwrite orupdate that data (for example, a variable that you can overwrite). Immutable state, onthe other hand, can’t be changed. There are also immutable data structures, which canbe changed but only in controlled ways (this is sort of how the state API works inReact). When you work with Redux in chapters 10 and 11, you’ll emulate immutable datastructures.
+
+Immutable— An immutable, persistent data structure supports multiple versionsover time but can’t be directly overwritten; immutable data structures are generallypersistent.Mutable— A mutable, ephemeral data structure supports only a single versionover time; mutable data structures are overwritten when they change and don’tsupport additional versions.
+
+Persistence and ephemerality in immutable and mutable datastructures. Immutable or persistent data structures usually record a history anddon’t change but rather make versions of what changed over time. Ephemeraldata structures, on the other hand, usually don’t record history and get wiped out with each update.
+
+React exposes component state in a mutable way (changeable via setState) and props asread­only.
+
+import React from 'react'
+import ReactDOM from 'react-dom';
+ 
+function Hello(props){
+  return <h1>Hellow at {props.now}</h1>;
+}
+
+ReactDOM.render(<Hello now={new Date().toISOString()} />,
+  document.getElementById('root')
+);

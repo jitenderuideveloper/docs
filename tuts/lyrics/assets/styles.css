@@ -1,0 +1,8 @@
+body{ padding: 20px; font-family: nunito, Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif"; font-size: 24px; color:#000;}
+p{ margin: 0 0 40px 0; }
+p:nth-child(even) { margin-left: 100px; }
+a { color: #808080; font-size:12px; text-decoration: underline; }
+a:visited{ color: #808080; }
+h1{ font-size:32px; color: #808080; font-family: Arial, Helvetica, sans-serif;}
+.metaData{ float:right; }
+.english { color: #808080; display: block; margin-bottom: 5px; }

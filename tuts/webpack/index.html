@@ -1,0 +1,1053 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Angular 2</title>
+  <link href="../assets/prism.css" type="text/css" rel="stylesheet" media="all" />
+  <link href="../assets/styles.css" type="text/css" rel="stylesheet" media="all" />
+  <script src="../assets/prism.js"></script>
+</head>
+
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="#ngInstallation">Installation</a></li>
+      <li><a href="#ngDirective">Directive</a></li>
+      <li><a href="#ngRxjs">RxJs</a></li>
+      <li><a href="#ngRouting">Routing</a></li>
+      <li><a href="#ngHttp">HTTP</a></li>
+      <li><a href="#ngNgModules">NgModules</a></li>
+      <li><a href="#ngComponents">Components</a></li>
+      <li><a href="#ngPipes">Pipes</a></li>
+      <li><a href="#ngDirectives">Directives</a></li>
+      <li><a href="#ngServices">Services & DI</a></li>
+      <li><a href="#ngForm">Form</a>
+        <ul>
+          <li><a href="#formReactive">Reactive</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <p>Best Practices:-</p>
+  <ul>
+    <li>When you bootstrap with the AppComponent class (in main.ts), Angular looks for a <app-root> in the index.html,
+        finds it, instantiates an instance of AppComponent, and renders it inside the <app-root> tag.</li>
+    <li>Component should focus on presenting data and delegate data access to a service.</li>
+    <li>The component plays the part of the controller/viewmodel, and the template represents the view.</li>
+    <li>{{1+1}} the text between the braces is a template expression that Angular first evaluates and then converts to
+      a string.</li>
+  </ul>
+  <pre><code>
+  ng generate component componentName
+  ng generate service serviceName
+  ng test --watch=false --source-map --code-coverage 
+  </code></pre>
+
+  <h1>Angular 2</h1>
+  <p>The basic building blocks of an Angular application are NgModules, which provide a compilation context for
+    components. NgModules collect related code into functional sets; an Angular app is defined by a set of NgModules.
+    An app always has at least a root module that enables bootstrapping, and typically has many more feature modules.</p>
+  <ul>
+    <li>Components define views, which are sets of screen elements that Angular can choose among and modify according
+      to your program logic and data.</li>
+    <li>Components use services, which provide specific functionality not directly related to views. Service providers
+      can be injected into components as dependencies, making your code modular, reusable, and efficient.</li>
+  </ul>
+  <h2 id="ngInstallation">Installation</h2>
+  <pre><code>
+  npm uninstall -g typescript
+  npm uninstall -g typings
+  
+  npm uninstall -g @angular/cli
+  npm cache clean --force
+  npm install -g @angular/cli@latest  
+  
+  npm install -g typescript
+  npm install -g typings
+  </code></pre>
+
+  <pre><code>
+  ng new my-app
+  </code></pre>
+
+  <pre><code>
+  cd my-app
+  ng serve --open
+  </code></pre>
+
+  <h2>Component</h2>
+  <p>Components are the fundamental building blocks of Angular applications. They display data on the screen, listen
+    for user input, and take action based on that input.</p>
+  <pre><code>
+  // Include in app.module.ts file
+  // import { ComponentClassName } from 'filePath';
+  import { HeroesComponent } from './heroes/heroes.component';
+  
+  declarations: [
+    HeroesComponent
+  ],
+  // declared in the @NgModule.declarations array
+  </code></pre>
+
+  <h3>Template Syntax</h3>
+
+  <h4>Class binding</h4>
+  <pre><code>
+  &lt;div class=&quot;special&quot; [class.special]=&quot;!isSpecial&quot;&gt;This one is not so special&lt;/div&gt;
+  </code></pre>
+
+  <h4>Style binding</h4>
+  <pre><code>
+  &lt;button [style.background-color]=&quot;canSave ? 'cyan': 'grey'&quot; &gt;Save&lt;/button&gt;  
+  </code></pre>
+
+  <h4>Reference variable</h4>
+  <pre><code>
+  // set Reference variable with hash #
+  &lt;form (ngSubmit)=&quot;onSubmit(heroForm)&quot; #heroForm=&quot;ngForm&quot;&gt;&lt;/form&gt; 
+  &lt;div [hidden]=&quot;!heroForm.form.valid&quot;&gt;{{submitMessage}}&lt;/div&gt; 
+  </code></pre>
+  <h3>Component Interaction</h3>
+  <h4>Pass data from parent to child with input binding</h4>
+  <pre><code>
+  import { Component, Input } from '@angular/core';
+  export class HeroChildComponent {
+    @Input() hero: type;
+  }
+  <h3>{{hero}}</h3>
+  <app-hero-child [hero]="hero"></app-hero-child>
+  export class HeroParentComponent {
+    hero = "jitender";
+  }  
+  </code></pre>
+
+  The double curly braces(<code>&lt;h1&gt;{{title}}&lt;/h1&gt;</code>) are Angular's interpolation binding syntax.
+
+
+  <h3>Define type for Object</h3>
+  <pre class="language-js"><code>
+  // Define object modal in new file
+  export class Hero {
+    id: number;
+    name: string;
+  }
+
+  // import object modal in your file
+  import { Hero } from '../hero';
+
+  // add type with colon : 
+  hero: Hero = {
+    id: 1,
+    name: 'Windstorm'
+  };
+  </code></pre>
+
+  <h3>Create mock data</h3>
+  <pre><code>
+  // src/app/mock-heroes.ts
+  import { Hero } from './hero';
+
+  export const HEROES: Hero[] = [
+    { id: 11, name: 'Mr. Nice' },
+    { id: 12, name: 'Narco' },
+    { id: 13, name: 'Bombasto' },
+    { id: 14, name: 'Celeritas' },
+    { id: 15, name: 'Magneta' },
+    { id: 16, name: 'RubberMan' },
+    { id: 17, name: 'Dynama' },
+    { id: 18, name: 'Dr IQ' },
+    { id: 19, name: 'Magma' },
+    { id: 20, name: 'Tornado' }
+  ];
+  </code></pre>
+
+  <h3>Two-way binding</h3>
+  <pre class="language-js"><code>
+  // It belongs to the optional FormsModule and you must import it in (app.module.ts). 
+  // import { FormsModule } from '@angular/forms';
+  // imports: [
+    // FormsModule
+  // ]   
+  &lt;label&gt;name:
+    &lt;input [(ngModel)]=&quot;hero.name&quot; placeholder=&quot;name&quot;&gt;
+  &lt;/label&gt;
+  </code></pre>
+
+  <h3>Directive</h3>
+  <pre><code>
+  &lt;li *ngFor=&quot;let hero of heroes&quot;&gt;&lt;/li&gt;
+  </code></pre>
+
+  <pre><code>
+  &lt;div *ngIf=&quot;selectedHero&quot;&gt;&lt;/div&gt;
+  </code></pre>
+
+  <h3>Event binding</h3>
+  <pre><code>
+  // in component.html
+  &lt;li (click)=&quot;onSelect($event)&quot;&gt;
+
+  // in component.ts
+  onSelect($event): void {
+    //define task
+  }
+  </code></pre>
+  <h2>Dependency injection</h2>
+  <p>Dependency injection is an important application design pattern. Angular has its own Dependency injection
+    framework, which is typically used in the design of Angular applications to increase their efficiency and
+    modularity.</p>
+
+  <p>Dependencies are services or objects that a class needs to perform its function. Dependency injection is a coding
+    pattern in which a class asks for dependencies from external sources rather than creating them itself.</p>
+
+  <p>In Angular, the Dependency injection framework provides declared dependencies to a class when that class is
+    instantiated.</p>
+
+
+  <pre><code>
+  // Service imports the Angular Injectable symbol and annotates the class with the @Injectable() decorator. This marks 
+     the class as one that participates in the dependency injection system.
+  import { Injectable } from '@angular/core';
+
+  @Injectable({
+    providedIn: 'root',
+  })
+  export class HeroService {
+    constructor() { }
+  }  
+  </code></pre>
+  <p>A service registers a provider with the root injector for your service by including provider metadata in the
+    @Injectable decorator. When you provide the service at the root level, Angular creates a single, shared instance of
+    HeroService and injects into any class that asks for it. Registering the provider in the @Injectable metadata also
+    allows Angular to optimize an app by removing the service if it turns out not to be used after all.</p>
+  <h3>Injecting services</h3>
+  <pre><code>
+  constructor(private heroService: HeroServic)
+  </code></pre>
+  <h2>Rxjs</h2>
+  <h3>Observable</h3>
+  <pre><code>
+  import { Observable } from 'rxjs';
+  
+  getHeroes(): Observable<Hero[]> {
+    return of(HEROES);
+  }
+
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes);
+  }
+  </code></pre>
+
+  <h2 id="ngRouting">Routing</h2>
+  <pre><code>
+  // --flat puts the file in src/app instead of its own folder.
+  // --module=app tells the CLI to register it in the imports array of the AppModule.
+  ng generate module app-routing --flat --module=app
+  </code></pre>
+
+  <pre><code>
+  // app-routing.module.ts
+  import { NgModule } from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+  
+  import { DashboardComponent } from './dashboard/dashboard.component';
+  import { HeroesComponent } from './heroes/heroes.component';
+  import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+  
+  const routes: Routes = [
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'detail/:id', component: HeroDetailComponent },
+    { path: 'heroes', component: HeroListComponent, data: { title: 'Heroes List' } },
+    { path: 'heroes', component: HeroesComponent }
+  ];
+  
+  @NgModule({
+    imports: [ RouterModule.forRoot(routes) ],
+    exports: [ RouterModule ]
+  })
+  export class AppRoutingModule {}
+  </code></pre>
+
+  <pre><code>
+  // app.module.ts
+  import { AppRoutingModule } from './app-routing.module';
+  
+  @NgModule({
+    imports: [
+      AppRoutingModule
+    ]
+  })
+  </code></pre>
+  <p>The RouterOutlet is a directive from the router library that is used like a component. It acts as a placeholder
+    that marks the spot in the template where the router should display the components for that outlet.</p>
+  <pre><code> 
+  // Put where you want to print routing component
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  </code></pre>
+
+  <pre><code>  
+  // Put in the navigation component
+  &lt;a routerLink=&quot;/detail/{{hero.id}} &quot; routerLinkActive=&quot;active&quot; &gt;Menu1&lt;/a&gt;
+  &lt;a routerLink=&quot;/detail/{{hero.id}} &quot; [routerLinkActive]=&quot;'active fluffy'&quot; &gt;Menu1&lt;/a&gt;
+  &lt;li&gt;&lt;a routerLink=&quot;/detail/{{hero.id}} &quot; routerLinkActive=&quot;active&quot; &gt;Menu2&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a routerLink=&quot;/detail/{{hero.id}} &quot; routerLinkActive=&quot;active&quot; [routerLinkActiveOptions]=&quot;{ exact: true }&quot;&gt;Menu2.1&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  </code></pre>
+
+  <h2 id="ngHttp">HTTP</h2>
+  <p>HttpClient is Angular's mechanism for communicating with a remote server over HTTP.</p>
+  <p>To make HttpClient available everywhere in the app, import 'HttpClientModule' inside app.module.ts file</p>
+  <pre><code>
+  // import inside app.module.ts file
+  import { HttpClientModule } from '@angular/common/http';   
+  </code></pre>
+
+  <pre><code>
+  // 1. step
+  import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+  // 2. step
+  constructor( private http: HttpClient)
+  
+  //3. step 
+  // (this.http.get())
+  // this.http.put(httpUrl, httpData, httpOptions)
+
+  getHeroes (): Observable&lt;Hero[]&gt; {
+    return this.http.get&lt;Hero[]&gt;(this.heroesUrl)
+  }
+  </code></pre>
+
+
+  <h3>Interpolation ( {{...}} )</h3>
+  <p>Interpolation is a special syntax that Angular converts into a property binding</p>
+  <p>My current hero is {{JS expression}}</p>
+
+  <h3>Expression context</h3>
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
+  <input #heroInput> {{heroInput.value}}
+
+  Binding syntax
+  <p>Interpolation Property (One-way from data source to view target )</p>
+  <pre><code>
+  {{expression}}
+  [target]="expression"
+  bind-target="expression"
+  </code></pre>
+
+  <p>Event</p>
+  <pre><code>
+  (target)="statement"
+  on-target="statement"
+  </code></pre>
+
+  <h3>How to Reference Html element</h3>
+  <pre><code>
+  <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
+  </code></pre>
+
+  <h2 id="ngNgModules">NgModules</h2>
+  <p>Angular apps are modular and Angular has its own modularity system called NgModules. NgModules are containers for
+    a
+    cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities.
+    They
+    can contain components, service providers, and other code files whose scope is defined by the containing NgModule.
+    They can import functionality that is exported from other NgModules, and export selected functionality for use by
+    other NgModules.</p>
+
+  <p>Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule and
+    resides in a file named app.module.ts. You launch your app by bootstrapping the root NgModule.</p>
+
+  <p>The root NgModule for an app is so named because it can include child NgModules in a hierarchy of any depth.</p>
+
+  <h3>NgModule metadata</h3>
+  <p>An NgModule is defined by a class decorated with @NgModule().</p>
+  <ul>
+    <li>declarations: The components, directives, and pipes that belong to this NgModule.</li>
+    <li>exports: The subset of declarations that should be visible and usable in the component templates of other
+      NgModules.</li>
+    <li>imports: Other modules whose exported classes are needed by component templates declared in this NgModule.</li>
+    <li>providers: Creators of services that this NgModule contributes to the global collection of services; they
+      become
+      accessible in all parts of the app.</li>
+    <li>bootstrap: The main application view, called the root component, which hosts all other app views. Only the root
+      NgModule should set the bootstrap property.</li>
+  </ul>
+
+  <pre><code>
+  import { NgModule } from '@angular/core';
+  import { BrowserModule } from '@angular/platform-browser';
+
+  @NgModule({
+    imports: [ BrowserModule ],
+    providers: [ Logger ],
+    declarations: [ AppComponent ],
+    exports: [ AppComponent ],
+    bootstrap: [ AppComponent ]
+  })
+
+  export class AppModule { }
+  </code></pre>
+
+  <h2 id="ngComponents">Components</h2>
+  <p>A component controls a patch of screen called a view.</p>
+  <h3>metadata</h3>
+  <ul>
+    <li>selector: A CSS selector that tells Angular to create and insert an instance of this component wherever it
+      finds the corresponding tag in template HTML.</li>
+    <li>templateUrl: The module-relative address of this component's HTML template.</li>
+    <li>providers: An array of providers for services that the component requires.</li>
+  </ul>
+
+  <h3>Template syntax</h3>
+  <p>Template can use data binding to coordinate the app and DOM data, pipes to transform data before it is displayed,
+    and directives to apply app logic to what gets displayed.</p>
+
+  <h3>Data binding</h3>
+  <p><img src="img/databinding.png" alt="" /></p>
+
+  <pre><code>
+  &lt;ul&gt;
+    &lt;li&gt;{{hero.name}}&lt;/li&gt;
+    &lt;app-hero-detail [hero]=&quot;selectedHero&quot;&gt;&lt;/app-hero-detail&gt;
+  &lt;li (click)=&quot;selectHero(hero)&quot;&gt;&lt;/li&gt;
+  &lt;input [(ngModel)]=&quot;hero.name&quot;&gt;
+  &lt;/ul&gt;
+  </code></pre>
+
+  <ul>
+    <li>The {{hero.name}} interpolation displays the component's hero.name property value within the &lt;li&gt;
+      element.</li>
+    <li>The [hero] property binding passes the value of selectedHero from the parent HeroListComponent to the hero
+      property of the child HeroDetailComponent.</li>
+    <li>The (click) event binding calls the component's selectHero method when the user clicks a hero's name.</li>
+  </ul>
+
+  <h2 id="ngPipes">Pipes</h2>
+  <p>Angular pipes let you declare display-value transformations in your template HTML. A class with the @Pipe
+    decorator defines a function that transforms input values to output values for display in a view.</p>
+  <a href="https://angular.io/api?type=pipe">Pipes API list</a>
+  <p>To specify a value transformation in an HTML template, use the pipe operator (|).</p>
+  <code>{{interpolated_value | pipe_name}}</code>
+  <p>You can chain pipes, sending the output of one pipe function to be transformed by another pipe function. A pipe
+    can also take arguments that control how it performs its transformation.</p>
+
+  <pre><code>
+  &lt;!-- Default format: output 'Jun 15, 2015'--&gt;
+  &lt;p&gt;Today is {{today | date}}&lt;/p&gt;
+
+  &lt;!-- fullDate format: output 'Monday, June 15, 2015'--&gt;
+  &lt;p&gt;The date is {{today | date:'fullDate'}}&lt;/p&gt;
+
+  &lt;!-- shortTime format: output '9:43 AM'--&gt;
+  &lt;p&gt;The time is {{today | date:'shortTime'}}&lt;/p&gt;
+  </code></pre>
+
+  <h2 id="ngDirectives">Directives</h2>
+  <p>A component is technically a directive. However, components are so distinctive and central to Angular applications
+    that Angular defines the @Component() decorator, which extends the @Directive() decorator with template-oriented
+    features.</p>
+
+  <p>There are two other kinds of directives: structural and attribute.</p>
+  <h4>Structural directives</h4>
+  <p>Structural directives alter layout by adding, removing, and replacing elements in the DOM. The example template
+    uses two built-in structural directives to add application logic to how the view is rendered. 1. *ngFor 2. *ngIf</p>
+
+  <h4>Attribute directives</h4>
+  <p>Attribute directives alter the appearance or behavior of an existing element. In templates they look like regular
+    HTML attributes, hence the name.</p>
+  <p>The <code>ngModel</code> directive, which implements two-way data binding, is an example of an attribute
+    directive.</p>
+  <a href="https://angular.io/api?type=directive">Directives API list</a>
+
+  <h2 id="ngServices">Services and Dependency Injection</h2>
+  <p>Angular distinguishes components from services to increase modularity and reusability. By separating a component's
+    view-related functionality from other kinds of processing, you can make your component classes lean and efficient.</p>
+
+  <p>A component can delegate certain tasks to services, such as fetching data from the server, validating user input,
+    or logging directly to the console. By defining such processing tasks in an injectable service class, you make
+    those tasks available to any component. </p>
+  <p>To define a class as a service in Angular, use the @Injectable() decorator to provide the metadata that allows
+    Angular to inject it into a component as a dependency.</p>
+  <p>Use the @Injectable() decorator to indicate that a component or other class (such as another service, a pipe, or
+    an
+    NgModule) has a dependency.</p>
+
+  <ul>
+    <li>The <em>injector</em> is the main mechanism. Angular creates an application-wide injector for you during the
+      bootstrap
+      process, and additional injectors as needed. You don't have to create injectors.</li>
+    <li>An injector creates dependencies, and maintains a container of dependency instances that it reuses if possible.</li>
+    <li>A provider is an object that tells an injector how to obtain or create a dependency.</li>
+  </ul>
+  <p>For any dependency that you need in your app, you must register a provider with the app's injector, so that the
+    injector can use the provider to create new instances.</p>
+  <p>When Angular creates a new instance of a component class, it determines which services or other dependencies that
+    component needs by looking at the constructor parameter types. For example, the constructor of HeroListComponent
+    needs HeroService.</p>
+
+  <pre><code>
+  constructor(private service: HeroService) { }
+  </code></pre>
+
+  <p>When Angular discovers that a component depends on a service, it first checks if the injector has any existing
+    instances of that service. If a requested service instance doesn't yet exist, the injector makes one using the
+    registered provider, and adds it to the injector before returning the service to Angular.</p>
+  <p>When all requested services have been resolved and returned, Angular can call the component's constructor with
+    those services as arguments.</p>
+  <p>The process of HeroService injection looks something like this.</p>
+  <p><img src="img/injector-injects.png" alt="" /></p>
+
+  <h3>Providing services</h3>
+  <p>You must register at least one provider of any service you are going to use. The provider can be part of the
+    service's own metadata, making that service available everywhere, or you can register providers with specific
+    modules or components. You register providers in the metadata of the service (in the <strong>@Injectable()</strong>
+    decorator), or in the <strong>@NgModule()</strong> or <strong>@Component()</strong> metadata</p>
+  <ol>
+    <li>By default, the Angular CLI command ng generate service registers a provider with the root injector for your
+      service by including provider metadata in the @Injectable() decorator.
+      <pre><code>
+      @Injectable({
+        providedIn: 'root',
+       })
+    </code></pre>
+      <p>When you provide the service at the root level, Angular creates a single, shared instance of HeroService and
+        injects it into any class that asks for it. Registering the provider in the @Injectable() metadata also allows
+        Angular to optimize an app by removing the service from the compiled app if it isn't used.</p>
+    </li>
+
+    <li>When you register a provider with a specific NgModule, the same instance of a service is available to all
+      components in that NgModule.
+      <pre><code>
+      @NgModule({
+        providers: [
+        BackendService,
+        Logger
+        ],
+        ...
+      })
+      </code></pre>
+    </li>
+    <li>When you register a provider at the component level, you get a new instance of the service with each new
+      instance of that component.
+      <pre><code>
+    @Component({
+      selector:    'app-hero-list',
+      templateUrl: './hero-list.component.html',
+      providers:  [ HeroService ]
+    })
+    </code></pre>
+    </li>
+  </ol>
+
+  <h3>Components &amp; Templates</h3>
+  <h4>Displaying Data</h4>
+  <ul>
+    <li>interpolation :: put the property name in the view template, enclosed in double curly braces: {{myHero}}.</li>
+  </ul>
+
+  <h2 id="ngForm">Form</h2>
+  <p>Angular provides two different approaches to handling user input through forms: reactive and template-driven.
+    Reactive and template-driven forms process and manage form data differently. Each offers different advantages.</p>
+  <ul>
+    <li><strong>Reactive</strong> forms are more robust: they're more scalable, reusable, and testable. If forms are a
+      key part of your
+      application, or you're already using reactive patterns for building your application, use reactive forms.</li>
+    <li><strong>Template-driven</strong> forms are useful for adding a simple form to an app, such as an email list
+      signup form. They're
+      easy to add to an app, but they don't scale as well as reactive forms.</li>
+  </ul>
+  <h3>Key differences</h3>
+  <p>The table below summarizes the key differences between reactive and template-driven forms.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Reactive</th>
+        <th>Template-driven</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Setup (form model)</td>
+        <td>More explicit, created in component class</td>
+        <td>Less explicit, created by directives</td>
+      </tr>
+      <tr>
+        <td>Data model</td>
+        <td>Structured</td>
+        <td>Unstructured</td>
+      </tr>
+      <tr>
+        <td>Predictability</td>
+        <td>Synchronous</td>
+        <td>Asynchronous</td>
+      </tr>
+      <tr>
+        <td>Form validation</td>
+        <td>Functions</td>
+        <td>Directives</td>
+      </tr>
+      <tr>
+        <td>Mutability</td>
+        <td>Immutable</td>
+        <td>Mutable</td>
+      </tr>
+      <tr>
+        <td>Scalability</td>
+        <td>Low-level API access</td>
+        <td>Abstraction on top of APIs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Common foundation</h3>
+  <ul>
+    <li><strong>FormControl</strong> tracks the value and validation status of an individual form control.</li>
+    <li><strong>FormGroup</strong> tracks the same values and status for a collection of form controls.</li>
+    <li><strong>FormArray</strong> tracks the same values and status for an array of form controls.</li>
+    <li><strong>ControlValueAccessor</strong> creates a bridge between Angular FormControl instances and native DOM
+      elements.</li>
+  </ul>
+
+  <h3>Form model setup</h3>
+  <p>Reactive and template-driven forms both use a form model to track value changes between Angular forms and form
+    input elements.</p>
+  <ul>
+    <li>In reactive forms, the form model is the source of truth. The form model is the FormControl instance.</li>
+    <li>In template-driven forms, the source of truth is the template.</li>
+  </ul>
+  <h4>Setup in reactive forms</h4>
+  <p>With reactive forms, the form model is explicitly defined in the component class. The reactive form directive (in
+    this case, FormControlDirective) then links the existing FormControl instance to a specific form element in the
+    view using a value accessor (ControlValueAccessor instance).</p>
+  <pre><code>
+  import { Component } from '@angular/core';
+  import { FormControl } from '@angular/forms';
+    
+  @Component({
+    selector: 'app-reactive-favorite-color',
+    template: `
+      Favorite Color: &lt;input type=&quot;text&quot; [formControl]=&quot;favoriteColorControl&quot;&gt;
+    `
+  })
+  export class FavoriteColorComponent {
+    favoriteColorControl = new FormControl('');
+  }  
+  </code></pre>
+  <h5>Data flow in reactive forms</h5>
+  <p>In reactive forms each form element in the view is directly linked to a form model (FormControl instance). Updates
+    from the view to the model and from the model to the view are synchronous and aren't dependent on the UI rendered.
+    The diagrams below use the same favorite color example to demonstrate how data flows when an input field's value is
+    changed from the view and then from the model.</p>
+
+  <p>The steps below outline the data flow from view to model.</p>
+  <figure><img src="img/dataflow-reactive-forms-vtm.png" alt="" /></figure>
+  <ol>
+    <li>
+      The user types a value into the input element, in this case the favorite color Blue.</li>
+    <li>The form input element emits an "input" event with the latest value.</li>
+    <li>The control value accessor listening for events on the form input element immediately relays the new value to
+      the FormControl instance.</li>
+    <li>The FormControl instance emits the new value through the valueChanges observable.</li>
+    <li>Any subscribers to the valueChanges observable receive the new value.</li>
+  </ol>
+  <p>The steps below outline the data flow from model to view.</p>
+  <figure><img src="img/dataflow-reactive-forms-mtv.png" alt="" /></figure>
+  <ol>
+    <li>The user calls the favoriteColorControl.setValue() method, which updates the FormControl value.</li>
+    <li>The FormControl instance emits the new value through the valueChanges observable.</li>
+    <li>Any subscribers to the valueChanges observable receive the new value.</li>
+    <li>The control value accessor on the form input element updates the element with the new value.</li>
+  </ol>
+  <h4>Setup in template-driven forms</h4>
+  <p>The template-driven form directive NgModel is responsible for creating and managing the FormControl instance for a
+    given form element. </p>
+  <pre><code>
+  import { Component } from '@angular/core';
+
+  @Component({
+    selector: 'app-template-favorite-color',
+    template: `
+      Favorite Color: &lt;input type=&quot;text&quot; [(ngModel)]=&quot;favoriteColor&quot;&gt;
+    `
+  })
+  export class FavoriteColorComponent {
+    favoriteColor = '';
+  }  
+  </code></pre>
+
+  <p>Reactive forms provide a model-driven approach to handling form inputs whose values change over time. Reactive
+    forms use an explicit and immutable approach to managing the state of a form at a given point in time. Each change
+    to the form state returns a new state, which maintains the integrity of the model between changes. Reactive forms
+    are built around observable streams, where form inputs and values are provided as streams of input values, which
+    can be accessed synchronously.</p>
+
+  <ol>
+    <li>Registering the reactive forms module</li>
+    <li>Import the FormControl class into your component and create a new instance of the form control to save as a
+      class property.</li>
+    <li>Registering the control in the template by using the <code>formControl</code> binding provided by <code>FormControlDirective</code>
+      included in <code>ReactiveFormsModule</code>.</li>
+  </ol>
+
+  <pre><code>
+  import { ReactiveFormsModule } from '@angular/forms';
+
+  @NgModule({
+    imports: [
+      ReactiveFormsModule
+    ],
+  })
+  </code></pre>
+  <pre><code>
+  import { Component } from '@angular/core';
+  import { FormControl } from '@angular/forms';
+  
+  @Component({
+    selector: 'app-name-editor',
+    templateUrl: './name-editor.component.html',
+    styleUrls: ['./name-editor.component.css']
+  })
+  export class NameEditorComponent {
+    name = new FormControl('');
+  }
+  </code></pre>
+  <pre><code>
+  &lt;label&gt; Name:  &lt;input type=&quot;text&quot; [formControl]=&quot;name&quot;&gt; &lt;/label&gt;
+  </code></pre>
+
+  <h2 id="formReactive">Reactive</h2>
+  <p>Reactive forms provide a model-driven approach to handling form inputs whose values change over time.</p>
+
+  <h3>Introduction to reactive forms</h3>
+  <p>Reactive forms use an explicit and immutable approach to managing the state of a form at a given point in time.
+    Each change to the form state returns a new state, which maintains the integrity of the model between changes.
+    Reactive forms are built around observable streams, where form inputs and values are provided as streams of input
+    values, which can be accessed synchronously.</p>
+
+  <p>Reactive forms differ from template-driven forms in distinct ways. Reactive forms provide more predictability with
+    synchronous access to the data model, immutability with observable operators, and change tracking through
+    observable streams. If you prefer direct access to modify data in your template, template-driven forms are less
+    explicit because they rely on directives embedded in the template, along with mutable data to track changes
+    asynchronously.</p>
+
+  <h3>Simple Setup</h3>
+  <p>This section describes how to add a single form control. </p>
+
+  <p>1. To use reactive forms, import ReactiveFormsModule from the @angular/forms package and add it to your NgModule's
+    imports array.</p>
+
+  <pre><code>
+  //src/app/app.module.ts 
+  import { ReactiveFormsModule } from '@angular/forms';
+
+  @NgModule({
+    imports: [
+      // other imports ...
+      ReactiveFormsModule
+    ],
+  })
+  export class AppModule { }
+  </code></pre>
+
+  <p>2. To register a single form control, import the FormControl class into your component and create a new instance
+    of the form control to save as a class property.</p>
+
+  <pre><code>
+  //src/app/name-editor/name-editor.component.ts
+  import { Component } from '@angular/core';
+  import { FormControl } from '@angular/forms';
+  
+  @Component({
+    selector: 'app-name-editor',
+    templateUrl: './name-editor.component.html',
+    styleUrls: ['./name-editor.component.css']
+  })
+  export class NameEditorComponent {
+    name = new FormControl('');
+  }
+  </code></pre>
+
+  <p>3. After you create the control in the component class, you must associate it with a form control element in the
+    template. Update the template with the form control using the formControl binding provided by FormControlDirective
+    included in ReactiveFormsModule.</p>
+
+  <pre><code>
+  &lt;label&gt;
+  Name:
+  &lt;input type=&quot;text&quot; [formControl]=&quot;name&quot;&gt;
+  &lt;/label&gt;
+  </code></pre>
+
+  <p>4. How to display</p>
+  <pre><code>
+  &lt;p&gt;
+  Value: {{ name.value }}
+  &lt;/p&gt;
+  </code></pre>
+
+  <p>5. Replacing a form control value</p>
+  <p>A form control instance provides a setValue() method that updates the value of the form control and validates the
+    structure of the value provided against the control's structure.</p>
+
+  <pre><code>
+  updateName() {
+    this.name.setValue('Nancy');
+  }
+  </code></pre>
+
+  <h3>Grouping form controls</h3>
+  <p>Step 1: import the FormGroup and FormControl classes from the @angular/forms package and Creating a FormGroup
+    instance</p>
+
+  <pre><code>
+  import { Component } from '@angular/core';
+  import { FormGroup, FormControl } from '@angular/forms';
+    
+  @Component({
+    selector: 'app-profile-editor',
+    templateUrl: './profile-editor.component.html',
+    styleUrls: ['./profile-editor.component.css']
+  })
+  export class ProfileEditorComponent {
+    profileForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+    });
+  }
+  </code></pre>
+  <p>The individual form controls are now collected within a group. A FormGroup instance provides its model value as an
+    object reduced from the values of each control in the group. A form group instance has the same properties (such as
+    value and untouched) and methods (such as setValue()) as a form control instance.</p>
+
+  <p>Step 2: Associating the FormGroup model and view</p>
+  <pre><code>
+  &lt;form [formGroup]=&quot;profileForm&quot;&gt;
+
+  &lt;label&gt;
+    First Name:
+    &lt;input type=&quot;text&quot; formControlName=&quot;firstName&quot;&gt;
+  &lt;/label&gt;
+
+  &lt;label&gt;
+    Last Name:
+    &lt;input type=&quot;text&quot; formControlName=&quot;lastName&quot;&gt;
+  &lt;/label&gt;
+
+  &lt;/form&gt;
+  </code></pre>
+
+  <h3>Saving form data</h3>
+  <pre><code>
+  &lt;form [formGroup]=&quot;profileForm&quot; (ngSubmit)=&quot;onSubmit()&quot;&gt;
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
+  }
+  
+  &lt;button type=&quot;submit&quot; [disabled]=&quot;!profileForm.valid&quot;&gt;Submit&lt;/button&gt;
+  </code></pre>
+
+  <h3>Creating nested form groups</h3>
+  <p>Step 1: Creating a nested group</p>
+  <pre><code>
+  import { Component } from '@angular/core';
+  import { FormGroup, FormControl } from '@angular/forms';
+  
+  @Component({
+    selector: 'app-profile-editor',
+    templateUrl: './profile-editor.component.html',
+    styleUrls: ['./profile-editor.component.css']
+  })
+  export class ProfileEditorComponent {
+    profileForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      address: new FormGroup({
+        street: new FormControl(''),
+        city: new FormControl(''),
+        state: new FormControl(''),
+        zip: new FormControl('')
+      })
+    });
+  }  
+  </code></pre>
+
+  <p>Step 2: Grouping the nested form in the template</p>
+  <pre><code>
+  &lt;div formGroupName=&quot;address&quot;&gt;
+  &lt;h3&gt;Address&lt;/h3&gt;
+  &lt;label&gt; Street:
+    &lt;input type=&quot;text&quot; formControlName=&quot;street&quot;&gt;
+  &lt;/label&gt;
+  &lt;label&gt; City:
+    &lt;input type=&quot;text&quot; formControlName=&quot;city&quot;&gt;
+  &lt;/label&gt;
+  &lt;label&gt; State:
+    &lt;input type=&quot;text&quot; formControlName=&quot;state&quot;&gt;
+  &lt;/label&gt;
+  &lt;label&gt; Zip Code:
+    &lt;input type=&quot;text&quot; formControlName=&quot;zip&quot;&gt;
+  &lt;/label&gt;
+  &lt;/div&gt;    
+  </code></pre>
+
+  <h3>Partial model updates</h3>
+  <p>When updating the value for a form group instance that contains multiple controls, you may only want to update
+    parts of the model.</p>
+  <p>There are two ways to update the model value:</p>
+  <ul>
+    <li>Use the setValue() method to set a new value for an individual control. The setValue() method strictly adheres
+      to the structure of the form group and replaces the entire value for the control.</li>
+    <li>Use the patchValue() method to replace any properties defined in the object that have changed in the form
+      model.</li>
+  </ul>
+  <p>The strict checks of the setValue() method help catch nesting errors in complex forms, while patchValue() fails
+    silently on those errors.</p>
+  <pre><code>
+  updateProfile() {
+    this.profileForm.patchValue({
+      firstName: 'Nancy',
+      address: {
+        street: '123 Drew Street'
+      }
+    });
+  }
+  </code></pre>
+
+  <h3>Generating form controls with FormBuilder</h3>
+  <p>Creating form control instances manually can become repetitive when dealing with multiple forms. The FormBuilder
+    service provides convenient methods for generating controls.</p>
+  <h4>Step 1: Importing the FormBuilder class</h4>
+  <pre><code>
+  import { FormBuilder } from '@angular/forms';
+  </code></pre>
+
+  <h4>Step 2: Injecting the FormBuilder service</h4>
+  <p>The FormBuilder service is an injectable provider that is provided with the reactive forms module. Inject this
+    dependency by adding it to the component constructor.</p>
+  <pre><code>
+  constructor(private fb: FormBuilder) { }
+  </code></pre>
+
+  <h4>Step 3: Generating form controls</h4>
+  <p>The FormBuilder service has three methods: control(), group(), and array(). These are factory methods for
+    generating instances in your component classes including form controls, form groups, and form arrays.</p>
+
+  <pre><code>
+  import { Component } from '@angular/core';
+  import { FormBuilder } from '@angular/forms';
+    
+  @Component({
+    selector: 'app-profile-editor',
+    templateUrl: './profile-editor.component.html',
+    styleUrls: ['./profile-editor.component.css']
+  })
+  export class ProfileEditorComponent {
+    profileForm = this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      address: this.fb.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        zip: ['']
+      }),
+    });
+    
+    constructor(private fb: FormBuilder) { }
+  }
+  </code></pre>
+
+  <h3>Dynamic controls using form arrays</h3>
+  <p>FormArray is an alternative to FormGroup for managing any number of unnamed controls. You don't need to define a
+    key for each control by name, so this is a great option if you don't know the number of child values in advance.</p>
+  <h4>Step 1: Importing the FormArray class</h4>
+  <pre><code>
+  import { FormArray } from '@angular/forms';
+  </code></pre>
+
+  <h4>Step 2: Defining a FormArray control</h4>
+  <p>You can initialize a form array with any number of controls, from zero to many, by defining them in an array. Add
+    an aliases property to the form group instance for profileForm to define the form array.</p>
+  <p>Use the FormBuilder.array() method to define the array, and the FormBuilder.control() method to populate the array
+    with an initial control.</p>
+  <pre><code>
+  profileForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: [''],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    }),
+    aliases: this.fb.array([
+      this.fb.control('')
+    ])
+  });
+  </code></pre>
+
+  <h4>Step 3: Accessing the FormArray control</h4>
+  <p>Use the getter syntax to create an aliases class property to retrieve the alias's form array control from the
+    parent form group.</p>
+  <pre><code>
+  get aliases() {
+    return this.profileForm.get('aliases') as FormArray;
+  }
+  </code></pre>
+
+  <p>Define a method to dynamically insert an alias control into the alias's form array. The FormArray.push() method
+    inserts the control as a new item in the array.</p>
+  <pre><code>
+  addAlias() {
+    this.aliases.push(this.fb.control(''));
+  }
+  </code></pre>
+
+  <h4>Step 4: Displaying the form array in the template</h4>
+  <p>To attach the aliases from your form model, you must add it to the template. Similar to the formGroupName input
+    provided by FormGroupNameDirective, formArrayName binds communication from the form array instance to the template
+    with FormArrayNameDirective.</p>
+
+  <h3>Simple form validation</h3>
+  <h4>Step 1: Importing a validator function</h4>
+  <pre><code>
+  import { Validators } from '@angular/forms';
+  </code></pre>
+
+  <h4>Step 2: Making a field required</h4>
+  <code>
+    <pre>
+  profileForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: [''],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    }),
+  });
+  </code>
+  </pre>
+
+    <h4>Displaying form status</h4>
+    <code>
+      <pre>
+&lt;p&gt; Form Status: {{ profileForm.status }} &lt;/p&gt;
+</code>
+  </pre>
+
+</body>
+
+</html>
