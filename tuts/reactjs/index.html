@@ -765,14 +765,58 @@
   
   <pre><code class="language-jsx">
     &lt;div&gt;
-    &lt;BlogPost {...data} /&gt;
+      &lt;BlogPost {...data} /&gt;
     &lt;/div&gt;
   </code></pre>
 
   <p>and the properties of the <code>data</code> object will be used as attributes automatically, thanks to the <em>ES6
       spread operator</em></p>
+  
+  <h3>How to loop in JSX</h3>
+  <p>If you have a set of elements you need to loop upon to generate a JSX partial, you can create a loop, and then add JSX to an array:</p>
+  <pre><code class="language-jsx">
+    const elements = [] //..some array
+
+    const items = []
+    
+    for (const [index, value] of elements.entries() {
+      items.push(&#x3C;Element key={index} /&#x3E;)
+    }
+  </code></pre>
+
+  <p>Now when rendering the JSX you can embed the items array simply by wrapping it in curly braces:</p>
+
+  <pre><code class="language-jsx">
+    const elements = [&#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;];
+
+    const items = []
+    
+    for (const [index, value] of elements.entries() {
+      items.push(&#x3C;li key={index}&#x3E;{value}&#x3C;/li&#x3E;)
+    }
+    
+    return (
+      &#x3C;div&#x3E;
+        {items}
+      &#x3C;/div&#x3E;
+    )
+  </code></pre>
+  
+  <p>You can do the same directly in the JSX, using map instead of a for-of loop:</p>
+
+  <pre><code class="language-jsx">
+    const elements = [&#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;];
+    return (
+      &#x3C;ul&#x3E;
+        {elements.map((value, index) =&#x3E; {
+          return &#x3C;li key={index}&#x3E;{value}&#x3C;/li&#x3E;
+        })}
+      &#x3C;/ul&#x3E;
+    )
+  </code></pre>
 
   <h2 id="componentInDetails">Everything Is a Component</h2>
+
   <p>React makes it very simple: everything is a component. A component is one isolated piece of interface.</p>
   <p>A user interface is an aggregate of components, and the whole React application is an aggregate of
     components. </p>
@@ -782,7 +826,6 @@
   <p><img src="img/img-7.png" alt="Browser console inspecting React.DOM" /></p>
   <p>The next 2 lines are equivalent, they do the same thing. One with <strong>JSX</strong>, one without, by
     injecting <code>&lt;h1&gt;Hello World!&lt;/h1&gt;</code> into an element with id <code>app</code>.</p>
-  
   <pre><code class="language-jsx">
     import React from 'react'
     import ReactDOM from 'react-dom'
@@ -801,6 +844,51 @@
   <p>See, <code>React.DOM</code> exposed us an <code>h1</code> component. Which other HTML tags are available?
     All of them! You can inspect what <code>React.DOM</code> offers by typing it in the Browser Console:</p>
   <p><img src="img/img-6.png" alt="Browser console inspecting React.DOM" /></p>
+  
+  <p>There are 2 ways to define a component in React.</p>
+  <p>A function component:</p>
+  <pre><code class="language-jsx">
+    const BlogPostExcerpt = () =&#x3E; {
+      return (
+        &#x3C;div&#x3E;
+          &#x3C;h1&#x3E;Title&#x3C;/h1&#x3E;
+          &#x3C;p&#x3E;Description&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      )
+    }
+  </code></pre>
+  <p>A class component:</p>
+  <pre><code class="language-jsx">
+    import React, { Component } from &#x27;react&#x27;
+
+    class BlogPostExcerpt extends Component {
+      render() {
+        return (
+          &#x3C;div&#x3E;
+            &#x3C;h1&#x3E;Title&#x3C;/h1&#x3E;
+            &#x3C;p&#x3E;Description&#x3C;/p&#x3E;
+          &#x3C;/div&#x3E;
+        )
+      }
+    }
+  </code></pre>
+  <p>Up until recently, class components were the only way to define a component that had its own state, and could access the lifecycle methods so you could do things when the component was first rendered, updated or removed.</p>
+  <p>React Hooks changed this, so our function components are now much more powerful than ever and I believe we'll see fewer and fewer class components in the future, although it will still be perfectly valid way to create components.</p>
+  <p>There is also a third syntax which uses the ES5 syntax, without the classes:</p>
+  <pre><code class="language-jsx">
+    import React from &#x27;react&#x27;
+
+    React.createClass({
+      render() {
+        return (
+          &#x3C;div&#x3E;
+            &#x3C;h1&#x3E;Title&#x3C;/h1&#x3E;
+            &#x3C;p&#x3E;Description&#x3C;/p&#x3E;
+          &#x3C;/div&#x3E;
+        )
+      }
+    })
+  </code></pre>
   <h3>CUSTOM COMPONENTS</h3>
   <p>A stateless component does not manage internal state, and is just a function:</p>
   
