@@ -65,7 +65,7 @@ h4 { font-size:24px; font-family: "robotolight"; padding: 16px 0 10px 0; }
 h5 { font-size:22px; font-weight: 500; } 
 h6 { font-size:20px; font-weight: 500; } 
 
-code { font-family: monospace; padding: 2px 4px; font-size: 100%; color: #444; background-color: #f1f0ea; border-radius: 4px; font-style: italic; font-weight: bold; } 
+code { font-family: monospace; padding: 2px 4px; font-size: 100%; color: #444; background-color: #f1f0ea; border-radius: 4px; font-style: italic; } 
 
 pre { background: #f5f2f0; border: 1px solid #dddbcc; border-radius: 3px; margin: 0 0 10px 0; } 
 pre code { padding: 0; margin:0; font-style: normal; font-weight: normal; } 
@@ -87,9 +87,10 @@ body { color:#424242; font-family: 'Segoe UI', 'roboto', Georgia, "serif", Verda
 .note { border-left:5px solid #DD4A68; padding-left: 10px; font-size:75%; } 
 
 .site-nav { position: fixed; top:0; left:0; width:10%; height: 100%; padding:10px; background:#e8e8e8; } 
-.site-nav ul { list-style: none; margin:0; font-size:16px; } 
-.site-nav li { margin:0; } 
-.site-nav a { text-decoration: none; } 
+.site-nav ul { list-style: none; margin:0; font-size:14px; } 
+.site-nav li { margin:0 0 10px 0; } 
+.site-nav a { text-decoration: none; }
+.site-nav a:hover { text-decoration: underline;}
 
 table { margin-bottom:20px; width: 100%; } 
 table th, table td { padding:5px 10px; border:2px solid #e8e8e8 } 

@@ -25,6 +25,7 @@
       <li><a href="#reactPropsVsState">Props vs State</a></li>
       <li><a href="#reactContextAPI">Context API</a></li>
       <li><a href="#reactRouter">Router</a></li>
+      <li><a href="#formHandling">Form Handling</a></li>
     </ul>
   </nav>
 
@@ -1798,14 +1799,198 @@
 
   
   
-  <h2>Form Handling</h2>
+  <h2 id="formHandling">Form Handling</h2>
   <p>There are two main ways of handling forms in React, which differ on a fundamental level: how data is managed.</p>
   <ul>
     <li>if the data is handled by the DOM, we call them <strong>uncontrolled components</strong></li>
     <li>if the data is handled by the components we call them <strong>controlled components</strong></li>
   </ul>
   
+  <p>As you can imagine, controlled components is what you will use most of the time. The component state is the single
+    source of truth, rather than the DOM. But sometimes you are forced to use uncontroller components, for example when
+    using some form fields that are inherently uncontrolled because of their behavior, like the
+    <code>&lt;input type=&quot;file&quot;&gt;</code> field.</p>
   
+  <p>When an element state changes in a form field managed by a component, we track it using the <code
+      class="language-js">onChange</code> attribute.</p>
+  
+  <pre><code class="language-jsx">
+      class Form extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = { username: '' }
+        }
+      
+        handleChange(event) {}
+      
+        render() {
+          return (
+            &lt;form&gt;
+              Username:
+              &lt;input
+                type=&quot;text&quot;
+                value={this.state.username}
+                onChange={this.handleChange}
+              /&gt;
+            &lt;/form&gt;
+          )
+        }
+      }
+    </code></pre>
+  
+  <p>With class components, in order to set the new state, we must bind <code>this</code> to the <code>handleChange</code>
+    method, otherwise <code>this</code> is not accessible from within that method:</p>
+  
+  <pre><code class="language-js">class Form extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = { username: '' }
+        this.handleChange = this.handleChange.bind(this)
+      }
+  
+      handleChange(event) {
+        this.setState({ value: event.target.value })
+      }
+  
+      render() {
+        return (
+          &lt;form&gt;
+            &lt;input
+              type=&quot;text&quot;
+              value={this.state.username}
+              onChange={this.handleChange}
+            /&gt;
+          &lt;/form&gt;
+        )
+      }
+    }
+    </code></pre>
+  
+  <p>Similarly, we use the <code>onSubmit</code> attribute on the form to call the <code>handleSubmit</code> method when
+    the form is submitted:</p>
+  
+  <pre><code class="language-js">
+      class Form extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = { username: '' }
+          this.handleChange = this.handleChange.bind(this)
+          this.handleSubmit = this.handleSubmit.bind(this)
+        }
+      
+        handleChange(event) {
+          this.setState({ value: event.target.value })
+        }
+      
+        handleSubmit(event) {
+          alert(this.state.username)
+          event.preventDefault()
+        }
+      
+        render() {
+          return (
+            &lt;form onSubmit={this.handleSubmit}&gt;
+              &lt;input
+                type=&quot;text&quot;
+                value={this.state.username}
+                onChange={this.handleChange}
+              /&gt;
+              &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+            &lt;/form&gt;
+          )
+        }
+      }
+    </code></pre>
+  
+  <p>Using hooks it&rsquo;s all much simpler:</p>
+  
+  <pre><code class="language-js">
+      const Form = props =&gt; {
+        const [username, setUsername] = useState()
+      
+        const handleChangeUsername = e =&gt; {
+          setUsername(e.target.value)
+        }
+      
+        const handleSubmit = event =&gt; {
+          alert(username)
+          event.preventDefault()
+        }
+      
+        render() {
+          return (
+            &lt;form onSubmit={handleSubmit}&gt;
+              Username:
+              &lt;input
+                type=&quot;text&quot;
+                value={username}
+                onChange={handleChangeUsername}
+              /&gt;
+            &lt;/form&gt;
+          )
+        }
+      }
+    </code></pre>
+  
+  <p>Validation in a form can be handled in the <code>handleChange</code> method: you have access to the old value of the
+    state, and the new one. You can check the new value and if not valid reject the updated value (and communicate it in
+    some way to the user).</p>
+  
+  <p>HTML Forms are inconsistent. They have a long history, and it shows. React however makes things more consistent for
+    us, and you can get (and update) fields using its <code>value</code> attribute.</p>
+  
+  <p>Here&rsquo;s a <code>textarea</code>, for example:</p>
+  
+  <pre><code class="language-html">&lt;textarea value={this.state.address} onChange={this.handleChange} /&gt;
+  </code></pre>
+  
+  <p>The same goes for the <code>select</code> tag:</p>
+  
+  <pre><code class="language-html">&lt;select value=&quot;{this.state.age}&quot; onChange=&quot;{this.handleChange}&quot;&gt;
+    &lt;option value=&quot;teen&quot;&gt;Less than 18&lt;/option&gt;
+    &lt;option value=&quot;adult&quot;&gt;18+&lt;/option&gt;
+  &lt;/select&gt;
+  </code></pre>
+  
+  <p>Previously we mentioned the <code>&lt;input type=&quot;file&quot;&gt;</code> field. That works a bit differently.</p>
+  
+  <p>In this case you need to get a reference to the field by assigning the <code>ref</code> attribute to a property defined in the constructor with <code>React.createRef()</code>, and use that to get the value of it in the submit handler:</p>
+
+  <pre><code class="language-js">
+    class FileInput extends React.Component {
+      constructor(props) {
+        super(props)
+        this.curriculum = React.createRef()
+        this.handleSubmit = this.handleSubmit.bind(this)
+      }
+
+      handleSubmit(event) {
+        alert(this.curriculum.current.files[0].name)
+        event.preventDefault()
+      }
+
+      render() {
+        return (
+          &lt;form onSubmit={this.handleSubmit}&gt;
+            &lt;input type=&quot;file&quot; ref={this.curriculum} /&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+          &lt;/form&gt;
+        )
+      }
+    }
+  </code></pre>
+  
+  <p>This is the <strong>uncontrolled components</strong> way. The state is stored in the DOM rather than in the component
+    state (notice we used <code>this.curriculum</code> to access the uploaded file, and have not touched the
+    <code>state</code>.</p>
+
+  
+
+
+
+
+
+
   <h2>React concepts: declarative</h2>
 
   <p>What does it mean when you read that React is declarative</p>
