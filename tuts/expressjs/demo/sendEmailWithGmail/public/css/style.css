@@ -1,0 +1,32 @@
+*{ box-sizing: border-box; }
+
+ul{ list-style: none; padding: 0; }
+
+ body{ background: #92bde7; color: #485e74; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; font-size: 16px; }
+ .container{ max-width: 1170px; margin-left: auto; margin-right: auto; padding: 16px; }
+
+ .brand{ text-align: center; }
+ .brand span{ color: #fff; }
+
+ .wrapper{ box-shadow: 0 0 20px 0 rgba(72,94,116,0.7); }
+ .wrapper > *{ padding: 16px; }
+
+ .company-info{ float: left; width: 35%; background: #c9e6ff; }
+ .company-info h3, .company-info ul{ text-align: center; margin: 0 0 1rem 0; }
+
+::placeholder { color: #d7dadc; }
+
+ .form-group { margin-bottom: 10px; }
+ .form-group label { display: block;} 
+ .form-group .form-control { width: 100%; padding: 6px 12px; font-size: 16px; font-weight: 400; line-height: 1.5; height: 40px; color: #495057; background-color: #fff; border: 1px solid #c9e6ff; border-radius: 4px;
+}
+.form-check label { display: inline-block;}
+.form-check-inline{ display: inline-block;}
+.form-group select[multiple] { height: 70px;}
+.form-group textarea.form-control { height: 80px;}
+.btn { padding: 5px 15px; height: 36px; border-radius: 4px; cursor: pointer; color: #485e74; background: #c9e6ff; border: 0; text-transform: uppercase;}
+.btn:hover, .btn:focus{ background: #92bde7; color: #fff; outline: 0; transition: background-color 2s ease-out; }
+
+.contact { float: right; width: 65%; background: #f9feff; }
+.contact .form-group{ float:left; width: 46%; margin:0 2% 20px;}
+.contact .form-group:nth-child(odd) { clear: left; }
