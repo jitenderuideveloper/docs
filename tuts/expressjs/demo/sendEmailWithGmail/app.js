@@ -3,9 +3,22 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
 
 const app = express();
 require('dotenv').config();  // process.env
+// const upload = multer({ storage: multer.memoryStorage() });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({
+    storage: storage
+});
 
 // View engine setup
 app.engine('handlebars', exphbs());
@@ -22,8 +35,15 @@ app.get('/', (req, res) => {
     res.render('contact', { layout: false });
 });
 
-app.post('/send', (req, res) => {
-    console.log(req.body);
+app.post('/send', upload.array('photos', 4), (req, res) => {
+    console.log(req);
+    var attachementList = [];
+    for (var i = 0; i < req.files.length; i++) {
+        attachementList.push({
+            filename: req.files[i].originalname,
+            path: req.files[i].path
+        })
+    }
     const output = `
     <p>You have a new contact request</p>
     <h3>Contact Details</h3>
@@ -58,9 +78,16 @@ app.post('/send', (req, res) => {
     let mailOptions = {
         from: 'jitenderwebdesigner@gmail.com', //email sender
         to: 'jitenderwebdesigner@gmail.com', //email receiver
-        subject: 'Nodemailer - Test',
+        subject: 'Nodemailer - Test1',
         text: 'Wooohooo it works!!',
-        html: output // html body
+        html: output, // html body
+        attachments: attachementList
+        //attachments:[
+            //{
+                //fileName: req.body.photo,
+                //path: 'uploads/'+req.file.originalname
+            //}
+        //]
     };
 
     // Step 3

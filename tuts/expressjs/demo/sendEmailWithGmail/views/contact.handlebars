@@ -28,8 +28,8 @@
       </div>
       <div class="contact">
         <h3>Email Us</h3>
-        {{msg}}
-        <form method="POST" action="send">
+        <div class="success">{{msg}}</div>
+        <form method="POST" action="/send" enctype="multipart/form-data">
 
           <div class="form-group">
             <label for="personName">Name</label>
@@ -137,9 +137,14 @@
             <textarea class="form-control" id="personMessage" name="message" rows="5"></textarea>
           </div>
 
+          <!--div class="form-group">
+            <label for="personPhoto">Photo</label>
+            <input type="file" class="form-control-file" id="personPhoto" name="photo">
+          </div-->
+
           <div class="form-group">
-            <!-- <label for="exampleFormControlFile1">Photo</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+            <label for="personPhotos">Photos</label>
+            <input type="file" class="form-control-file" id="personPhotos" name="photos" multiple>
           </div>
 
           <div class="form-group form-check">
