@@ -53,19 +53,15 @@
   </code></pre>
 
   <p>Express sends us two objects in this callback, which we called <code class="language-js">req</code> and <code
-      class="language-js">res</code> , that
-    represent the Request and the Response objects.</p>
+      class="language-js">res</code>, they represent the Request and the Response objects.</p>
 
-  <p>Request is the HTTP request. It can give us all the info about that, including the request parameters, the
-    headers, the body of the request, and more.</p>
+  <p>Request is the HTTP request. It gives us all the request information, including the request parameters, the headers, the body of the request, and more.</p>
 
-  <p>Response is the HTTP response object that we'll send to the client. <code class="language-js">Response.send()</code>
-    method sets
-    string as the body, and it closes the connection.</p>
+  <p>Response is the HTTP response object that we’ll send to the client.</p>
 
-  <p><code class="language-js">app.listen(3000, () => {})</code> starts the server, and tells it to listen on port 3000
-    . We pass in a
-    callback that is called when the server is ready to accept new requests.</p>
+  <p>What we do in this callback is to send the ‘Hello World!’ string to the client, using the <code class="language-js">Response.send()</code> method. his method sets that string as the body, and it closes the connection.</p>
+
+  <p>The last line of the example actually starts the server, and tells it to listen on port 3000. We pass in a callback that is called when the server is ready to accept new requests.</p>
 
   <h3>Request parameters</h3>
   <table>
