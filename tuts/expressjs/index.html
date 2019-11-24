@@ -30,18 +30,79 @@
   </code></pre>
 
   <pre><code class="language-js">
-  // Create index.js file and paste this code. Run "node index.js" command and open "http://localhost:3000/" on browser.
+  // Create app.js file and paste this code. Run "node app.js" command and open "http://localhost:3000/" on browser.
   const express = require('express')
   const app = express()
+  const port = 3000
 
   app.get('/', (req, res) => { 
     // console.log("request", req);
     // console.log("response", res);
-    res.send('Hello Worldd!')
+    res.send('Hello World!')
   })
 
-  app.listen(3000, () => console.log('Server ready')) 
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
   </code></pre>
+
+  <h3>Express application generator</h3>
+  <p>Install the application generator as a global npm package and then launch it with `express` command.</p>
+  <pre><code class="language-js">
+    npm install -g express-generator
+  </code></pre>
+  <p>Follwing is the command options with the -h option:</p>
+  <pre><code class="language-sh">
+    express -h
+
+      Usage: express [options] [dir]
+    
+      Options:
+    
+        -h, --help          output usage information
+            --version       output the version number
+        -e, --ejs           add ejs engine support
+            --hbs           add handlebars engine support
+            --pug           add pug engine support
+        -H, --hogan         add hogan.js engine support
+            --no-view       generate without view engine
+        -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+        -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+            --git           add .gitignore
+        -f, --force         force on non-empty directory
+    </code></pre>
+  <p>For example, the following creates an Express app named <em>myapp</em>. The app will be created in a folder named
+    <em>myapp</em> in the current working directory and the view engine will be set to `handlebars`:</p>
+  <pre><code class="language-sh">
+    express --view=hbs demoapp
+    
+      create : demoapp\
+      create : demoapp\public\
+      create : demoapp\public\javascripts\
+      create : demoapp\public\images\
+      create : demoapp\public\stylesheets\
+      create : demoapp\public\stylesheets\style.css
+      create : demoapp\routes\
+      create : demoapp\routes\index.js
+      create : demoapp\routes\users.js
+      create : demoapp\views\
+      create : demoapp\views\error.hbs
+      create : demoapp\views\index.hbs
+      create : demoapp\views\layout.hbs
+      create : demoapp\app.js
+      create : demoapp\package.json
+      create : demoapp\bin\
+      create : demoapp\bin\www
+    </code></pre>
+    <pre><code class="language-sh">
+        change directory:
+        > cd demoapp
+   
+      install dependencies:
+        > npm install
+   
+      run the app:
+        > SET DEBUG=demoapp:* & npm start
+    </code></pre>
+
 
   <p>There is a method for every HTTP verb: get() , post() , put() , delete() , patch() :</p>
   <pre><code class="language-js">
@@ -55,13 +116,17 @@
   <p>Express sends us two objects in this callback, which we called <code class="language-js">req</code> and <code
       class="language-js">res</code>, they represent the Request and the Response objects.</p>
 
-  <p>Request is the HTTP request. It gives us all the request information, including the request parameters, the headers, the body of the request, and more.</p>
+  <p>Request is the HTTP request. It gives us all the request information, including the request parameters, the
+    headers, the body of the request, and more.</p>
 
   <p>Response is the HTTP response object that we’ll send to the client.</p>
 
-  <p>What we do in this callback is to send the ‘Hello World!’ string to the client, using the <code class="language-js">Response.send()</code> method. his method sets that string as the body, and it closes the connection.</p>
+  <p>What we do in this callback is to send the ‘Hello World!’ string to the client, using the <code
+      class="language-js">Response.send()</code> method. his method sets that string as the body, and it closes the
+    connection.</p>
 
-  <p>The last line of the example actually starts the server, and tells it to listen on port 3000. We pass in a callback that is called when the server is ready to accept new requests.</p>
+  <p>The last line of the example actually starts the server, and tells it to listen on port 3000. We pass in a callback
+    that is called when the server is ready to accept new requests.</p>
 
   <h3>Request parameters</h3>
   <table>
@@ -143,7 +208,8 @@
 
   <h3>How to retrieve the POST query string parameters</h3>
 
-  <p>If the data was sent as JSON, using Content-Type: application/json , you will use the express.json() middleware:</p>
+  <p>If the data was sent as JSON, using Content-Type: application/json , you will use the express.json() middleware:
+  </p>
 
   <pre><code class="language-js">
   app.use(express.json())
@@ -176,7 +242,8 @@
   (req, res) => res.send('Hello World!') 
   </code></pre>
 
-  <p>If you pass in a string, it sets the <code class="language-js">Content-Type</code> header to <code class="language-js">text/html</code>.</p>
+  <p>If you pass in a string, it sets the <code class="language-js">Content-Type</code> header to <code
+      class="language-js">text/html</code>.</p>
 
   <p>if you pass in an object or an array, it sets the application/json Content-Type header, and
     parses that parameter into JSON.</p>
