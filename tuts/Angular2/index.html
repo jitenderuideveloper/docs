@@ -39,7 +39,7 @@
     <li>{{1+1}} the text between the braces is a template expression that Angular first evaluates and then converts to
       a string.</li>
   </ul>
-  <pre><code>
+  <pre><code class="language-js">
   ng generate component componentName
   ng generate service serviceName
   ng test --watch=false --source-map --code-coverage 
@@ -56,7 +56,7 @@
       can be injected into components as dependencies, making your code modular, reusable, and efficient.</li>
   </ul>
   <h2 id="ngInstallation">Installation</h2>
-  <pre><code>
+  <pre><code class="language-js">
   npm uninstall -g typescript
   npm uninstall -g typings
   
@@ -66,13 +66,16 @@
   
   npm install -g typescript
   npm install -g typings
+
+  ng v
+  ng --help
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   ng new my-app
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   cd my-app
   ng serve --open
   </code></pre>
@@ -80,7 +83,7 @@
   <h2>Component</h2>
   <p>Components are the fundamental building blocks of Angular applications. They display data on the screen, listen
     for user input, and take action based on that input.</p>
-  <pre><code>
+  <pre><code class="language-js">
   // Include in app.module.ts file
   // import { ComponentClassName } from 'filePath';
   import { HeroesComponent } from './heroes/heroes.component';
@@ -94,24 +97,24 @@
   <h3>Template Syntax</h3>
 
   <h4>Class binding</h4>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;div class=&quot;special&quot; [class.special]=&quot;!isSpecial&quot;&gt;This one is not so special&lt;/div&gt;
   </code></pre>
 
   <h4>Style binding</h4>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;button [style.background-color]=&quot;canSave ? 'cyan': 'grey'&quot; &gt;Save&lt;/button&gt;  
   </code></pre>
 
   <h4>Reference variable</h4>
-  <pre><code>
+  <pre><code class="language-js">
   // set Reference variable with hash #
   &lt;form (ngSubmit)=&quot;onSubmit(heroForm)&quot; #heroForm=&quot;ngForm&quot;&gt;&lt;/form&gt; 
   &lt;div [hidden]=&quot;!heroForm.form.valid&quot;&gt;{{submitMessage}}&lt;/div&gt; 
   </code></pre>
   <h3>Component Interaction</h3>
   <h4>Pass data from parent to child with input binding</h4>
-  <pre><code>
+  <pre><code class="language-js">
   import { Component, Input } from '@angular/core';
   export class HeroChildComponent {
     @Input() hero: type;
@@ -145,7 +148,7 @@
   </code></pre>
 
   <h3>Create mock data</h3>
-  <pre><code>
+  <pre><code class="language-js">
   // src/app/mock-heroes.ts
   import { Hero } from './hero';
 
@@ -176,16 +179,16 @@
   </code></pre>
 
   <h3>Directive</h3>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;li *ngFor=&quot;let hero of heroes&quot;&gt;&lt;/li&gt;
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   &lt;div *ngIf=&quot;selectedHero&quot;&gt;&lt;/div&gt;
   </code></pre>
 
   <h3>Event binding</h3>
-  <pre><code>
+  <pre><code class="language-js">
   // in component.html
   &lt;li (click)=&quot;onSelect($event)&quot;&gt;
 
@@ -206,7 +209,7 @@
     instantiated.</p>
 
 
-  <pre><code>
+  <pre><code class="language-js">
   // Service imports the Angular Injectable symbol and annotates the class with the @Injectable() decorator. This marks 
      the class as one that participates in the dependency injection system.
   import { Injectable } from '@angular/core';
@@ -223,12 +226,12 @@
     HeroService and injects into any class that asks for it. Registering the provider in the @Injectable metadata also
     allows Angular to optimize an app by removing the service if it turns out not to be used after all.</p>
   <h3>Injecting services</h3>
-  <pre><code>
+  <pre><code class="language-js">
   constructor(private heroService: HeroServic)
   </code></pre>
   <h2>Rxjs</h2>
   <h3>Observable</h3>
-  <pre><code>
+  <pre><code class="language-js">
   import { Observable } from 'rxjs';
   
   getHeroes(): Observable<Hero[]> {
@@ -242,13 +245,13 @@
   </code></pre>
 
   <h2 id="ngRouting">Routing</h2>
-  <pre><code>
+  <pre><code class="language-js">
   // --flat puts the file in src/app instead of its own folder.
   // --module=app tells the CLI to register it in the imports array of the AppModule.
   ng generate module app-routing --flat --module=app
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   // app-routing.module.ts
   import { NgModule } from '@angular/core';
   import { RouterModule, Routes } from '@angular/router';
@@ -272,7 +275,7 @@
   export class AppRoutingModule {}
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   // app.module.ts
   import { AppRoutingModule } from './app-routing.module';
   
@@ -284,12 +287,12 @@
   </code></pre>
   <p>The RouterOutlet is a directive from the router library that is used like a component. It acts as a placeholder
     that marks the spot in the template where the router should display the components for that outlet.</p>
-  <pre><code> 
+  <pre><code class="language-js"> 
   // Put where you want to print routing component
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   </code></pre>
 
-  <pre><code>  
+  <pre><code class="language-js">  
   // Put in the navigation component
   &lt;a routerLink=&quot;/detail/{{hero.id}} &quot; routerLinkActive=&quot;active&quot; &gt;Menu1&lt;/a&gt;
   &lt;a routerLink=&quot;/detail/{{hero.id}} &quot; [routerLinkActive]=&quot;'active fluffy'&quot; &gt;Menu1&lt;/a&gt;
@@ -303,12 +306,12 @@
   <h2 id="ngHttp">HTTP</h2>
   <p>HttpClient is Angular's mechanism for communicating with a remote server over HTTP.</p>
   <p>To make HttpClient available everywhere in the app, import 'HttpClientModule' inside app.module.ts file</p>
-  <pre><code>
+  <pre><code class="language-js">
   // import inside app.module.ts file
   import { HttpClientModule } from '@angular/common/http';   
   </code></pre>
 
-  <pre><code>
+  <pre><code class="language-js">
   // 1. step
   import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -335,20 +338,20 @@
 
   Binding syntax
   <p>Interpolation Property (One-way from data source to view target )</p>
-  <pre><code>
+  <pre><code class="language-js">
   {{expression}}
   [target]="expression"
   bind-target="expression"
   </code></pre>
 
   <p>Event</p>
-  <pre><code>
+  <pre><code class="language-js">
   (target)="statement"
   on-target="statement"
   </code></pre>
 
   <h3>How to Reference Html element</h3>
-  <pre><code>
+  <pre><code class="language-js">
   <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
   </code></pre>
 
@@ -380,7 +383,7 @@
       NgModule should set the bootstrap property.</li>
   </ul>
 
-  <pre><code>
+  <pre><code class="language-js">
   import { NgModule } from '@angular/core';
   import { BrowserModule } from '@angular/platform-browser';
 
@@ -412,7 +415,7 @@
   <h3>Data binding</h3>
   <p><img src="img/databinding.png" alt="" /></p>
 
-  <pre><code>
+  <pre><code class="language-js">
   &lt;ul&gt;
     &lt;li&gt;{{hero.name}}&lt;/li&gt;
     &lt;app-hero-detail [hero]=&quot;selectedHero&quot;&gt;&lt;/app-hero-detail&gt;
@@ -438,7 +441,7 @@
   <p>You can chain pipes, sending the output of one pipe function to be transformed by another pipe function. A pipe
     can also take arguments that control how it performs its transformation.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   &lt;!-- Default format: output 'Jun 15, 2015'--&gt;
   &lt;p&gt;Today is {{today | date}}&lt;/p&gt;
 
@@ -492,7 +495,7 @@
     component needs by looking at the constructor parameter types. For example, the constructor of HeroListComponent
     needs HeroService.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   constructor(private service: HeroService) { }
   </code></pre>
 
@@ -512,7 +515,7 @@
   <ol>
     <li>By default, the Angular CLI command ng generate service registers a provider with the root injector for your
       service by including provider metadata in the @Injectable() decorator.
-      <pre><code>
+      <pre><code class="language-js">
       @Injectable({
         providedIn: 'root',
        })
@@ -524,7 +527,7 @@
 
     <li>When you register a provider with a specific NgModule, the same instance of a service is available to all
       components in that NgModule.
-      <pre><code>
+      <pre><code class="language-js">
       @NgModule({
         providers: [
         BackendService,
@@ -536,7 +539,7 @@
     </li>
     <li>When you register a provider at the component level, you get a new instance of the service with each new
       instance of that component.
-      <pre><code>
+      <pre><code class="language-js">
     @Component({
       selector:    'app-hero-list',
       templateUrl: './hero-list.component.html',
@@ -628,7 +631,7 @@
   <p>With reactive forms, the form model is explicitly defined in the component class. The reactive form directive (in
     this case, FormControlDirective) then links the existing FormControl instance to a specific form element in the
     view using a value accessor (ControlValueAccessor instance).</p>
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormControl } from '@angular/forms';
     
@@ -670,7 +673,7 @@
   <h4>Setup in template-driven forms</h4>
   <p>The template-driven form directive NgModel is responsible for creating and managing the FormControl instance for a
     given form element. </p>
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
 
   @Component({
@@ -698,7 +701,7 @@
       included in <code>ReactiveFormsModule</code>.</li>
   </ol>
 
-  <pre><code>
+  <pre><code class="language-js">
   import { ReactiveFormsModule } from '@angular/forms';
 
   @NgModule({
@@ -707,7 +710,7 @@
     ],
   })
   </code></pre>
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormControl } from '@angular/forms';
   
@@ -720,7 +723,7 @@
     name = new FormControl('');
   }
   </code></pre>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;label&gt; Name:  &lt;input type=&quot;text&quot; [formControl]=&quot;name&quot;&gt; &lt;/label&gt;
   </code></pre>
 
@@ -745,7 +748,7 @@
   <p>1. To use reactive forms, import ReactiveFormsModule from the @angular/forms package and add it to your NgModule's
     imports array.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   //src/app/app.module.ts 
   import { ReactiveFormsModule } from '@angular/forms';
 
@@ -761,7 +764,7 @@
   <p>2. To register a single form control, import the FormControl class into your component and create a new instance
     of the form control to save as a class property.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   //src/app/name-editor/name-editor.component.ts
   import { Component } from '@angular/core';
   import { FormControl } from '@angular/forms';
@@ -780,7 +783,7 @@
     template. Update the template with the form control using the formControl binding provided by FormControlDirective
     included in ReactiveFormsModule.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   &lt;label&gt;
   Name:
   &lt;input type=&quot;text&quot; [formControl]=&quot;name&quot;&gt;
@@ -788,7 +791,7 @@
   </code></pre>
 
   <p>4. How to display</p>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;p&gt;
   Value: {{ name.value }}
   &lt;/p&gt;
@@ -798,7 +801,7 @@
   <p>A form control instance provides a setValue() method that updates the value of the form control and validates the
     structure of the value provided against the control's structure.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   updateName() {
     this.name.setValue('Nancy');
   }
@@ -808,7 +811,7 @@
   <p>Step 1: import the FormGroup and FormControl classes from the @angular/forms package and Creating a FormGroup
     instance</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormGroup, FormControl } from '@angular/forms';
     
@@ -829,7 +832,7 @@
     value and untouched) and methods (such as setValue()) as a form control instance.</p>
 
   <p>Step 2: Associating the FormGroup model and view</p>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;form [formGroup]=&quot;profileForm&quot;&gt;
 
   &lt;label&gt;
@@ -846,7 +849,7 @@
   </code></pre>
 
   <h3>Saving form data</h3>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;form [formGroup]=&quot;profileForm&quot; (ngSubmit)=&quot;onSubmit()&quot;&gt;
 
   onSubmit() {
@@ -859,7 +862,7 @@
 
   <h3>Creating nested form groups</h3>
   <p>Step 1: Creating a nested group</p>
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormGroup, FormControl } from '@angular/forms';
   
@@ -883,7 +886,7 @@
   </code></pre>
 
   <p>Step 2: Grouping the nested form in the template</p>
-  <pre><code>
+  <pre><code class="language-js">
   &lt;div formGroupName=&quot;address&quot;&gt;
   &lt;h3&gt;Address&lt;/h3&gt;
   &lt;label&gt; Street:
@@ -913,7 +916,7 @@
   </ul>
   <p>The strict checks of the setValue() method help catch nesting errors in complex forms, while patchValue() fails
     silently on those errors.</p>
-  <pre><code>
+  <pre><code class="language-js">
   updateProfile() {
     this.profileForm.patchValue({
       firstName: 'Nancy',
@@ -928,14 +931,14 @@
   <p>Creating form control instances manually can become repetitive when dealing with multiple forms. The FormBuilder
     service provides convenient methods for generating controls.</p>
   <h4>Step 1: Importing the FormBuilder class</h4>
-  <pre><code>
+  <pre><code class="language-js">
   import { FormBuilder } from '@angular/forms';
   </code></pre>
 
   <h4>Step 2: Injecting the FormBuilder service</h4>
   <p>The FormBuilder service is an injectable provider that is provided with the reactive forms module. Inject this
     dependency by adding it to the component constructor.</p>
-  <pre><code>
+  <pre><code class="language-js">
   constructor(private fb: FormBuilder) { }
   </code></pre>
 
@@ -943,7 +946,7 @@
   <p>The FormBuilder service has three methods: control(), group(), and array(). These are factory methods for
     generating instances in your component classes including form controls, form groups, and form arrays.</p>
 
-  <pre><code>
+  <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormBuilder } from '@angular/forms';
     
@@ -972,7 +975,7 @@
   <p>FormArray is an alternative to FormGroup for managing any number of unnamed controls. You don't need to define a
     key for each control by name, so this is a great option if you don't know the number of child values in advance.</p>
   <h4>Step 1: Importing the FormArray class</h4>
-  <pre><code>
+  <pre><code class="language-js">
   import { FormArray } from '@angular/forms';
   </code></pre>
 
@@ -981,7 +984,7 @@
     an aliases property to the form group instance for profileForm to define the form array.</p>
   <p>Use the FormBuilder.array() method to define the array, and the FormBuilder.control() method to populate the array
     with an initial control.</p>
-  <pre><code>
+  <pre><code class="language-js">
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: [''],
@@ -1000,7 +1003,7 @@
   <h4>Step 3: Accessing the FormArray control</h4>
   <p>Use the getter syntax to create an aliases class property to retrieve the alias's form array control from the
     parent form group.</p>
-  <pre><code>
+  <pre><code class="language-js">
   get aliases() {
     return this.profileForm.get('aliases') as FormArray;
   }
@@ -1008,7 +1011,7 @@
 
   <p>Define a method to dynamically insert an alias control into the alias's form array. The FormArray.push() method
     inserts the control as a new item in the array.</p>
-  <pre><code>
+  <pre><code class="language-js">
   addAlias() {
     this.aliases.push(this.fb.control(''));
   }
@@ -1021,7 +1024,7 @@
 
   <h3>Simple form validation</h3>
   <h4>Step 1: Importing a validator function</h4>
-  <pre><code>
+  <pre><code class="language-js">
   import { Validators } from '@angular/forms';
   </code></pre>
 
