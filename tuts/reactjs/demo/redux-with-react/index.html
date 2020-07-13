@@ -1,0 +1,2844 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ECMAScript</title>
+  <link href="../assets/prism.css" type="text/css" rel="stylesheet" media="all" />
+  <link href="../assets/styles.css" type="text/css" rel="stylesheet" media="all" />
+  <script src="../assets/prism.js"></script>
+</head>
+
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="#reactElement"></a></li>
+      <li><a href="#hoisting">Hoisting</a></li>
+    </ul>
+  </nav>
+
+  <h1>ECMAScript/ javaScript</h1>
+  <h2>Syntax</h2>
+  <pre><code class="language-js">
+    var x, y, z;       // How to declare variables
+    x = 5; y = 6;      // How to assign values
+    z = x + y;         // How to compute values
+  </code></pre>
+
+  <h3>JavaScript Values</h3>
+
+  <p>The JavaScript syntax defines two types of values: Fixed values and variable values.</p>
+
+  <p>Fixed values are called literals. Variable values are called variables.</p>
+
+  <h3>JavaScript Literals</h3>
+
+  <p>The most important rules for writing fixed values are:</p>
+
+  <p>Numbers are written with or without decimals:</p>
+
+  <pre><code class="language-js">
+    10.50
+    1001
+    "John Doe"
+    'John Doe'
+  </code></pre>
+
+  <h3>Cases</h3>
+
+  <pre><code class="language-js">
+    // Hyphens:
+    first-name, last-name, master-card, inter-city.
+    // Underscore:
+    first_name, last_name, master_card, inter_city.
+    // Upper Camel Case
+    FirstName, LastName, MasterCard, InterCity.    
+    // Lower Camel Case:
+    firstName, lastName, masterCard, interCity.
+  </code></pre>
+
+  <h3>Character Set</h3>
+  
+  <p>JavaScript uses the Unicode character set.</p>
+
+  <p>Unicode covers (almost) all the characters, punctuations, and symbols in the world.</p>
+
+  <h2>Variable</h2>
+  <p>JavaScript variables are containers for storing data values and it can be changed anytime.</p>
+  <p>You can assign a value to a variable using equal to (=) operator when you declare it or before using it.</p>
+
+  <pre><code class="language-js">
+    var x = 5;
+    var y = 6;
+    
+    var z;
+    z = x + y;
+  </code></pre>
+
+  <p>Creating a variable in JavaScript is called "declaring" a variable. You declare a JavaScript variable with the var
+    keyword:</p>
+
+  <pre><code class="language-js">
+    var carName;
+  </code></pre>
+
+  <p>You can declare many variables in one statement.</p>
+
+  <pre><code class="language-js">
+  var person = "John Doe", 
+      carName = "Volvo", 
+      price = 200;
+  </code></pre>
+
+  <h3>Case Sensitive</h3>
+
+  <pre><code class="language-js">
+    var lastname, lastName;
+    lastName = "Doe";
+    lastname = "Peterson";
+  </code></pre>
+
+  <h3>Value = undefined</h3>
+  <p>In computer programs, variables are often declared without a value. The value can be something that has to be
+    calculated, or something that will be provided later, like user input.</p>
+
+  <p>A variable declared without a value will have the value undefined.</p>
+
+  <p>The variable carName will have the value undefined after the execution of this statement:</p>
+
+  <p>If you re-declare a JavaScript variable, it will not lose its value. The variable carName will still have the value
+    "Volvo" after the execution of these statements:</p>
+
+  <pre><code class="language-js">
+    var carName = "Volvo";
+    var carName;
+  </code></pre>
+
+  <p>As with algebra, you can do arithmetic with JavaScript variables, using operators like = and +:</p>
+
+  <pre><code class="language-js">
+    var x = 5 + 2 + 3;
+    var x = "John" + " " + "Doe";
+    var x = 2 + 3 + "5"; // "55"
+    var x = "5" + 2 + 3;  // "523"
+
+    var price1 = 5;
+    var price2 = 6;
+    var total = price1 + price2;
+  </code></pre>
+
+  <p>The general rules for constructing names for variables (unique identifiers) are:</p>
+  <ul>
+    <li>Names can contain letters, digits, underscores, and dollar signs.</li>
+    <li>Names must begin with a letter</li>
+    <li>Names can also begin with $ and _ (but we will not use it in this tutorial)</li>
+    <li>Names are case sensitive (y and Y are different variables)</li>
+    <li>Reserved words (like JavaScript keywords) cannot be used as names</li>
+  </ul>
+
+  <h2>Comments</h2>
+  <p>Single line comments start with <code class="language-js">//</code>. and Multi-line comments start with <code
+      class="language-js">/*</code> and end with <code class="language-js">*/</code>.</p>
+  <pre><code class="language-js">
+    // Change heading:
+    document.getElementById("myH").innerHTML = "My First Page";
+    var x = 5;      // Declare x, give it the value of 5
+    //document.getElementById("myH").innerHTML = "My First Page";
+
+    /*
+    The code below will change
+    the heading with id = "myH"
+    and the paragraph with id = "myP"
+    in my web page:
+    */
+    /*
+    document.getElementById("myH").innerHTML = "My First Page";
+    document.getElementById("myP").innerHTML = "My first paragraph.";
+    */
+  </code></pre>
+  <h4>Array.find() - Retrun: value</h4>
+  <p>Array.find() is used to get the value of the first element in the array that satisfies the provided condition.</p>
+
+  <pre><code class="language-js">
+    // array.find(function(currentValue, index, arr),thisValue)
+
+    var ages = [3, 10, 18, 20];
+
+    function checkAdult(age) {
+      return age >= 18;
+    }
+    console.log(ages.find(checkAdult));
+  </code></pre>
+
+  <h4>filter() - retrun new array</h4>
+  <p>The filter() method creates an array filled with all array elements that pass a test (provided as a function). It
+    is a non-mutating method or pure function because this method does not change the original array.
+  </p>
+
+  <pre><code class="language-js">
+  // array.filter(function(currentValue, index, arr), thisValue)
+
+  var ages = [32, 33, 16, 40];
+  // return boolean to create new array with passed element.
+  function checkAdult(age) {
+    return age >= 18;
+  }
+  console.log(ages.filter(checkAdult););
+  </code></pre>
+
+  <h4>map() - retrun new array</h4>
+  <p>The map() method returns new array by calling a specific function on each element present in the
+    parent array. It is a non-mutating method or pure function because this method does not change the original array.
+  </p>
+
+  <pre><code class="language-js">
+  // array.map(function(currentValue, index, arr), thisValue);
+  var numbers = [4, 9, 16, 25];
+  var x = numbers.map(Math.sqrt)
+  </code></pre>
+
+  <h4>reduce() - retrun new accumulated number</h4>
+  <p>The array reduce() method in JavaScript is used to reduce the array to a single value and executes a provided
+    function for each value of the array (from left-to-right) and the return value of the function is stored in an
+    accumulator.</p>
+  <p>if we provide 'initialValue' parameter, function will iterate over on all element of array else this method pick
+    first one element of array and iteration start from second value</p>
+
+  <pre><code class="language-js">
+  // array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+  
+  var numbers = [175, 50, 25];
+
+  // example.1 Subtract the numbers in the array  
+  function myfunc1 (total, num) {
+    return total - num;
+  }
+  console.log(numbers.reduce(myfunc1));
+
+  // example.2 sum the numbers in the array
+  function myfunc2 (total, num) {
+    return total - num;
+  }
+  console.log(numbers.reduce(myfunc2));
+  </code></pre>
+
+
+  <h2>ES6 or ES2015</h2>
+
+  <h3>Arrow Functions</h3>
+  <p>The <strong>this</strong> scope with arrow functions is inherited from the context.</p>
+  <p>With regular functions this always refers to the nearest function, while with arrow functions this problem is
+    removed, and you won’t need to write <code class="language-js">var that = this</code> ever again.</p>
+  <pre><code class="language-js">
+    const something = function something() {
+      //...
+    }
+    // to 
+    const something = () => {
+      //...
+    }
+    </code></pre>
+  <pre><code class="language-js">
+    const something = () => doSomething()
+    // or
+    const something = param => doSomething(param)
+    </code></pre>
+
+  <h3>Promises</h3>
+  <p>Promises are one way to deal with asynchronous code in JavaScript, without writing too many callbacks in your code.
+  </p>
+  <p>Although they&rsquo;ve been around for years, they were standardized and introduced in <a
+      href="https://flaviocopes.com/es6/">ES2015</a>, and now they have been superseded in <a
+      href="https://flaviocopes.com/es2017/">ES2017</a> by <a
+      href="https://flaviocopes.com/javascript-async-await">async functions</a>.</p>
+
+  <p><strong>Async functions</strong> use the promises API as their building block, so understanding them is fundamental
+    even if in newer code you&rsquo;ll likely use async functions instead of promises.</p>
+
+  <h4>How promises work, in brief</h4>
+
+  <p>Once a promise has been called, it will start in <strong>pending state</strong>. This means that the caller
+    function continues the execution, while it waits for the promise to do its own processing, and give the caller
+    function some feedback.</p>
+
+  <p>At this point, the caller function waits for it to either return the promise in a <strong>resolved state</strong>,
+    or in a <strong>rejected state</strong>, but <em>the function continues its execution while the promise does it
+      work</em>.</p>
+  <h4>Creating a promise</h4>
+
+  <p>The Promise API exposes a Promise constructor, which you initialize using <code>new Promise()</code>:</p>
+
+  <pre><code class="language-js">
+    // By using promises you can rewrite this code
+    setTimeout(function() {
+      console.log('I promised to run after 1s')
+      setTimeout(function() {
+        console.log('I promised to run after 2s')
+      }, 1000)
+    }, 1000)
+
+    //as
+
+    const wait = () => new Promise((resolve, reject) => {
+      setTimeout(resolve, 1000)
+    })
+    
+    wait().then(() => {
+      console.log('I promised to run after 1s')
+      return wait()
+    })
+    .then(() => console.log('I promised to run after 2s'))
+</code></pre>
+
+  <pre><code class="language-js">
+  let done = true
+
+  const isItDoneYet = new Promise((resolve, reject) =&gt; {
+    if (done) {
+      const workDone = 'Here is the thing I built'
+      resolve(workDone)
+    } else {
+      const why = 'Still working on something else'
+      reject(why)
+    }
+  })
+    </code></pre>
+  <p>As you can see the promise checks the <code>done</code> global variable, and if that&rsquo;s true, we return a
+    resolved promise, otherwise a rejected promise.</p>
+
+  <p>Using <code>resolve</code> and <code>reject</code> we can communicate back a value, in the above case we just
+    return a string, but it could be an object as well.</p>
+
+  <h4>Consuming a promise</h4>
+
+  <p>In the last section, we introduced how a promise is created.</p>
+
+  <p>Now let&rsquo;s see how the promise can be <em>consumed</em> or used.</p>
+
+  <pre><code class="language-js">
+    const isItDoneYet = new Promise()
+    //...
+
+    const checkIfItsDone = () =&gt; {
+      isItDoneYet
+        .then(ok =&gt; {
+          console.log(ok)
+        })
+        .catch(err =&gt; {
+          console.error(err)
+        })
+    }
+</code></pre>
+
+  <h3 id="chaining-promises">Chaining promises</h3>
+
+  <p>A promise can be returned to another promise, creating a chain of promises.</p>
+
+  <p>A great example of chaining promises is given by the <a href="https://flaviocopes.com/fetch-api">Fetch API</a>, a
+    layer on top of the XMLHttpRequest API, which we can use to get a resource and queue a chain of promises to execute
+    when the resource is fetched.</p>
+
+  <p>The Fetch API is a promise-based mechanism, and calling <code>fetch()</code> is equivalent to defining our own
+    promise using <code>new Promise()</code>.</p>
+
+  <h4>Example of chaining promises</h4>
+
+  <pre><code class="language-js">const status = response =&gt; {
+    if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
+      return Promise.resolve(response)
+    }
+    return Promise.reject(new Error(response.statusText))
+    }
+
+  const json = response =&gt; response.json()
+
+  fetch('/todos.json')
+    .then(status)
+    .then(json)
+    .then(data =&gt; {
+      console.log('Request succeeded with JSON response', data)
+    })
+    .catch(error =&gt; {
+      console.log('Request failed', error)
+    })
+    </code></pre>
+
+  <p>In this example, we call <code>fetch()</code> to get a list of TODO items from the <code>todos.json</code> file
+    found in the domain root, and we create a chain of promises.</p>
+
+  <p>Running <code>fetch()</code> returns a <a href="https://fetch.spec.whatwg.org/#concept-response">response</a>,
+    which has many properties, and within those we reference:</p>
+
+  <ul>
+    <li><code>status</code>, a numeric value representing the HTTP status code</li>
+    <li><code>statusText</code>, a status message, which is <code>OK</code> if the request succeeded</li>
+  </ul>
+
+  <p><code>response</code> also has a <code>json()</code> method, which returns a promise that will resolve with the
+    content of the body processed and transformed into <strong>JSON</strong>.</p>
+
+  <p>So given those premises, this is what happens: the first promise in the chain is a function that we defined, called
+    <code>status()</code>, that checks the response status and if it&rsquo;s not a success response (between 200 and
+    299), it rejects the promise.</p>
+
+  <p>This operation will cause the promise chain to skip all the chained promises listed and will skip directly to the
+    <code>catch()</code> statement at the bottom, logging the <code>Request failed</code> text along with the error
+    message.</p>
+
+  <p>If that succeeds instead, it calls the <code>json()</code> function we defined. Since the previous promise, when
+    successful, returned the <code>response</code> object, we get it as an input to the second promise.</p>
+
+  <p>In this case, we return the data JSON processed, so the third promise receives the JSON directly:</p>
+
+  <pre><code class="language-js">
+    .then((data) =&gt; {
+      console.log('Request succeeded with JSON response', data)
+    })
+    </code></pre>
+
+  <p>and we log it to the console.</p>
+
+  <h3>Handling errors</h3>
+
+  <p>In the above example, in the previous section, we had a <code>catch</code> that was appended to the chain of
+    promises.</p>
+
+  <p>When anything in the chain of promises fails and raises an error or rejects the promise, the control goes to the
+    nearest <code>catch()</code> statement down the chain.</p>
+
+  <pre><code class="language-js">
+    new Promise((resolve, reject) =&gt; {
+      throw new Error('Error')
+    }).catch(err =&gt; {
+      console.error(err)
+    })
+
+    // or
+
+    new Promise((resolve, reject) =&gt; {
+      reject('Error')
+    }).catch(err =&gt; {
+      console.error(err)
+    })
+    </code></pre>
+
+  <h3>Cascading errors</h3>
+
+  <p>If inside the <code>catch()</code> you raise an error, you can append a second <code>catch()</code> to handle it,
+    and so on.</p>
+
+  <pre><code class="language-js">
+    new Promise((resolve, reject) =&gt; {
+      throw new Error('Error')
+    })
+    .catch(err =&gt; {
+      throw new Error('Error')
+    })
+    .catch(err =&gt; {
+      console.error(err)
+    })
+    </code></pre>
+
+  <hr />
+
+  <h4>Orchestrating promises</h4>
+
+  <h5><code>Promise.all()</code></h5>
+
+  <p>If you need to synchronize different promises, <code>Promise.all()</code> helps you define a list of promises, and
+    execute something when they are all resolved.</p>
+
+  <p>Example:</p>
+
+  <pre><code class="language-js">
+    const f1 = fetch('/something.json')
+    const f2 = fetch('/something2.json')
+
+    Promise.all([f1, f2])
+    .then(res =&gt; {
+      console.log('Array of results', res)
+    })
+    .catch(err =&gt; {
+      console.error(err)
+    })
+    </code></pre>
+
+  <p>The <a href="https://flaviocopes.com/es6/#destructuring-assignments">ES2015 destructuring assignment</a> syntax
+    allows you to also do</p>
+
+  <pre><code class="language-js">
+    Promise.all([f1, f2]).then(([res1, res2]) =&gt; {
+      console.log('Results', res1, res2)
+    })
+    </code></pre>
+
+  <p>You are not limited to using <code>fetch</code> of course, <strong>any promise is good to go</strong>.</p>
+
+  <h5><code>Promise.race()</code></h5>
+
+  <p><code>Promise.race()</code> runs as soon as one of the promises you pass to it resolves, and it runs the attached
+    callback just once with the result of the first promise resolved.</p>
+
+  <p>Example:</p>
+
+  <pre><code class="language-js">
+    const promiseOne = new Promise((resolve, reject) =&gt; {
+      setTimeout(resolve, 500, 'one')
+    })
+    const promiseTwo = new Promise((resolve, reject) =&gt; {
+      setTimeout(resolve, 100, 'two')
+    })
+
+    Promise.race([promiseOne, promiseTwo]).then(result =&gt; {
+      console.log(result) // 'two'
+    })
+    </code></pre>
+
+  <h4>Common errors</h4>
+
+  <p>Uncaught TypeError: undefined is not a promise</p>
+
+  <p>If you get the <code>Uncaught TypeError: undefined is not a promise</code> error in the console, make sure you use
+    <code>new Promise()</code> instead of just <code>Promise()</code></p>
+
+  <h3>Generators</h3>
+  <p>Generators are a special kind of function with the ability to pause itself, and resume later, allowing other code
+    to run in the meantime.</p>
+
+  <p>The code decides that it has to wait, so it lets other code &ldquo;in the queue&rdquo; to run, and keeps the right
+    to resume its operations &ldquo;when the thing it&rsquo;s waiting for&rdquo; is done.</p>
+
+  <p>All this is done with a single, simple keyword: <code>yield</code>. When a generator contains that keyword, the
+    execution is halted.</p>
+
+  <p>A generator can contain many <code>yield</code> keywords, thus halting itself multiple times, and it&rsquo;s
+    identified by the <code>*function</code> keyword, which is not to be confused with the pointer dereference operator
+    used in lower level programming languages such as C, C++ or Go.</p>
+
+  <p>Generators enable whole new paradigms of programming in JavaScript, allowing:</p>
+
+  <ul>
+    <li>2-way communication while a generator is running</li>
+    <li>long-lived while loops which do not freeze your program</li>
+  </ul>
+
+  <p>Here is an example of a generator which explains how it all works.</p>
+
+  <pre><code class="language-js">
+    function *calculator(input) {
+      var doubleThat = 2 * (yield (input / 2))
+      var another = yield (doubleThat)
+      return (input * doubleThat * another)
+    }
+    </code></pre>
+
+  <p>We initialize it with</p>
+
+  <pre><code class="language-js">
+    const calc = calculator(10)
+    </code></pre>
+
+  <p>Then we start the iterator on our generator:</p>
+
+  <pre><code class="language-js">
+    calc.next()
+    </code></pre>
+
+  <p>This first iteration starts the iterator. The code returns this object:</p>
+
+  <pre><code class="language-js">{
+    done: false
+      value: 5
+    }
+    </code></pre>
+
+  <p>What happens is: the code runs the function, with <code>input = 10</code> as it was passed in the generator
+    constructor. It runs until it reaches the <code>yield</code>, and returns the content of <code>yield</code>:
+    <code>input / 2 = 5</code>. So we got a value of 5, and the indication that the iteration is not done (the function
+    is just paused).</p>
+
+  <p>In the second iteration we pass the value <code>7</code>:</p>
+
+  <pre><code class="language-js">
+    calc.next(7)
+    </code></pre>
+
+  <p>and what we got back is:</p>
+
+  <pre><code class="language-js">
+    {
+      done: false
+      value: 14
+    }
+    </code></pre>
+
+  <p><code>7</code> was placed as the value of <code>doubleThat</code>. Important: you might read like
+    <code>input / 2</code> was the argument, but that&rsquo;s just the return value of the first iteration. We now skip
+    that, and use the new input value, <code>7</code>, and multiply it by 2.</p>
+
+  <p>We then reach the second yield, and that returns <code>doubleThat</code>, so the returned value is <code>14</code>.
+  </p>
+
+  <p>In the next, and last, iteration, we pass in 100</p>
+
+  <pre><code class="language-js">
+    calc.next(100)
+    </code></pre>
+
+  <p>and in return we got</p>
+
+  <pre><code class="language-js">
+    {
+      done: true
+      value: 14000
+    }
+    </code></pre>
+
+  <p>As the iteration is done (no more yield keywords found) and we just return
+    <code>(input * doubleThat * another)</code> which amounts to <code>10 * 14 * 100</code>.</p>
+
+  <h4>let and const</h4>
+  <p><code>var</code> is traditionally <strong>function scoped</strong>.</p>
+
+  <p><code>let</code> is a new variable declaration which is <strong>block scoped</strong>.</p>
+
+  <p>This means that declaring <code>let</code> variables in a for loop, inside an if or in a plain block is not going
+    to let that variable &ldquo;escape&rdquo; the block, while <code>var</code>s are hoisted up to the function
+    definition.</p>
+
+  <p><code>const</code> is just like <code>let</code>, but <strong>immutable</strong>.</p>
+
+  <h3>Classes</h3>
+  <p>Traditionally JavaScript is the only mainstream language with prototype-based inheritance. Programmers switching to
+    JS from class-based language found it puzzling, but ES2015 introduced classes, which are just syntactic sugar over
+    the inner working, but changed a lot how we build JavaScript programs.</p>
+  <p>Now inheritance is very easy and resembles other object-oriented programming languages:</p>
+  <pre><code class="language-js">
+    class Person {
+      constructor(name) {
+        this.name = name
+      }
+    
+      hello() {
+        return 'Hello, I am ' + this.name + '.'
+      }
+    }
+    
+    class Actor extends Person {
+      hello() {
+        return super.hello() + ' I am an actor.'
+      }
+    }
+    
+    var tomCruise = new Actor('Tom Cruise')
+    tomCruise.hello()
+    </code></pre>
+  <p>Classes do not have explicit class variable declarations, but you must initialize any variable in the constructor.
+  </p>
+  <h4>Constructor</h4>
+  <p>Classes have a special method called <code>constructor</code> which is called when a class is initialized via
+    <code>new</code>.</p>
+
+  <h4>Super</h4>
+  <p>The parent class can be referenced using <code>super()</code>.</p>
+
+  <h4>Getters and setters</h4>
+  <p>A getter for a property can be declared as</p>
+  <pre><code class="language-js">
+    class Person {
+      get fullName() {
+        return `${this.firstName} ${this.lastName}`
+      }
+    }
+    </code></pre>
+  <p>Setters are written in the same way:</p>
+  <pre><code class="language-js">
+    class Person {
+      set age(years) {
+        this.theAge = years
+      }
+    }
+    </code></pre>
+
+  <h3>Modules</h3>
+
+  <p>Before ES2015, there were at least 3 major modules competing standards, which fragmented the community:</p>
+
+  <ul>
+    <li>AMD</li>
+    <li>RequireJS</li>
+    <li>CommonJS</li>
+  </ul>
+
+  <p>ES2015 standardized these into a common format.</p>
+
+  <h4>Importing modules</h4>
+
+  <p>Importing is done via the <code>import ... from ...</code> construct:</p>
+
+  <pre><code class="language-js">
+    import * from 'mymodule'
+    import React from 'react'
+    import { React, Component } from 'react'
+    import React as MyLibrary from 'react'
+    </code></pre>
+
+  <h4>Exporting modules</h4>
+
+  <p>You can write modules and export anything to other modules using the <code>export</code> keyword:</p>
+
+  <pre><code class="language-js">
+    export var number = 2
+    export function bar() { /* ... */ }
+    </code></pre>
+
+  <h3>Template Literals</h3>
+  <p>Template Literals are a new ES2015 / ES6 feature that allows you to work with strings in a novel way compared to
+    ES5 and below.</p>
+
+  <p>The syntax at a first glance is very simple, just use backticks instead of single or double quotes:</p>
+
+  <pre><code class="language-js">
+    const a_string = `something`
+    </code></pre>
+
+  <p>They are unique because they provide a lot of features that normal strings built with quotes do not, in particular:
+  </p>
+
+  <ul>
+    <li>they offer a great syntax to define multiline strings</li>
+    <li>they provide an easy way to interpolate variables and expressions in strings</li>
+    <li>they allow you to create DSLs with template tags (DSL means domain specific language, and it&rsquo;s for example
+      used in React by Styled Components, to define CSS for a component)</li>
+  </ul>
+
+  <p>Let&rsquo;s dive into each of these in detail.</p>
+
+  <h4>Multiline strings</h4>
+
+  <p>Pre-ES6, to create a string spanning over two lines you had to use the <code>\</code> character at the end of a
+    line:</p>
+
+  <pre><code class="language-js">
+    const string =
+    'first part \
+    second part'
+    </code></pre>
+
+  <p>This allows to create a string on 2 lines, but it&rsquo;s rendered on just one line:</p>
+
+  <p><code>first part second part</code></p>
+
+  <p>To render the string on multiple lines as well, you explicitly need to add <code>\n</code> at the end of each line,
+    like this:</p>
+
+  <pre><code class="language-js">
+    const string =
+    'first line\n \
+      second line'
+    </code></pre>
+
+  <p>or</p>
+
+  <pre><code class="language-js">
+    const string = 'first line\n' + 'second line'
+    </code></pre>
+
+  <p>Template literals make multiline strings much simpler.</p>
+
+  <p>Once a template literal is opened with the backtick, you just press enter to create a new line, with no special
+    characters, and it&rsquo;s rendered as-is:</p>
+
+  <pre><code class="language-js">
+    const string = `Hey
+    this
+
+    string
+    is awesome!`
+    </code></pre>
+
+  <p>Keep in mind that space is meaningful, so doing this:</p>
+
+  <pre><code class="language-js">
+    const string = `First
+                  Second`
+    </code></pre>
+
+  <p>is going to create a string like this:</p>
+
+  <code class="language-html">First
+                  Second
+  </code>
+  </pre>
+
+  <p>an easy way to fix this problem is by having an empty first line, and appending the trim() method right after the
+    closing backtick, which will eliminate any space before the first character:</p>
+
+  <pre><code class="language-js">
+    const string = `
+    First
+    Second`.trim()
+    </code></pre>
+
+  <h4>Interpolation</h4>
+
+  <p>Template literals provide an easy way to interpolate variables and expressions into strings.</p>
+
+  <p>You do so by using the <code>${...}</code> syntax:</p>
+
+  <pre><code class="language-js">
+    const myVariable = 'test'
+    const string = `something ${myVariable}` //something test
+    </code></pre>
+
+  <p>inside the <code>${}</code> you can add anything, even expressions:</p>
+
+  <pre><code class="language-js">
+    const string = `something ${1 + 2 + 3}`
+    const string2 = `something ${doSomething() ? 'x' : 'y'}`
+    </code></pre>
+
+  <h4>Template tags</h4>
+
+  <p>Tagged templates is one feature that might sound less useful at first for you, but it&rsquo;s actually used by
+    lots
+    of popular libraries around, like <a href="https://flaviocopes.com/styled-components/">Styled Components</a> or <a
+      href="https://flaviocopes.com/apollo/">Apollo</a>, the <a href="https://flaviocopes.com/graphql/">GraphQL</a>
+    client/server lib, so it&rsquo;s essential to understand how it works.</p>
+
+  <p>In Styled Components template tags are used to define CSS strings:</p>
+
+  <pre><code class="language-js">
+    const Button = styled.button`
+      font-size: 1.5em;
+      background-color: black;
+      color: white;
+    `
+    </code></pre>
+
+  <p>In Apollo template tags are used to define a GraphQL query schema:</p>
+
+  <pre><code class="language-js">
+    const query = gql`
+      query {
+        ...
+      }
+    `
+    </code></pre>
+
+  <p>The <code>styled.button</code> and <code>gql</code> template tags highlighted in those examples are just
+    <strong>functions</strong>:</p>
+
+  <pre><code class="language-js">
+    function gql(literals, ...expressions) {}
+    </code></pre>
+
+  <p>this function returns a string, which can be the result of <em>any</em> kind of computation.</p>
+
+  <p><code>literals</code> is an array containing the template literal content tokenized by the expressions
+    interpolations.</p>
+
+  <p><code>expressions</code> contains all the interpolations.</p>
+
+  <p>If we take an example above:</p>
+
+  <pre><code class="language-js">
+    const string = `something ${1 + 2 + 3}`
+    </code></pre>
+
+  <p><code>literals</code> is an array with two items. The first is <code>something</code>, the string until the first
+    interpolation, and the second is an empty string, the space between the end of the first interpolation (we only
+    have
+    one) and the end of the string.</p>
+
+  <p><code>expressions</code> in this case is an array with a single item, <code>6</code>.</p>
+
+  <p>A more complex example is:</p>
+
+  <pre><code class="language-js">
+    const string = `something
+    another ${'x'}
+    new line ${1 + 2 + 3}
+    test`
+    </code></pre>
+
+  <p>in this case <code>literals</code> is an array where the first item is:</p>
+
+  <pre><code class="language-js">
+    ;`something
+    another `
+    </code></pre>
+
+  <p>the second is:</p>
+
+  <pre><code class="language-js">;`
+    new line `
+    </code></pre>
+
+  <p>and the third is:</p>
+
+  <pre><code class="language-js">;`
+    test`
+    </code></pre>
+
+  <p><code>expressions</code> in this case is an array with two items, <code>x</code> and <code>6</code>.</p>
+
+  <p>The function that is passed those values can do anything with them, and this is the power of this kind feature.
+  </p>
+
+  <p>The most simple example is replicating what the string interpolation does, by joining <code>literals</code> and
+    <code>expressions</code>:</p>
+
+  <pre><code class="language-js">
+    const interpolated = interpolate`I paid ${10}€`
+    </code></pre>
+
+  <p>and this is how <code>interpolate</code> works:</p>
+
+  <pre><code class="language-js">
+    function interpolate(literals, ...expressions) {
+      let string = ``
+      for (const [i, val] of expressions.entries()) {
+        string += literals[i] + val
+      }
+      string += literals[literals.length - 1]
+      return string
+    }
+    </code></pre>
+
+  <h3>Default parameters</h3>
+
+  <p>Functions now support default parameters:</p>
+
+  <pre><code class="language-js">
+  const someFunction = function(index = 0, testing = true) { /* ... */ }
+  someFunction()
+    </code></pre>
+
+
+  <h3>The spread operator</h3>
+
+  <p>You can expand an array, an object or a string using the spread operator <code>...</code>.</p>
+
+  <p>Let&rsquo;s start with an array example. Given</p>
+
+  <pre><code class="language-js">
+    const a = [1, 2, 3]
+    </code></pre>
+
+  <p>you can create a new array using</p>
+
+  <pre><code class="language-js">
+    const b = [...a, 4, 5, 6]
+    </code></pre>
+
+  <p>You can also create a copy of an array using</p>
+
+  <pre><code class="language-js">
+    const c = [...a]
+    </code></pre>
+
+  <p>This works for objects as well. Clone an object with:</p>
+
+  <pre><code class="language-js">
+    const newObj = { ...oldObj }
+    </code></pre>
+
+  <p>Using strings, the spread operator creates an array with each char in the string:</p>
+
+  <pre><code class="language-js">
+    const hey = 'hey'
+    const arrayized = [...hey] // ['h', 'e', 'y']
+    </code></pre>
+
+  <p>This operator has some pretty useful applications. The most important one is the ability to use an array as
+    function argument in a very simple way:</p>
+
+  <pre><code class="language-js">
+    const f = (arg1, arg2) =&gt; {}
+    const a = [1, 2]
+    f(...a)
+    </code></pre>
+
+  <p>(in the past you could do this using <code>f.apply(null, a)</code> but that&rsquo;s not as nice and readable)</p>
+
+  <h3>Destructuring assignments</h3>
+
+  <p>Given an object, you can extract just some values and put them into named variables:</p>
+
+  <pre><code class="language-js">
+    const person = {
+      firstName: 'Tom',
+      lastName: 'Cruise',
+      actor: true,
+      age: 54, //made up
+    }
+
+    const {firstName: name, age} = person
+    </code></pre>
+
+  <p><code>name</code> and <code>age</code> contain the desired values.</p>
+
+  <p>The syntax also works on arrays:</p>
+
+  <pre><code class="language-js">
+    const a = [1,2,3,4,5]
+    const [first, second] = a
+    </code></pre>
+
+  <p>This statement creates 3 new variables by getting the items with index 0, 1, 4 from the array <code>a</code>:</p>
+
+  <pre><code class="language-js">
+    const [first, second, , , fifth] = a
+    </code></pre>
+
+  <h3>Enhanced Object Literals</h3>
+
+  <p>In ES2015 Object Literals gained superpowers.</p>
+
+  <h4>Simpler syntax to include variables</h4>
+
+  <p>Instead of doing</p>
+  <pre><code class="language-js">
+    const something = 'y'
+    const x = {
+      something: something
+    }
+    </code></pre>
+
+  <p>you can do</p>
+  <pre><code class="language-js">
+    const something = 'y'
+    const x = {
+      something
+    }
+    </code></pre>
+
+  <h3>Prototype</h3>
+
+  <p>A prototype can be specified with</p>
+  <pre><code class="language-js">
+    const anObject = { y: 'y' }
+    const x = {
+      __proto__: anObject
+    }
+    </code></pre>
+
+  <h3>super()</h3>
+
+  <pre><code class="language-js">const anObject = { y: 'y', test: () =&gt; 'zoo' }
+    const x = {
+      __proto__: anObject,
+      test() {
+        return super.test() + 'x'
+      }
+    }
+    x.test() //zoox
+    </code></pre>
+
+  <h3>Dynamic properties</h3>
+
+  <pre><code class="language-js">
+    const x = {
+      ['a' + '_' + 'b']: 'z'
+    }
+    x.a_b //z
+    </code></pre>
+
+  <h3>For-of loop</h3>
+
+  <p>ES5 back in 2009 introduced <code>forEach()</code> loops. While nice, they offered no way to break, like
+    <code>for</code> loops always did.</p>
+  <p>ES2015 introduced the <strong><code>for-of</code> loop</strong>, which combines the conciseness of
+    <code>forEach</code> with the ability to break:</p>
+  <pre><code class="language-js">//iterate over the value
+    for (const v of ['a', 'b', 'c']) {
+      console.log(v);
+    }
+
+    //get the index as well, using `entries()`
+    for (const [i, v] of ['a', 'b', 'c'].entries()) {
+      console.log(i, v);
+    }
+    </code></pre>
+
+  <h3>Map and Set - JavaScript Data Structure</h3>
+
+  <p><strong>Map</strong> and <strong>Set</strong> (and their respective garbage collected
+    <strong>WeakMap</strong> and <strong>WeakSet</strong>) are the official implementations of two very popular data
+    structures.</p>
+
+  <p>A Set data structure allows to add data to a container.</p>
+
+  <p>ECMAScript 6 (also called ES2015) introduced the Set data structure to the JavaScript world, along with Map</p>
+
+  <p>A Set is a collection of objects or primitive types (strings, numbers or booleans), and you can think of it as a
+    Map where values are used as map keys, with the map value always being a boolean true.</p>
+
+  <h4>Initialize a Set</h4>
+
+  <p>A Set is initialized by calling:</p>
+
+  <pre><code class="language-js">
+    const s = new Set()
+    </code></pre>
+
+  <h4>Add items to a Set</h4>
+
+  <p>You can add items to the Set by using the <code>add</code> method:</p>
+
+  <pre><code class="language-js">
+    s.add('one')
+    s.add('two')
+    </code></pre>
+
+  <p>A set only stores unique elements, so calling <code>s.add('one')</code> multiple times won&rsquo;t add new items.
+  </p>
+
+  <p>You can&rsquo;t add multiple elements to a set at the same time. You need to call <code>add()</code> multiple
+    times.</p>
+
+  <h4>Check if an item is in the set</h4>
+
+  <p>Once an element is in the set, we can check if the set contains it:</p>
+
+  <pre><code class="language-js">
+    s.has('one') //true
+    s.has('three') //false
+    </code></pre>
+
+  <h4>Delete an item from a Set by key</h4>
+
+  <p>Use the <code>delete()</code> method:</p>
+
+  <pre><code class="language-js">
+    s.delete('one')
+    </code></pre>
+
+  <h4>Determine the number of items in a Set</h4>
+
+  <p>Use the <code>size</code> property:</p>
+
+  <pre><code class="language-js">
+    s.size
+    </code></pre>
+
+  <h4>Delete all items from a Set</h4>
+
+  <p>Use the <code>clear()</code> method:</p>
+
+  <pre><code class="language-js">
+    s.clear()
+    </code></pre>
+
+  <h3>Iterate the items in a Set</h3>
+
+  <p>Use the <code>keys()</code> or <code>values()</code> methods - they are equivalent:</p>
+
+  <pre><code class="language-js">
+    for (const k of s.keys()) {
+      console.log(k)
+    }
+
+    for (const k of s.values()) {
+      console.log(k)
+    }
+    </code></pre>
+
+  <p>The <code>entries()</code> method returns an iterator, which you can use like this:</p>
+
+  <pre><code class="language-js">
+    const i = s.entries()
+    console.log(i.next())
+    </code></pre>
+
+  <p>calling <code>i.next()</code> will return each element as a <code>{ value, done = false }</code> object until the
+    iterator ends, at which point <code>done</code> is <code>true</code>.</p>
+
+  <p>You can also use the forEach() method on the set:</p>
+
+  <pre><code class="language-js">
+    s.forEach(v =&gt; console.log(v))
+    </code></pre>
+
+  <p>or you can just use the set in a for..of loop:</p>
+
+  <pre><code class="language-js">
+    for (const k of s) {
+      console.log(k)
+    }
+    </code></pre>
+
+  <h4>Initialize a Set with values</h4>
+
+  <p>You can initialize a Set with a set of values:</p>
+
+  <pre><code class="language-js">
+    const s = new Set([1, 2, 3, 4])
+    </code></pre>
+
+  <h4>Convert to array</h4>
+
+  <h4>Convert the Set keys into an array</h4>
+
+  <pre><code class="language-js">
+    const a = [...s.keys()]
+
+    // or
+
+    const a = [...s.values()]
+    </code></pre>
+
+  <h4>A WeakSet</h4>
+
+  <p>A WeakSet is a special kind of Set.</p>
+
+  <p>In a Set, items are never garbage collected. A WeakSet instead lets all its items be freely garbage collected.
+    Every key of a WeakSet is an object. When the reference to this object is lost, the value can be garbage
+    collected.
+  </p>
+
+  <p>Here are the main differences:</p>
+
+  <ol>
+    <li>you cannot iterate over the WeakSet</li>
+    <li>you cannot clear all items from a WeakSet</li>
+    <li>you cannot check its size</li>
+  </ol>
+
+  <p>A WeakSet is generally used by framework-level code, and only exposes these methods:</p>
+
+  <ul>
+    <li>add()</li>
+    <li>has()</li>
+    <li>delete()</li>
+  </ul>
+
+  <h4>New String methods</h4>
+
+  <p>Any string value got some new instance methods:</p>
+  <ul>
+    <li><code>repeat()</code> repeats the strings for the specificed number of times:
+      <code>'Ho'.repeat(3) //HoHoHo</code></li>
+    <li><code>codePointAt()</code> handles retrieving the Unicode code of characters that cannot be represented by a
+      single 16-bit UTF-16 unit, but need 2 instead</li>
+  </ul>
+
+  <h4>New Object methods</h4>
+
+  <p>ES6 introduced several static methods under the Object namespace:</p>
+  <ul>
+    <li><code>Object.is()</code> determines if two values are the same value</li>
+    <li><code>Object.assign()</code></li>
+    <li><code>Object.setPrototypeOf</code> sets an object prototype</li>
+  </ul>
+
+  <h3>What is a Map</h3>
+
+  <p>A Map data structure allows to associate data to a key.</p>
+
+  <h4>Before ES6</h4>
+
+  <p>ECMAScript 6 (also called ES2015) introduced the Map data structure to the JavaScript world, along with <a
+      href="/javascript-data-structures-set/">Set</a></p>
+
+  <p>Before its introduction, people generally used objects as maps, by associating some object or value to a specific
+    key value:</p>
+
+  <pre><code class="language-js">
+    const car = {}
+    car['color'] = 'red'
+    car.owner = 'Flavio'
+    console.log(car['color']) //red
+    console.log(car.color) //red
+    console.log(car.owner) //Flavio
+    console.log(car['owner']) //Flavio
+    </code></pre>
+
+  <h4>Enter Map</h4>
+
+  <p>ES6 introduced the Map data structure, providing us a proper tool to handle this kind of data organization.</p>
+
+  <p>A Map is initialized by calling:</p>
+
+  <pre><code class="language-js">
+    const m = new Map()
+    </code></pre>
+
+  <h4>Add items to a Map</h4>
+
+  <p>You can add items to the map by using the <code>set</code> method:</p>
+
+  <pre><code class="language-js">
+    m.set('color', 'red')
+    m.set('age', 2)
+    </code></pre>
+
+  <h4>Get an item from a map by key</h4>
+
+  <p>And you can get items out of a map by using <code>get</code>:</p>
+
+  <pre><code class="language-js">
+    const color = m.get('color')
+    const age = m.get('age')
+    </code></pre>
+
+  <h4>Delete an item from a map by key</h4>
+
+  <p>Use the <code>delete()</code> method:</p>
+
+  <pre><code class="language-js">
+    m.delete('color')
+    </code></pre>
+
+  <h4>Delete all items from a map</h4>
+
+  <p>Use the <code>clear()</code> method:</p>
+
+  <pre><code class="language-js">
+    m.clear()
+    </code></pre>
+
+  <h4>Check if a map contains an item by key</h4>
+
+  <p>Use the <code>has()</code> method:</p>
+
+  <pre><code class="language-js">
+    const hasColor = m.has('color')
+    </code></pre>
+
+  <h4>Find the number of items in a map</h4>
+
+  <p>Use the <code>size</code> property:</p>
+
+  <pre><code class="language-js">
+    const size = m.size
+    </code></pre>
+
+  <h4>Initialize a map with values</h4>
+
+  <p>You can initialize a map with a set of values:</p>
+
+  <pre><code class="language-js">
+    const m = new Map([['color', 'red'], ['owner', 'Flavio'], ['age', 2]])
+    </code></pre>
+
+  <h4>Map keys</h4>
+
+  <p>Just like any value (object, array, string, number) can be used as the value of the key-value entry of a map
+    item,
+    <strong>any value can be used as the key</strong>, even objects.</p>
+
+  <p>If you try to get a non-existing key using <code>get()</code> out of a map, it will return
+    <code>undefined</code>.
+  </p>
+
+  <h2>Weird situations you&rsquo;ll almost never find in real life</h2>
+
+  <pre><code class="language-js">const m = new Map()
+    m.set(NaN, 'test')
+    m.get(NaN) //test
+    </code></pre>
+
+  <pre><code class="language-js">
+    const m = new Map()
+    m.set(+0, 'test')
+    m.get(-0) //test
+    </code></pre>
+
+  <h4>Iterating over a map</h4>
+
+  <p>Map offers the <code>keys()</code> method we can use to iterate on all the keys:</p>
+
+  <pre><code class="language-js">
+    for (const k of m.keys()) {
+      console.log(k)
+    }
+    </code></pre>
+
+  <h4>Iterate over map values</h4>
+
+  <p>The Map object offers the <code>values()</code> method we can use to iterate on all the values:</p>
+
+  <pre><code class="language-js">
+    for (const v of m.values()) {
+      console.log(v)
+    }
+    </code></pre>
+
+  <h4>Iterate over map key, value pairs</h4>
+
+  <p>The Map object offers the <code>entries()</code> method we can use to iterate on all the values:</p>
+
+  <pre><code class="language-js">
+    for (const [k, v] of m.entries()) {
+      console.log(k, v)
+    }
+    </code></pre>
+
+  <p>which can be simplified to</p>
+
+  <pre><code class="language-js">
+    for (const [k, v] of m) {
+      console.log(k, v)
+    }
+    </code></pre>
+
+  <h4>Convert to array</h4>
+
+  <h5>Convert the map keys into an array</h5>
+
+  <pre><code class="language-js">
+    const a = [...m.keys()]
+    </code></pre>
+
+  <h5>Convert the map values into an array</h5>
+
+  <pre><code class="language-js">
+    const a = [...m.values()]
+    </code></pre>
+
+  <h4>WeakMap</h4>
+
+  <p>A WeakMap is a special kind of map.</p>
+
+  <p>In a map object, items are never garbage collected. A WeakMap instead lets all its items be freely garbage
+    collected. Every key of a WeakMap is an object. When the reference to this object is lost, the value can be
+    garbage
+    collected.</p>
+
+  <p>Here are the main differences:</p>
+
+  <ol>
+    <li>you cannot iterate over the keys or values (or key-values) of a WeakMap</li>
+    <li>you cannot clear all items from a WeakMap</li>
+    <li>you cannot check its size</li>
+  </ol>
+
+  <p>A WeakMap exposes those methods, which are equivalent to the Map ones:</p>
+
+  <ul>
+    <li><code>get(k)</code></li>
+    <li><code>set(k, v)</code></li>
+    <li><code>has(k)</code></li>
+    <li><code>delete(k)</code></li>
+  </ul>
+
+  <p>The use cases of a WeakMap are less evident than the ones of a Map, and you might never find the need for them, but
+    essentially it can be used to build a memory-sensitive cache that is not going to interfere with garbage collection,
+    or for careful encapsualtion and information hiding.</p>
+
+  <hr />
+
+  <h3>JavaScript Objects</h3>
+  <section class="section block separator">
+    <p>In JavaScript, almost &quot;everything&quot; is an object. A JavaScript object is a collection of named values
+    </p>
+
+    <ul class="text-medium">
+      <li>Booleans can be objects (if defined with the <code>new</code> keyword)</li>
+      <li>Numbers can be objects (if defined with the <code>new</code> keyword)</li>
+      <li>Strings can be objects (if defined with the <code>new</code> keyword)</li>
+      <li>Dates are always objects</li>
+      <li>Maths are always objects</li>
+      <li>Regular expressions are always objects</li>
+      <li>Arrays are always objects</li>
+      <li>Functions are always objects</li>
+      <li>Objects are always objects</li>
+    </ul>
+    <p>All JavaScript values, except primitives, are objects.</p>
+
+
+
+    <h4>JavaScript Primitives</h4>
+    <p>A <strong>primitive value</strong> is a value that has no properties or methods.</p>
+    <p>A <strong>primitive data type</strong> is data that has a primitive value.</p>
+    <p>JavaScript defines 5 types of primitive data types:</p>
+    <ul class="text-medium">
+      <li><code>string</code></li>
+      <li><code>number</codede >boolean</code></li>
+      <li><code>null</codede >undefined</code></li>
+    </ul>
+
+    <p>Primitive values are immutable (they are hardcoded and therefore cannot be changed).</p>
+
+    <p class="note">if x = 3.14, you can change the value of x. But you cannot change the value of 3.14.</p>
+    <table class="text-medium">
+      <tr>
+        <th>Value</th>
+        <th>Type</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <td>"Hello&quot;</td>
+        <td>string</td>
+        <td>&quot;Hello&quot; is always &quot;Hello&quot;</td>
+      </tr>
+      <tr>
+        <td>3.14</td>
+        <td>number</td>
+        <td>3.14 is always 3.14</td>
+      </tr>
+      <tr>
+        <td>true</td>
+        <td>boolean</td>
+        <td>true is always true</td>
+      </tr>
+      <tr>
+        <td>false</td>
+        <td>boolean</td>
+        <td>false is always false</td>
+      </tr>
+      <tr>
+        <td>null</td>
+        <td>null (object)</td>
+        <td>null is always null</td>
+      </tr>
+      <tr>
+        <td>undefined</td>
+        <td>undefined</td>
+        <td>undefined is always undefined</td>
+      </tr>
+    </table>
+
+    <h4>Object Properties</h4>
+    <section class="section block separator">
+      <p>Properties are the values associated with a JavaScript object. A JavaScript object is a collection of unordered
+        properties. Properties can usually be changed, added, and deleted, but some are read only.</p>
+
+      <h5>Accessing JavaScript Properties</h5>
+      <p>The syntax for accessing the property of an object is:</p>
+
+      <div class="code-snippet">
+        <i>objectName.property&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>// person.age</div>
+      <p class="text-medium">or</p>
+      <div class="code-snippet">
+        <i>objectName</i>[&quot;<i>property</i>&quot;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// person[&quot;age&quot;]
+      </div>
+      <p class="text-medium">or</p>
+      <div class="code-snippet">
+        <i>objectName</i>[<i>expression</i>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // x = &quot;age&quot;; person[x]
+      </div>
+
+      <h5>JavaScript for...in Loop</h5>
+      <p>The JavaScript <code>for...in</code> statement loops through the properties of an object.</p>
+
+      <pre><code class="language-js">
+      for (variable in object) {
+        // code to be executed
+      }
+
+      var person = {fname:"John", lname:"Doe", age:25};
+
+      for (x in person) {
+        txt += person[x];
+      }
+    </code></pre>
+
+      <h5>Adding New Properties</h4>
+        <pre><code class="language-js">
+      person.nationality = "English";
+    </code></pre>
+
+        <h5>Deleting Properties</h5>
+        <p>The <code class="language-js">delete</code> keyword deletes both the value of the property and the property
+          itself. After deletion, the property cannot be used before it is added back again. The <code
+            class="language-js">delete</code> operator is designed to be used on object properties. It has no effect on
+          variables or functions. The <code class="language-js">delete</code> operator should not be used on predefined
+          JavaScript object properties. It can crash your application. </p>
+
+        <pre><code class="language-js">
+        var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+        delete person.age;   // or delete person["age"];
+        </code></pre>
+
+        <h5>Prototype Properties</h5>
+        <p>JavaScript objects inherit the properties of their prototype. </p>
+        <p>The <code class="language-js">delete</code> keyword does not delete inherited properties, but if you delete a
+          prototype property, it will affect all objects inherited from the prototype.</p>
+
+        <h5>Property Attributes</h5>
+        <p>All properties have a name. In addition they also have a value. The value is one of the property's
+          attributes.
+          Other attributes are: enumerable, configurable, and writable. These attributes define how the property can be
+          accessed (is it readable?, is it writable?) In JavaScript, all attributes can be read, but only the value
+          attribute can be changed (and only if the property is writable). ( ECMAScript 5 has methods for both getting
+          and
+          setting all property attributes)</p>
+    </section>
+
+    <h4>Object Methods</h4>
+    <section class="section block separator">
+      <p>A JavaScript method is a property containing a function definition.</p>
+
+      <h5>The this Keyword</h5>
+      <p>In a function definition, this refers to the "owner" of the function. In the example above, this is the person
+        object that "owns" the fullName function. In other words, this.firstName means the firstName property of this
+        object.</p>
+
+      <h5>Accessing Object Methods</h5>
+      <pre><code class="language-js">
+        objectName.methodName()
+      </code></pre>
+      <p>The fullName property will execute (as a function) when it is invoked with ().</p>
+      <pre><code class="language-js">
+      name = person.fullName();
+    </code></pre>
+      <p>If you access the fullName property, without (), it will return the function definition:</p>
+      <pre><code class="language-js">
+      name = person.fullName;
+    </code></pre>
+    </section>
+
+    <h4>Object Accessors (Getters and Setters)</h4>
+
+    <p>ECMAScript 5 (2009) introduced Getter and Setters. Getters and setters allow you to define Object Accessors
+      (Computed Properties).</p>
+
+    <pre><code class="language-js">
+    // Create an object:
+    var person = {
+      firstName: "John",
+      lastName : "Doe",
+      language : "en",
+      get lang() {
+        return this.language;
+      }
+    };
+
+    // Display data from the object using a getter:
+    document.getElementById("demo").innerHTML = person.lang;
+  </code></pre>
+
+    <p>This example uses a <code>lang</code> property to <code>get</code>
+      the value of the <code>language</code> property.</p>
+
+    <pre><code class="language-js">
+  var person = {
+    firstName: "John",
+    lastName : "Doe",
+    language : "",
+    set lang(lang) {
+      this.language = lang;
+    }
+  };
+  
+  // Set an object property using a setter:
+  person.lang = "en";
+  
+  // Display data from the object:
+  document.getElementById("demo").innerHTML = person.language;
+</code></pre>
+
+    <h5>Function or Getter?</h5>
+    <p>What is the differences between these two examples?</p>
+    <p>Example 1 access fullName as a function: person.fullName(). Example 2 access fullName as a property:
+      person.fullName. The second example provides simpler syntax. </p>
+    <p>we don't need to define another method to get or set object property.</p>
+    <pre><code class="language-js">
+  var person = {
+    firstName: "John",
+    lastName : "Doe",
+    fullName : function() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+  
+  // Display data from the object using a method:
+  document.getElementById("demo").innerHTML = person.fullName();  
+</code></pre>
+
+    <pre><code class="language-js">
+  var person = {
+    firstName: "John",
+    lastName : "Doe",
+    get fullName() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+  
+  // Display data from the object using a getter:
+  document.getElementById("demo").innerHTML = person.fullName;
+</code></pre>
+
+    <h5>Object.defineProperty()</h5>
+    <p>The <code>Object.defineProperty()</code> method can also be used to add Getters and Setters:
+    </p>
+    <pre><code class="language-js">
+  // Define object
+var obj = {counter : 0};
+
+// Define setters
+Object.defineProperty(obj, "reset", {
+  get : function () {this.counter = 0;}
+});
+Object.defineProperty(obj, "increment", {
+  get : function () {this.counter++;}
+});
+Object.defineProperty(obj, "decrement", {
+  get : function () {this.counter--;}
+});
+Object.defineProperty(obj, "add", {
+  set : function (value) {this.counter += value;}
+});
+Object.defineProperty(obj, "subtract", {
+  set : function (value) {this.counter -= value;}
+});
+
+// Play with the counter:
+obj.reset;
+obj.add = 5;
+obj.subtract = 1;
+obj.increment;
+obj.decrement;
+</code></pre>
+
+    <h4>Object Constructors</h4>
+    <p>Sometimes we need a "blueprint" for creating many objects of the same "type". The way to create an "object type",
+      is to use an object constructor function. Objects of the same type are created by calling the constructor function
+      with the new keyword:</p>
+    <pre><code>
+        function Person(first, last, age, eye) {
+          this.firstName = first;
+          this.lastName = last;
+          this.age = age;
+          this.eyeColor = eye;
+        }
+
+      var myFather = new Person("John", "Doe", 50, "blue");
+      var myMother = new Person("Sally", "Rally", 48, "green");
+      </code></pre>
+
+    <h5>The this Keyword</h5>
+    <p>In JavaScript, the thing called this is the object that "owns" the code. The value of this, when used in an
+      object, is the object itself.</p>
+    <p>In a constructor function this does not have a value. It is a substitute for the new object. The value of this
+      will become the new object when a new object is created.</p>
+
+    <h5>Adding a Property/Method to an Object</h5>
+    <p>You cannot add a new property or method to an object constructor the same way you add a new property to an
+      existing object. Adding methods to an object constructor must be done inside the constructor function.</p>
+    <pre><code class="language-js">
+        //Adding a Property to an Object
+        myFather.nationality = "English";
+
+        //Adding a Method to an Object
+        myFather.name = function () {
+          return this.firstName + " " + this.lastName;
+        };
+      </code></pre>
+    <h5>Built-in JavaScript Constructors</h5>
+    <p>The Math() object is not in the list. Math is a global object. The new keyword cannot be used on Math.</p>
+    <pre><code class="language-js">
+    var x1 = new Object();    // A new Object object
+    var x2 = new String();    // A new String object
+    var x3 = new Number();    // A new Number object
+    var x4 = new Boolean();   // A new Boolean object
+    var x5 = new Array();     // A new Array object
+    var x6 = new RegExp();    // A new RegExp object
+    var x7 = new Function();  // A new Function object
+    var x8 = new Date();      // A new Date object
+    </code></pre>
+
+    <p>As you can see above, JavaScript has object versions of the primitive data types String, Number, and Boolean. But
+      there is no reason to create complex objects. Primitive values are much faster.</p>
+    <ul class="text-medium">
+      <li>Use object literals <code class="language-js">{}</code> instead of <code>new Object()</code>.</li>
+      <li>Use string literals <code>&quot;&quot;</code> instead of <code>new String()</code>.</li>
+      <li>Use number literals <code>12345</code> instead of <code>new Number()</code>.</li>
+      <li>Use boolean literals <code>true / false</code> instead of <code>new Boolean()</code>.</li>
+      <li>Use array literals <code>[]</code> instead of <code>new Array()</code>.</li>
+      <li>Use pattern literals <code>/()/</code> instead of <code>new RegExp()</code>.</li>
+      <li>Use function expressions <code>() {}</code> instead of <code>new Function()</code>.</li>
+    </ul>
+  </section>
+
+  <h3>JavaScript Functions</h3>
+  <section class="section block separator">
+    <p>Everything in JavaScript happens in functions. A function is a block of code, self contained, that can be defined
+      once and run any times you want. A function can optionally accept parameters, and returns one value.</p>
+    <p>Functions in JavaScript are <strong>objects</strong>, a special kind of objects: <strong>function
+        objects</strong>. Their superpower lies in the fact that they can be invoked.</p>
+
+    <p>In addition, functions are said to be <strong>first class functions</strong> because they can be assigned to a
+      value, and they can be passed as arguments and used as a return value.</p>
+
+    <h4>Syntax</h4>
+    <p>Let&rsquo;s start with the &ldquo;old&rdquo;, pre-ES6/ES2015 syntax. Here&rsquo;s a <strong>function
+        declaration</strong>:</p>
+
+    <pre><code class="language-js">
+    function dosomething(foo) {
+      // do something
+    }
+    </code></pre>
+
+    <p>(now, in post ES6/ES2015 world, referred as a <strong>regular function</strong>)</p>
+
+    <p>Functions can be assigned to variables (this is called a <strong>function expression</strong>):</p>
+
+    <pre><code class="language-js">
+    const dosomething = function(foo) {
+      // do something
+    }
+    </code></pre>
+
+    <p><strong>Named function expressions</strong> are similar, but play nicer with the stack call trace, which is
+      useful when an error occurs - it holds the name of the function:</p>
+
+    <pre><code class="language-js">
+    const dosomething = function dosomething(foo) {
+      // do something
+    }
+    </code></pre>
+
+    <p>ES6/ES2015 introduced <strong>arrow functions</strong>, which are especially nice to use when working with inline
+      functions, as parameters or callbacks:</p>
+
+    <pre><code class="language-js">
+    const dosomething = foo =&gt; {
+      //do something
+    }
+    </code></pre>
+
+    <h4>Parameters</h4>
+    <p>A function can have one or more parameters.</p>
+
+    <pre><code class="language-js">
+    const dosomething = () =&gt; {
+      //do something
+    }
+
+    const dosomethingElse = foo =&gt; {
+      //do something
+    }
+
+    const dosomethingElseAgain = (foo, bar) =&gt; {
+      //do something
+    }
+    </code></pre>
+
+    <p>Starting with ES6/ES2015, functions can have default values for the parameters:</p>
+
+    <pre><code class="language-js">
+    const dosomething = (foo = 1, bar = 'hey') =&gt; {
+      //do something
+    }
+    </code></pre>
+
+    <p>This allows you to call a function without filling all the parameters:</p>
+
+    <pre><code class="language-js">
+    dosomething(3)
+    dosomething()
+    </code></pre>
+
+    <p>ES2018 introduced trailing commas for parameters, a feature that helps reducing bugs due to missing commas when
+      moving around parameters (e.g. moving the last in the middle):</p>
+
+    <pre><code class="language-js">
+    const dosomething = (foo = 1, bar = 'hey') =&gt; {
+      //do something
+    }
+
+    dosomething(2, 'ho!')
+    </code></pre>
+
+    <p>You can wrap all your arguments in an array, and use the <a href="/javascript-spread-operator/"><strong>spread
+          operator</strong></a> operator when calling the function:</p>
+
+    <pre><code class="language-js">
+    const dosomething = (foo = 1, bar = 'hey') =&gt; {
+      //do something
+    }
+    const args = [2, 'ho!']
+    dosomething(...args)
+    </code></pre>
+
+    <p>With many parameters, remembering the order can be difficult. Using objects, destructuring allows to keep the
+      parameter names:</p>
+
+    <pre><code class="language-js">
+    const dosomething = ({ foo = 1, bar = 'hey' }) =&gt; {
+      //do something
+      console.log(foo) // 2
+      console.log(bar) // 'ho!'
+    }
+    const args = { foo: 2, bar: 'ho!' }
+    dosomething(args)
+    </code></pre>
+
+    <h4>Return values</h4>
+
+    <p>Every function returns a value, which by default is <code>undefined</code>.</p>
+
+    <p><img src="undefined-return-value.png" alt="Undefined return value" /></p>
+    <p>Any function is terminated when its lines of code end, or when the execution flow finds a <code>return</code>
+      keyword.</p>
+    <p>When JavaScript encounters this keyword it exits the function execution and gives control back to its caller.</p>
+    <p>If you pass a value, that value is returned as the result of the function:</p>
+
+    <pre><code class="language-js">
+    const dosomething = () =&gt; {
+      return 'test'
+    }
+    const result = dosomething() // result === 'test'
+    </code></pre>
+
+    <p>You can only return one value.</p>
+
+    <p>To <em>simulate</em> returning multiple values, you can return an <strong>object literal</strong>, or an
+      <strong>array</strong>, and use a <a href="/es6/#destructuring-assignments">destructuring assignment</a> when
+      calling the function.</p>
+
+    <p>Using arrays:</p>
+
+    <p><img src="destructuring-return-array.png" alt="Destructuring using arrays" /></p>
+
+    <p>Using objects:</p>
+    <p><img src="destructuring-return-object.png" alt="Destructuring using objects" /></p>
+
+    <h4>Nested functions</h4>
+    <p>Functions can be defined inside other functions:</p>
+
+    <pre><code class="language-js">
+    const dosomething = () =&gt; {
+      const dosomethingelse = () =&gt; {
+        //some code here
+      }
+      dosomethingelse()
+      return 'test'
+    }
+    </code></pre>
+
+    <p>The nested function is scoped to the outside function, and cannot be called from the outside.</p>
+    <p>This means that <code>dosomethingelse()</code> is not reachable from outside <code>dosomething()</code>:</p>
+
+    <pre><code class="language-js">
+    const dosomething = () =&gt; {
+      const dosomethingelse = () =&gt; {
+        //some code here
+      }
+      dosomethingelse()
+      return 'test'
+    }
+
+    dosomethingelse() //ReferenceError: dosomethingelse is not defined
+    </code></pre>
+
+    <p>This is very useful because we can create encapsulated code that is limited in its scope by the outer function
+      it&rsquo;s defined in.</p>
+
+    <p>We could have 2 function define a function with the same name, inside them:</p>
+
+    <pre><code class="language-js">
+    const bark = () =&gt; {
+      const dosomethingelse = () =&gt; {
+        //some code here
+      }
+      dosomethingelse()
+      return 'test'
+    }
+
+
+    const sleep = () =&gt; {
+      const dosomethingelse = () =&gt; {
+        //some code here
+      }
+      dosomethingelse()
+      return 'test'
+    }
+    </code></pre>
+
+    <p>and most importantly you don&rsquo;t have to <em>think</em> about overwriting existing functions and variables
+      defined inside other functions.</p>
+
+    <h4>Object Methods</h4>
+    <p>When used as object properties, functions are called methods:</p>
+
+    <pre><code class="language-js">
+    const car = {
+      brand: 'Ford',
+      model: 'Fiesta',
+      start: function() {
+        console.log(`Started`)
+      }
+    }
+
+    car.start()
+    </code></pre>
+
+    <h4><code>this</code> in Arrow Functions</h4>
+    <p>There&rsquo;s an important behavior of Arrow Functions vs regular Functions when used as object methods. Consider
+      this example:</p>
+
+    <pre><code class="language-js">
+    const car = {
+      brand: 'Ford',
+      model: 'Fiesta',
+      start: function() {
+        console.log(`Started ${this.brand} ${this.model}`)
+      },
+      stop: () =&gt; {
+        console.log(`Stopped ${this.brand} ${this.model}`)
+      }
+    }
+    </code></pre>
+
+    <p>The <code>stop()</code> method does not work as you would expect.</p>
+
+    <p><img src="methods-this.png" alt="Difference in arrow functions of this in methods" /></p>
+
+    <p>This is because the handling of <code>this</code> is different in the two functions declarations style.
+      <code>this</code> in the arrow function refers to the enclosing function context, which in this case is the
+      <code>window</code> object:</p>
+
+    <p><img src="methods-this-window.png" alt="this points to the window object" /></p>
+
+    <p><code>this</code>, which refers to the host object using <code>function()</code></p>
+
+    <p>This implies that <strong>arrow functions are not suitable to be used for object methods</strong> and
+      constructors (arrow function constructors will actually raise a <code>TypeError</code> when called).</p>
+
+    <h4>IIFE, Immediately Invocated Function Expressions</h4>
+
+    <p>An IIFE is a function that&rsquo;s immediately executed right after its declaration:</p>
+
+    <pre><code class="language-js">
+    ;(function dosomething() {
+      console.log('executed')
+    })()
+    </code></pre>
+
+    <p>You can assign the result to a variable:</p>
+
+    <pre><code class="language-js">
+    const something = (function dosomething() {
+      return 'something'
+    })()
+    </code></pre>
+
+    <p>They are very handy, as you don&rsquo;t need to separately call the function after its definition.</p>
+
+    <p><a href="/javascript-iife/">See my post dedicated to them</a>.</p>
+
+    <h4>Function Hoisting</h4>
+    <p>JavaScript before executing your code reorders it according to some rules.</p>
+    <p>Functions in particular are moved at the top of their scope. This is why it&rsquo;s legal to write</p>
+
+    <pre><code class="language-js">
+    dosomething()
+    function dosomething() {
+      console.log('did something')
+    }
+    </code></pre>
+
+    <p><img src="hoisting-example.png" alt="Hoisting example" /></p>
+
+    <p>Internally, JavaScript moves the function before its call, along with all the other functions found in the same
+      scope:</p>
+
+    <pre><code class="language-js">
+    function dosomething() {
+      console.log('did something')
+    }
+    dosomething()
+    </code></pre>
+
+    <p>Now, if you use named function expressions, since you&rsquo;re using <a
+        href="/javascript-variables/">variables</a> something different happens. The variable declaration is hoisted,
+      but not the value, so not the function.</p>
+
+    <pre><code class="language-js">
+    dosomething()
+    const dosomething = function dosomething() {
+      console.log('did something')
+    }
+    </code></pre>
+
+    <p>Not going to work:</p>
+
+    <p><img src="hoisting-named.png" alt="Hoisting named functions" /></p>
+
+    <p>This is because what happens internally is:</p>
+
+    <pre><code class="language-js">
+      const dosomething
+      dosomething()
+      dosomething = function dosomething() {
+        console.log('did something')
+      }
+    </code></pre>
+
+    <p>The same happens for <code>let</code> declarations. <code>var</code> declarations do not work either, but with a
+      different error:</p>
+
+    <p><img src="hoisting-var.png" alt="Hoisting var declarations" /></p>
+
+    <p>This is because <code>var</code> declarations are hoisted and initialized with <code>undefined</code> as a value,
+      while <code>const</code> and <code>let</code> are hoisted but not initialized.</p>
+  </section>
+
+  <h3>JavaScript Arrays</h3>
+  <section class="section block separator">
+    <h4>Initialize array</h4>
+
+    <pre><code class="language-js">
+    const a = []
+    const a = [1, 2, 3]
+    const a = Array.of(1, 2, 3)
+    const a = Array(6).fill(1) //init an array of 6 items of value 1
+    </code></pre>
+
+    <p>Don&rsquo;t use the old syntax (just use it for typed arrays)</p>
+
+    <pre><code class="language-js">
+    const a = new Array() //never use
+    const a = new Array(1, 2, 3) //never use
+    </code></pre>
+
+    <h4>Get length of the array</h4>
+
+    <pre><code class="language-js">
+    const l = a.length
+    </code></pre>
+
+    <h4>Iterating the array</h4>
+
+    <h5>Every</h5>
+
+    <pre><code class="language-js">
+    a.every(f)
+    </code></pre>
+
+    <p>Iterates <code>a</code> until <code>f()</code> returns false</p>
+
+    <h5>Some</h5>
+
+    <pre><code class="language-js">
+    a.some(f)
+    </code></pre>
+
+    <p>Iterates <code>a</code> until <code>f()</code> returns true</p>
+
+    <h5>Iterate the array and return a new one with the returned result of a function</h5>
+
+    <p>Calling <code>map()</code> on an array will create a new array with the result of a function executed on every
+      item
+      of the original array:</p>
+
+    <pre><code class="language-js">
+    const a = [1, 2, 3]
+    const b = a.map((v, k) =&gt; v * k)
+    // b = [0, 2, 6]
+    </code></pre>
+
+    <p>This example:</p>
+
+    <pre><code class="language-js">
+    const b = a.map(f)
+    </code></pre>
+
+    <p>Iterates <code>a</code> and builds a new array with the result of executing <code>f()</code> on each
+      <code>a</code>
+      element</p>
+
+    <h5>Filter an array</h5>
+
+    <pre><code class="language-js">
+    const b = a.filter(f)
+    </code></pre>
+
+    <p>Iterates <code>a</code> and builds a new array with elements of <code>a</code> that returned true when executing
+      <code>f()</code> on each <code>a</code> element</p>
+
+    <h5>Reduce</h5>
+
+    <pre><code class="language-js">
+    a.reduce((accumulator, currentValue, currentIndex, array) =&gt; {
+      //...
+    }, initialValue)
+    </code></pre>
+
+    <p><code>reduce()</code> executes a callback function on all the items of the array and allows to progressively
+      compute a result. If <code>initialValue</code> is specified, <code>accumulator</code> in the first iteration will
+      equal to that value.</p>
+
+    <p>Example:</p>
+
+    <pre><code class="language-js">
+    ;[1, 2, 3, 4].reduce((accumulator, currentValue, currentIndex, array) =&gt; {
+      return accumulator * currentValue
+    }, 1)
+
+    // iteration 1: 1 * 1 =&gt; return 1
+    // iteration 2: 1 * 2 =&gt; return 2
+    // iteration 3: 2 * 3 =&gt; return 6
+    // iteration 4: 6 * 4 =&gt; return 24
+
+    // return value is 24
+    </code></pre>
+
+    <h5>forEach</h5>
+
+    <blockquote>
+      <p>ES6</p>
+    </blockquote>
+
+    <pre><code class="language-js">
+    a.forEach(f)
+    </code></pre>
+
+    <p>Iterates <code>f</code> on <code>a</code> without a way to stop</p>
+
+    <p>Example:</p>
+
+    <pre><code class="language-js">
+    a.forEach(v =&gt; {
+      console.log(v)
+    })
+    </code></pre>
+
+    <h5>for..of</h5>
+
+    <blockquote>
+      <p>ES6</p>
+    </blockquote>
+
+    <pre><code class="language-js">
+    for (let v of a) {
+      console.log(v)
+    }
+    </code></pre>
+
+    <h5>for</h5>
+
+    <pre><code class="language-js">
+    for (let i = 0; i &lt; a.length; i += 1) {
+      //a[i]
+    }
+    </code></pre>
+
+    <p>Iterates <code>a</code>, can be stopped using <code>return</code> or <code>break</code> and an iteration can be
+      skipped using <code>continue</code></p>
+
+    <h5>@@iterator</h5>
+
+    <blockquote>
+      <p>ES6</p>
+    </blockquote>
+
+    <p>Getting the iterator from an array returns an iterator of values</p>
+
+    <pre><code class="language-js">
+    const a = [1, 2, 3]
+    let it = a[Symbol.iterator]()
+
+    console.log(it.next().value) //1
+    console.log(it.next().value) //2
+    console.log(it.next().value) //3
+    </code></pre>
+
+    <p><code>.entries()</code> returns an iterator of key/value pairs</p>
+
+    <pre><code class="language-js">
+    let it = a.entries()
+
+    console.log(it.next().value) //[0, 1]
+    console.log(it.next().value) //[1, 2]
+    console.log(it.next().value) //[2, 3]
+    </code></pre>
+
+    <p><code>.keys()</code> allows to iterate on the keys:</p>
+
+    <pre><code class="language-js">
+    let it = a.keys()
+
+    console.log(it.next().value) //0
+    console.log(it.next().value) //1
+    console.log(it.next().value) //2
+    </code></pre>
+
+    <p><code>.next()</code> returns <code>undefined</code> when the array ends. You can also detect if the iteration
+      ended
+      by looking at <code>it.next()</code> which returns a <code>value, done</code> pair. <code>done</code> is always
+      false until the last element, which returns <code>true</code>.</p>
+
+    <h4>Adding to an array</h4>
+
+    <h5>Add at the end</h5>
+
+    <pre><code class="language-js">
+      a.push(4)
+    </code></pre>
+
+    <h5>Add at the beginning</h5>
+
+    <pre><code class="language-js">
+    a.unshift(0)
+    a.unshift(-2, -1)
+    </code></pre>
+
+    <h4>Removing an item from an array</h4>
+
+    <h5>From the end</h5>
+
+    <pre><code class="language-js">
+    a.pop()
+    </code></pre>
+
+    <h5>From the beginning</h5>
+
+    <pre><code class="language-js">
+    a.shift()
+    </code></pre>
+
+    <h5>At a random position</h5>
+
+    <pre><code class="language-js">
+    a.splice(0, 2) // get the first 2 items
+    a.splice(3, 2) // get the  2 items starting from index 3
+    </code></pre>
+
+    <p>Do not use <code>remove()</code> as it leaves behind undefined values.</p>
+
+    <h5>Remove and insert in place</h5>
+
+    <pre><code class="language-js">
+    a.splice(2, 3, 2, 'a', 'b') //removes 3 items starting from
+    //index 2, and adds 2 items,
+    // still starting from index 2
+    </code></pre>
+
+    <h4>Join multiple arrays</h4>
+
+    <pre><code class="language-js">
+    const a = [1, 2]
+    const b = [3, 4]
+    a.concat(b) // 1, 2, 3, 4
+    </code></pre>
+
+    <h4>Lookup the array for a specific element</h4>
+
+    <h5>ES5</h5>
+
+    <pre><code class="language-js">
+    a.indexOf()
+    </code></pre>
+
+    <p>Returns the index of the first matching item found, or -1 if not found</p>
+
+    <pre><code class="language-js">
+    a.lastIndexOf()
+    </code></pre>
+
+    <p>Returns the index of the last matching item found, or -1 if not found</p>
+
+    <h4>ES2015</h4>
+
+    <pre><code class="language-js">
+    a.find((element, index, array) =&gt; {
+      //return true or false
+    })
+    </code></pre>
+
+    <p>Returns the first item that returns true. Returns undefined if not found.</p>
+
+    <p>A commonly used syntax is:</p>
+
+    <pre><code class="language-js">
+    a.find(x =&gt; x.id === my_id)
+    </code></pre>
+
+    <p>The above line will return the first element in the array that has <code>id === my_id</code>.</p>
+
+    <p><code>findIndex</code> returns the index of the first item that returns true, and if not found, it returns
+      <code>undefined</code>:</p>
+
+    <pre><code class="language-js">
+    a.findIndex((element, index, array) =&gt; {
+      //return true or false
+    })
+    </code></pre>
+
+    <h4>ES2016</h4>
+
+    <pre><code class="language-js">
+    a.includes(value)
+    </code></pre>
+
+    <p>Returns true if <code>a</code> contains <code>value</code>.</p>
+
+    <pre><code class="language-js">
+    a.includes(value, i)
+    </code></pre>
+
+    <p>Returns true if <code>a</code> contains <code>value</code> after the position <code>i</code>.</p>
+
+    <h4>Get a portion of an array</h4>
+
+    <pre><code class="language-js">
+    a.slice()
+    </code></pre>
+
+    <h4>Sort the array</h4>
+
+    <p>Sort alphabetically (by ASCII value - <code>0-9A-Za-z</code>)</p>
+
+    <pre><code class="language-js">
+    const a = [1, 2, 3, 10, 11]
+    a.sort() //1, 10, 11, 2, 3
+
+    const b = [1, 'a', 'Z', 3, 2, 11]
+    b = b.sort() //1, 11, 2, 3, Z, a
+    </code></pre>
+
+    <p>Sort by a custom function</p>
+
+    <pre><code class="language-js">
+    const a = [1, 10, 3, 2, 11]
+    a.sort((a, b) =&gt; a - b) //1, 2, 3, 10, 11
+    </code></pre>
+
+    <p>Reverse the order of an array</p>
+
+    <pre><code class="language-js">
+    a.reverse()
+    </code></pre>
+
+    <h4>Get a string representation of an array</h4>
+
+    <pre><code class="language-js">
+    a.toString()
+    </code></pre>
+
+    <p>Returns a string representation of an array</p>
+
+    <pre><code class="language-js">
+    a.join()
+    </code></pre>
+
+    <p>Returns a string concatenation of the array elements. Pass a parameter to add a custom separator:</p>
+
+    <pre><code class="language-js">
+    a.join(', ')
+    </code></pre>
+
+    <h4>Copy an existing array by value</h4>
+
+    <pre><code class="language-js">
+    const b = Array.from(a)
+    const b = Array.of(...a)
+    </code></pre>
+
+    <h4>Copy just some values from an existing array</h4>
+
+    <pre><code class="language-js">
+    const b = Array.from(a, x =&gt; x % 2 == 0)
+    </code></pre>
+
+    <h4>Copy portions of an array into the array itself, in other positions</h4>
+
+    <pre><code class="language-js">
+    const a = [1, 2, 3, 4]
+    a.copyWithin(0, 2) // [3, 4, 3, 4]
+
+    const b = [1, 2, 3, 4, 5]
+    b.copyWithin(0, 2) // [3, 4, 5, 4, 5]
+    //0 is where to start copying into,
+    // 2 is where to start copying from
+
+    const c = [1, 2, 3, 4, 5]
+    c.copyWithin(0, 2, 4) // [3, 4, 3, 4, 5]
+    //4  is an end index
+    </code></pre>
+  </section>
+  <h3>JavaScript Object</h3>
+  <section class="section block separator">
+    <h4>Methods</h4>
+    <dl>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"><code>Object.assign()</code></a>
+      </dt>
+      <dd>Copies the values of all enumerable own properties from one or more source objects to a target object.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create"><code>Object.create()</code></a>
+      </dt>
+      <dd>Creates a new object with the specified prototype object and properties.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty()</code></a>
+      </dt>
+      <dd>Adds the named property described by a given descriptor to an object.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties"><code>Object.defineProperties()</code></a>
+      </dt>
+      <dd>Adds the named properties described by the given descriptors to an object.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"><code>Object.entries()</code></a>
+      </dt>
+      <dd>Returns an array containing all of the <code>[key, value]</code> pairs of a given object's
+        <strong>own</strong> enumerable string properties.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"><code>Object.freeze()</code></a>
+      </dt>
+      <dd>Freezes an object. Other code cannot delete or change its properties.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries"><code>Object.fromEntries()</code></a>
+      </dt>
+      <dd>Returns a new object from an iterable of <code>[key, value]</code> pairs. (This is the reverse of <a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"><code>Object.entries</code></a>).
+      </dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor"><code>Object.getOwnPropertyDescriptor()</code></a>
+      </dt>
+      <dd>Returns a property descriptor for a named property on an object.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors"><code>Object.getOwnPropertyDescriptors()</code></a>
+      </dt>
+      <dd>Returns an object containing all own property descriptors for an object.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames"><code>Object.getOwnPropertyNames()</code></a>
+      </dt>
+      <dd>Returns an array containing the names of all of the given object's <strong>own</strong> enumerable and
+        non-enumerable properties.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols"><code>Object.getOwnPropertySymbols()</code></a>
+      </dt>
+      <dd>Returns an array of all symbol properties found directly upon a given object.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf"><code>Object.getPrototypeOf()</code></a>
+      </dt>
+      <dd>Returns the <code>prototype</code> of the specified object.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is"><code>Object.is()</code></a></dt>
+      <dd>Compares if two values are the same value. Equates all <code>NaN</code> values (which differs from both
+        Abstract Equality Comparison and Strict Equality Comparison).</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible"><code>Object.isExtensible()</code></a>
+      </dt>
+      <dd>Determines if extending of an object is allowed.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen"><code>Object.isFrozen()</code></a>
+      </dt>
+      <dd>Determines if an object was frozen.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed"><code>Object.isSealed()</code></a>
+      </dt>
+      <dd>Determines if an object is sealed.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"><code>Object.keys()</code></a></dt>
+      <dd>Returns an array containing the names of all of the given object's <strong>own</strong> enumerable string
+        properties.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions"><code>Object.preventExtensions()</code></a>
+      </dt>
+      <dd>Prevents any extensions of an object.</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal"><code>Object.seal()</code></a></dt>
+      <dd>Prevents other code from deleting properties of an object.</dd>
+      <dt><a
+          href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf"><code>Object.setPrototypeOf()</code></a>
+      </dt>
+      <dd>Sets the object's prototype (its internal <code>[[Prototype]]</code> property).</dd>
+      <dt><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values"><code>Object.values()</code></a>
+      </dt>
+      <dd>Returns an array containing the values that correspond to all of a given object's <strong>own</strong>
+        enumerable string properties.</dd>
+    </dl>
+    <h4>>Object.assign()</h4>
+    <p>Properties in the target object are overwritten by properties in the sources if they have the same key. Later
+      sources' properties overwrite earlier ones.</p>
+
+    <p>The Object.assign() method only copies enumerable and own properties from a source object to a target object. It
+      uses [[Get]] on the source and [[Set]] on the target, so it will invoke getters and setters. Therefore it assigns
+      properties, versus copying or defining new properties. This may make it unsuitable for merging new properties into
+      a prototype if the merge sources contain getters.</p>
+
+    <p>For copying property definitions (including their enumerability) into prototypes, use
+      Object.getOwnPropertyDescriptor() and Object.defineProperty() instead.</p>
+
+    <pre><code class="language-js">
+    // Object.assign(target, ...sources)
+
+    const o1 = { a: 1 };
+    const o2 = { b: 2 };
+    const o3 = { c: 3 };
+
+    const obj = Object.assign(o1, o2, o3);
+    console.log(obj); // { a: 1, b: 2, c: 3 }
+    console.log(o1);  // { a: 1, b: 2, c: 3 }, target object itself is changed.
+    </code></pre>
+    <pre><code class="language-js">
+    // Cloning an object
+    const obj = { a: 1 };
+    const copy = Object.assign({}, obj);
+    console.log(copy); // { a: 1 }
+    </code></pre>
+    <pre><code class="language-js">
+    // Properties on the prototype chain and non-enumerable properties cannot be copied
+    const obj = Object.create({ foo: 1 }, { // foo is on obj's prototype chain.
+      bar: {
+        value: 2  // bar is a non-enumerable property.
+      },
+      baz: {
+        value: 3,
+        enumerable: true  // baz is an own enumerable property.
+      }
+    });
+
+    const copy = Object.assign({}, obj);
+    console.log(copy); // { baz: 3 }
+    </code></pre>
+    <pre><code class="language-js">
+    //Primitives will be wrapped to objects
+    const v1 = 'abc';
+    const v2 = true;
+    const v3 = 10;
+    const v4 = Symbol('foo');
+
+    const obj = Object.assign({}, v1, null, v2, undefined, v3, v4); 
+    // Primitives will be wrapped, null and undefined will be ignored.
+    // Note, only string wrappers can have own enumerable properties.
+    console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+    </code></pre>
+
+    <h4>>Object.create()</h4>
+
+    <pre><code class="language-js">
+    Object.create(proto, [propertiesObject])
+    </code></pre>
+
+    <pre><code class="language-js">
+    // Classical inheritance with Object.create()
+    // Shape - superclass
+    function Shape() {
+      this.x = 0;
+      this.y = 0;
+    }
+
+    // superclass method
+    Shape.prototype.move = function(x, y) {
+      this.x += x;
+      this.y += y;
+      console.info('Shape moved.');
+    };
+
+    // Rectangle - subclass
+    function Rectangle() {
+      Shape.call(this); // call super constructor.
+    }
+
+    // subclass extends superclass
+    Rectangle.prototype = Object.create(Shape.prototype);
+
+    //If you don't set Object.prototype.constructor to Rectangle,
+    //it will take prototype.constructor of Shape (parent).
+    //To avoid that, we set the prototype.constructor to Rectangle (child).
+    Rectangle.prototype.constructor = Rectangle;
+
+    var rect = new Rectangle();
+
+    console.log('Is rect an instance of Rectangle?', rect instanceof Rectangle); // true
+    console.log('Is rect an instance of Shape?', rect instanceof Shape); // true
+    rect.move(1, 1); // Outputs, 'Shape moved.'
+    </code></pre>
+
+
+    <pre><code class="language-js">
+    function MyClass() {
+      SuperClass.call(this);
+      OtherSuperClass.call(this);
+    }
+
+    // inherit one class
+    MyClass.prototype = Object.create(SuperClass.prototype);
+    // mixin another
+    Object.assign(MyClass.prototype, OtherSuperClass.prototype);
+    // re-assign constructor
+    MyClass.prototype.constructor = MyClass;
+
+    MyClass.prototype.myMethod = function() {
+      // do something
+    };
+    </code></pre>
+
+  </section>
+  <h2 id="hoisting">Hoisting</h2>
+
+  <p>In JavaScript, variable and function names can be used before declaring it. The JavaScript compiler moves all the
+    declarations of variables and functions at the top so that there will not be any error. This is called hoisting.</p>
+
+  <p>Hoisting is only possible with declaration but not the initialization. JavaScript will not move variables that are
+    declared and initialized in a single line.</p>
+
+  <pre><code class="language-js">
+    x = 1;
+    y = x;
+
+    alert('x = ' + x);
+    alert('y = ' + y);
+
+    var x;
+    var y;
+  </code></pre>
+
+  <pre><code class="language-js">
+    alert('x = ' + x); // display x = undefined
+    var x = 1;
+  </code></pre>
+
+  <h3>Hoisting of Function</h3>
+
+  <p>JavaScript compiler moves the function definition at the top in the same way as variable declaration.</p>
+
+  <p>Please note that JavaScript compiler does not move function expression.</p>
+
+  <pre><code>
+    Add(5, 5); // error
+
+    var Add = function Sum(val1, val2) {
+        return val1 + val2;
+    }
+  </code></pre>
+
+  <h3>Hoisting Functions Before Variables</h3>
+  <p>JavaScript compiler moves a function's definition before variable declaration. The following example proves it.
+    alert(UseMe);</p>
+
+  <pre><code class="language-js">
+    alert(UseMe);
+
+    var UseMe;
+
+    function UseMe() {
+      alert("UseMe function called");
+    }
+  </code></pre>
+
+  <h2>Closure</h2>
+
+  <p>Closure means that an inner function always has access to the vars and parameters of its outer function, even after
+    the outer function has returned.</p>
+
+  <pre><code class="language-js">
+    function OuterFunction() {
+
+      var outerVariable = 1;
+  
+      function InnerFunction() {
+          alert(outerVariable);
+      }
+  
+      InnerFunction();
+  }
+  
+  function OuterFunction() {
+  
+      var outerVariable = 100;
+  
+      function InnerFunction() {
+          alert(outerVariable);
+      }
+  
+      return InnerFunction;
+  }
+  var innerFunc = OuterFunction();
+  
+  innerFunc(); // 100
+  </code></pre>
+
+  <p>In the above example, return InnerFunction; returns InnerFunction from OuterFunction when you call OuterFunction().
+    A variable innerFunc reference the InnerFunction() only, not the OuterFunction(). So now, when you call innerFunc(),
+    it can still access outerVariable which is declared in OuterFunction(). This is called Closure.</p>
+
+  <p>One important characteristic of closure is that outer variables can keep their states between multiple calls.
+    Remember, inner function does not keep the separate copy of outer variables but it reference outer variables, that
+    means value of the outer variables will be changed if you change it using inner function.
+  </p>
+  <pre><code class="language-js">
+  function Counter() {
+    var counter = 0;
+
+    function IncreaseCounter() {
+        return counter += 1;
+    };
+
+    return IncreaseCounter;
+}
+
+var counter = Counter();
+alert(counter()); // 1
+alert(counter()); // 2
+alert(counter()); // 3
+alert(counter()); // 4
+</code></pre>
+
+  <pre><code class="language-js">
+  function Counter() {
+    
+    var counter = 0;
+
+    setTimeout( function () {
+        var innerCounter = 0;
+        counter += 1;
+        alert("counter = " + counter);
+
+        setTimeout( function () {
+            counter += 1;
+            innerCounter += 1;
+            alert("counter = " + counter + ", innerCounter = " + innerCounter)
+        }, 500);
+
+    }, 1000);
+};
+
+Counter();
+</code></pre>
+
+  <p>As per the closure definition, if inner function access the variables of outer function then only it is called
+    closure.</p>
+
+  <p>The following is not a closure.</p>
+
+  <pre><code class="language-js">
+  var Counter = (function () {
+    var i = 0;
+    return { counter : i += 1 };
+})();
+</code></pre>
+
+  <h3>When to use Closure?</h3>
+
+  <p>Closure is useful in hiding implementation detail in JavaScript. In other words, it can be useful to create private
+    variables or functions.</p>
+
+  <p>The following example shows how to create private functions & variable.</p>
+
+  <pre><code>
+    var counter = (function() {
+      
+      var privateCounter = 0;
+      function changeBy(val) {
+        privateCounter += val;
+      }
+
+      return {
+        increment: function() {
+          changeBy(1);
+        },
+        decrement: function() {
+          changeBy(-1);
+        },
+        value: function() {
+          return privateCounter;
+        }
+      };
+    })();
+
+    alert(counter.value()); // 0
+    counter.increment();
+    counter.increment();
+    alert(counter.value()); // 2
+    counter.decrement();
+    alert(counter.value()); // 1
+  </code></pre>
+
+  <p>In the above example, increment(), decrement() and value() becomes public function because they are included in the
+    return object, whereas changeBy() function becomes private function because it is not returned and only used
+    internally by increment() and decrement().</p>
+</body>
+
+</html>
