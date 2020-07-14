@@ -26,12 +26,18 @@
       <li><a href="#reactContextAPI">Context API</a></li>
       <li><a href="#reactRouter">Router</a></li>
       <li><a href="#formHandling">Form Handling</a></li>
+      <li><a href="#hooks">Hooks</a></li>
+      <li><a href="#redux">Redux</a></li>
+      <li><a href="#reduxSaga">Redux Saga</a></li>
+      <li><a href="#reduxTutorial">Redux Tutorial</a></li>
+
     </ul>
   </nav>
 
   <h2>React Concepts</h2>
 
   <h3>Declarative</h3>
+
   <p class="list-heading">It's really not a new concept, but React took building UIs a lot more declaratively than with
     HTML templates:</p>
   <ul>
@@ -43,7 +49,7 @@
     you need.</p>
   <p>The React declarative approach abstracts that for us. We just tell React we want a component to be rendered in a
     specific way, and we never have to interact with the DOM to reference it later.</p>
-  
+
   <h3>Immutability</h3>
   <p>An immutable variable can never be changed. To update its value, you create a new variable. The same applies to
     objects and arrays. Instead of changing an array, to add a new item you create a new array by concatenating the old
@@ -56,24 +62,28 @@
       centralized, like in the case of Redux, which improves your
       debugging capabilities and reduces sources of errors.</li>
     <li>Code looks cleaner and simpler to understand. You never expect
-      a function to change some value without you knowing, which gives you predictability. When a function does not mutate
+      a function to change some value without you knowing, which gives you predictability. When a function does not
+      mutate
       objects but just returns a new object, it's called a pure function.</li>
     <li>library can optimize the code because for
-      example JavaScript is faster when swapping an old object reference for an entirely new object, rather than mutating
+      example JavaScript is faster when swapping an old object reference for an entirely new object, rather than
+      mutating
       an existing object. This gives you performance.</li>
   </ul>
 
   <h3>Purity</h3>
   <p><strong>What is purity, a pure function and a pure component?</strong></p>
-	
+
   <p>In JavaScript, when a function does not mutate objects but just returns a new object, it's called a pure function.
   </p>
   <p>A function, or a method, in order to be called pure should not cause side effects and should return the same output
     when called multiple times with the same input.</p>
-  
-  <p>A pure function takes an input and returns an output without changing the input nor anything else. Its output is only
+
+  <p>A pure function takes an input and returns an output without changing the input nor anything else. Its output is
+    only
     determined by the arguments.</p>
-  <p>React applies this concept to components. A React component is a pure component when its output is only dependant on
+  <p>React applies this concept to components. A React component is a pure component when its output is only dependant
+    on
     its props.</p>
   <p>All functional components are pure components:</p>
   <pre><code class="language-jsx">
@@ -107,7 +117,8 @@
   </code></pre>
 
   <h3>Pass methods as props</h3>
-    A component can focus on tracking a click event, for example, and what actually happens when the click event happens is up to the container component:</p>
+  A component can focus on tracking a click event, for example, and what actually happens when the click event happens
+  is up to the container component:</p>
   <pre><code class="language-js">
       const Button = props =&#x3E; {
         return &#x3C;button onClick={props.onClickHandler}&#x3E;{props.text}&#x3C;/button&#x3E;
@@ -142,38 +153,42 @@
       &#x3C;Link title=&#x22;Second link&#x22; /&#x3E;
     &#x3C;/Sidebar&#x3E;
   </code></pre>
-  
+
   <h3>Higher order components</h3>
   <p>When a component receives a component as a prop and returns a component, it's called higher order component.</p>
 
   <h3>Unidirectional Data Flow</h3>
   <p>this concept means that data has one, and only one, way to be transferred to other parts of the application.</p>
-  
-  <p class="list-heading"><strong>In React this means that:</strong></p>  
+
+  <p class="list-heading"><strong>In React this means that:</strong></p>
   <ul>
     <li>state is passed to the view and to child components</li>
     <li>actions are triggered by the view</li>
     <li>actions can update the state</li>
     <li>the state change is passed to the view and to child components</li>
   </ul>
-  <p>The view is a result of the application state. State can only change when actions happen. When actions happen, the state is updated.</p>
+  <p>The view is a result of the application state. State can only change when actions happen. When actions happen, the
+    state is updated.</p>
   <figure><img src="img/unidirectional-data-flow.jpg" alt="" /></figure>
-  <p class="list-heading"><strong>this has some key advantages:</strong></p>  
+  <p class="list-heading"><strong>this has some key advantages:</strong></p>
   <ul>
     <li>it's less error prone, as you have more control over your data</li>
     <li>it's easier to debug, as you know what is coming from where</li>
     <li>it's more efficient, as the library already knows what the boundaries are of each part of the system</li>
   </ul>
-  <p>A state is always owned by one Component. Any data that's affected by this state can only affect Components below it:
+  <p>A state is always owned by one Component. Any data that's affected by this state can only affect Components below
+    it:
     its children. Changing state on a Component will never affect its parent, or its siblings, or any other Component in
-    the application: just its children. This is the reason that the state is often moved up in the Component tree, so that
+    the application: just its children. This is the reason that the state is often moved up in the Component tree, so
+    that
     it can be shared between components that need to access it.</p>
 
   <p>Best Practices:-</p>
   <ul>
     <li>Always start component names with a capital letter. <br />
       React treats components starting with lowercase letters as DOM tags. For example, <em>&#x3C;div /&#x3E;</em>
-      represents an HTML div tag, but <em>&#x3C;Welcome /&#x3E;</em> represents a component and requires Welcome to be in
+      represents an HTML div tag, but <em>&#x3C;Welcome /&#x3E;</em> represents a component and requires Welcome to be
+      in
       scope.</li>
   </ul>
 
@@ -264,13 +279,13 @@
       with aremote, webbased public API. This means that an API is usually a way of exposingdefined ways to interact
       with a program or platform, usually over the internet, and forpeople to use and consume.</p-->
 
-  
 
 
 
-	<h2 id="reactElement">Create React elements/components</h2>
-  
-	<p>A <strong>React element</strong> is a light, stateless, immutable primitive in React. There are two types:
+
+  <h2 id="reactElement">Create React elements/components</h2>
+
+  <p>A <strong>React element</strong> is a light, stateless, immutable primitive in React. There are two types:
     <strong>React
       DOM Element</strong> and <strong>React Component Element</strong>.</p>
   <p>React.createElement takes a string or component (either a class extending React.Component or a function), a props
@@ -357,7 +372,8 @@
 
   <p>React elements are immutable. Once you create an element, you can’t change its children or attributes. An element
     is like a single frame in a movie: it represents the UI at a certain point in time.</p>
-  <p>Only way to update the UI is to create a new element, and pass it to <code class="language-jsx">ReactDOM.render()</code>.</p>
+  <p>Only way to update the UI is to create a new element, and pass it to <code
+      class="language-jsx">ReactDOM.render()</code>.</p>
   <pre><code class="language-jsx">
     function tick() {
       const element = (
@@ -407,14 +423,16 @@
   <p><strong>"create-react-app"</strong>, a command-line interface (CLI) tool that allows us to set up a
     React-based application without need to configure any of the aforementioned tools.</p>
 
-  <pre><code class="language-jsx">
+  <pre><code class="language-bash">
     // Install "Create react app" globally
     npm uninstall -g create-react-app
     npm install -g create-react-app
+    
     create-react-app --version
+    npm view react version
   </code></pre>
 
-  <pre><code class="language-jsx">
+  <pre><code class="language-bash">
     // Start to create "my-react-app" project in your local directory. 
     npx create-react-app my-react-app
   </code></pre>
@@ -440,11 +458,12 @@
   </ol>
 
   <h3>How React initialize</h3>
-  <p>You need to add a new DOM element with an ID of <code class="language-jsx">root</code> as well as some basic code that uses
+  <p>You need to add a new DOM element with an ID of <code class="language-jsx">root</code> as well as some basic code
+    that uses
     <strong>React
       DOM</strong>.</p>
   <p>Define <code class="language-jsx">root id</code> to render &lt;App /&gt; component inside.</p>
-  
+
   <pre class="language-html"><code class="language-jsx">
     // index.html inside public folder
     &lt;!DOCTYPE html&gt;
@@ -512,23 +531,23 @@
   <pre><code class="language-jsx">
     "homepage": "http://mywebsite.com/relativepath",
   </code></pre>
-  
-  
-  
-  
+
+
+
+
   <h2 id="jsxIntro">Getting started with JSX</h2>
-  
+
   <p>JSX is a technology that was introduced by React.</p>
-  
+
   <p>Although React can work completely fine without using JSX, it’s an ideal technology to work with components,
     so
     React benefits a lot from JSX.</p>
-  
+
   <h3>Introduction to JSX</h3>
-  
+
   <p>You might think that using JSX is like mixing HTML and JavaScript. But this is not true, because what you
     are really doing when using JSX syntax is writing a declarative syntax of what a component UI should be.</p>
-  
+
   <p>And you’re describing that UI not using strings, but instead using JavaScript. </p>
   <br />
   <pre><code class="language-jsx">
@@ -551,10 +570,11 @@
   </ul>
   <p>because they are reserved words in JavaScript.</p>
   <br />
-  <p>In Below code, wrapped the 2 components into a div. Why? Because the <code class="language-js">render()</code> function can only
-      return a
-      single node.</p>
-  
+  <p>In Below code, wrapped the 2 components into a div. Why? Because the <code class="language-js">render()</code>
+    function can only
+    return a
+    single node.</p>
+
   <pre><code class="language-jsx">
     &lt;div&gt;
       &lt;BlogPostsList /&gt;
@@ -565,7 +585,7 @@
   <h3>TRANSPILING JSX</h3>
   <p>JSX code must be first transformed into regular JS to excute on browser.</p>
   <p>In the below code, JSX is transpiled into plain JS by transpiler.</p>
-  
+
   <pre><code class="language-jsx">
     ReactDOM.render(
       &lt;div id=&quot;test&quot;&gt;
@@ -593,7 +613,8 @@
 
   <h3>JS IN JSX</h3>
   <p>JSX accepts any kind of JavaScript mixed into it.</p>
-  <p>Whenever you need to add some JS, just put it inside curly braces {}. For example here’s how to use a constant value
+  <p>Whenever you need to add some JS, just put it inside curly braces {}. For example here’s how to use a constant
+    value
     defined elsewhere:</p>
 
   <pre><code class="language-jsx">
@@ -606,9 +627,9 @@
       document.getElementById('myapp')
     )
   </code></pre>
-  
+
   <p>Curly braces accept any JS code:</p>
-  
+
   <pre><code class="language-jsx">
     ReactDOM.render(
       &lt;table&gt;
@@ -622,15 +643,17 @@
 
   <p>As you can see we nested JavaScript inside a JSX that defined inside a JavaScript which nested in a JSX. You can go
     as deep as you need.</p>
-  
+
   <h3>HTML IN JSX</h3>
 
   <p>JSX resembles a lot HTML, but it’s actually a XML syntax.</p>
   <h4>YOU NEED TO CLOSE ALL TAGS</h4>
-  <p>Just like in XHTML, if you have ever used it, you need to close all tags: no more <code class="language-jsx">&lt;br&gt;</code> but
+  <p>Just like in XHTML, if you have ever used it, you need to close all tags: no more <code
+      class="language-jsx">&lt;br&gt;</code> but
     instead use the self-closing tag: <code class="language-jsx">&lt;br /&gt;</code> (the same goes for other tags)</p>
   <h4>CAMELCASE IS THE NEW STANDARD</h4>
-  <p>In HTML you’ll find attributes without any case (e.g. <code class="language-jsx">onchange</code>). In JSX, they are renamed to
+  <p>In HTML you’ll find attributes without any case (e.g. <code class="language-jsx">onchange</code>). In JSX, they are
+    renamed to
     their camelCase equivalent: </p>
   <ul>
     <li><code class="language-jsx">onchange</code> =&gt; <code class="language-jsx">onChange</code></li>
@@ -641,24 +664,24 @@
   <h3>CLASS BECOMES <strong>CLASSNAME</strong></h3>
 
   <p>Due to the fact that JSX is JavaScript, and class is a reserved word, you can’t write</p>
-  
+
   <pre><code class="language-jsx">
     &lt;p class=&quot;description&quot;&gt;
   </code></pre>
-  
+
   <p>you need to use</p>
-  
+
   <pre><code class="language-jsx">
     &lt;p className=&quot;description&quot;&gt;
   </code></pre>
-  
+
   <p>The same applies to <strong>for</strong> which is translated to <strong>htmlFor</strong>.</p>
 
   <h3>CSS IN REACT</h3>
   <p>You can't write inline style tag in JSX. The JSX style attribute only accepts an object. This means you
     define
     properties in an object:</p>
-  
+
   <pre><code class="language-jsx">
     var divStyle = {
       color: 'white'
@@ -666,13 +689,13 @@
     
     ReactDOM.render(&lt;div style={divStyle}&gt;Hello World!&lt;/div&gt;, mountNode)
   </code></pre>
-  
+
   <p>or</p>
-  
+
   <pre><code class="language-jsx">
     ReactDOM.render(&lt;div style={{ color: 'white' }}&gt;Hello World!&lt;/div&gt;, mountNode)
   </code></pre>
-  
+
   <br />
   <p>Inline styles in JSX are good until you need to</p>
   <ol>
@@ -682,10 +705,13 @@
     <li>reference pseudo elements (e.g. <code class="language-jsx">::first-letter</code>)</li>
   </ol>
   <h3>FORMS IN JSX</h3>
-  <h4 id="value-and-defaultvalue"><code class="language-jsx">value</code> and <code class="language-jsx">defaultValue</code></h4>
+  <h4 id="value-and-defaultvalue"><code class="language-jsx">value</code> and <code
+      class="language-jsx">defaultValue</code></h4>
   <p>The <code class="language-jsx">value</code> attribute always holds the current value of the field.</p>
-  <p>The <code class="language-jsx">defaultValue</code> attribute holds the default value that was set when the field was created.</p>
-  <p><em>This helps solve some weird behavior of regular DOM interaction when inspecting <code class="language-jsx">input.value</code> and
+  <p>The <code class="language-jsx">defaultValue</code> attribute holds the default value that was set when the field
+    was created.</p>
+  <p><em>This helps solve some weird behavior of regular DOM interaction when inspecting <code
+        class="language-jsx">input.value</code> and
       <code class="language-js">input.getAttribute('value')</code> returning one the current value and one the original
       default value.</em></p>
   <p>This also applies to the <code class="language-jsx">textarea</code> field, e.g.</p>
@@ -721,28 +747,29 @@
   <p>To mitigate the ever present risk of XSS exploits, JSX forces automatic escaping in expressions.</p>
   <p>This means that you might run into issues when using an HTML entity in a string expression.</p>
   <p>You expect the following to print <code class="language-jsx">© 2017</code>:</p>
-  
+
   <pre><code class="language-jsx">
     &lt;p&gt;{'&amp;copy; 2017'}&lt;/p&gt;
   </code></pre>
 
-  <p>But it&rsquo;s not, it&rsquo;s printing <code class="language-jsx">&amp;copy; 2017</code> because the string is escaped.</p>
+  <p>But it&rsquo;s not, it&rsquo;s printing <code class="language-jsx">&amp;copy; 2017</code> because the string is
+    escaped.</p>
   <p>To fix this you can either move the entities outside the expression:</p>
-  
+
   <pre><code class="language-html">
     &lt;p&gt;&amp;copy; 2017&lt;/p&gt;
   </code></pre>
-  
+
   <p>or by using a constant that prints the Unicode representation corresponding to the HTML entity you need to
     print:</p>
-  
+
   <pre><code class="language-jsx">
     &lt;p&gt;{'\u00A9 2017'}&lt;/p&gt;
   </code></pre>
 
   <h3 id="white-space-in-jsx">White space in JSX</h3>
   <p>To add white space horizontal/vertical in JSX there are 2 rules:</p>
-  
+
   <pre><code class="language-html">
     &lt;p&gt;
     Something
@@ -752,7 +779,7 @@
   </code></pre>
 
   <p>or by embedding the string in a space expression:</p>
-  
+
   <pre><code class="language-html">
     &lt;p&gt;
     Something
@@ -764,26 +791,28 @@
   <h3>Spread attributes</h3>
   <p>In JSX a common operation is assigning values to attributes.</p>
   <p>Instead of doing it manually, e.g.</p>
-  
+
   <pre><code class="language-jsx">
     &lt;div&gt;
       &lt;BlogPost title={data.title} date={data.date} /&gt;
     &lt;/div&gt;
   </code></pre>
-  
+
   <p>you can pass</p>
-  
+
   <pre><code class="language-jsx">
     &lt;div&gt;
       &lt;BlogPost {...data} /&gt;
     &lt;/div&gt;
   </code></pre>
 
-  <p>and the properties of the <code class="language-jsx">data</code> object will be used as attributes automatically, thanks to the <em>ES6
+  <p>and the properties of the <code class="language-jsx">data</code> object will be used as attributes automatically,
+    thanks to the <em>ES6
       spread operator</em></p>
-  
+
   <h3>How to loop in JSX</h3>
-  <p>If you have a set of elements you need to loop upon to generate a JSX partial, you can create a loop, and then add JSX to an array:</p>
+  <p>If you have a set of elements you need to loop upon to generate a JSX partial, you can create a loop, and then add
+    JSX to an array:</p>
   <pre><code class="language-jsx">
     const elements = [] //..some array
 
@@ -811,7 +840,7 @@
       &#x3C;/div&#x3E;
     )
   </code></pre>
-  
+
   <p>You can do the same directly in the JSX, using map instead of a for-of loop:</p>
 
   <pre><code class="language-jsx">
@@ -825,9 +854,9 @@
     )
   </code></pre>
 
-  
-  
-  
+
+
+
   <h2 id="componentInDetails">Everything Is a Component</h2>
 
   <p>React makes it very simple: everything is a component. A component is one isolated piece of interface.</p>
@@ -838,7 +867,8 @@
   <p> The presentational components are components that display data in some graphical form.</p>
   <p><img src="img/img-7.png" alt="Browser console inspecting React.DOM" /></p>
   <p>The next 2 lines are equivalent, they do the same thing. One with <strong>JSX</strong>, one without, by
-    injecting <code class="language-jsx">&lt;h1&gt;Hello World!&lt;/h1&gt;</code> into an element with id <code class="language-jsx">app</code>.</p>
+    injecting <code class="language-jsx">&lt;h1&gt;Hello World!&lt;/h1&gt;</code> into an element with id <code
+      class="language-jsx">app</code>.</p>
   <pre><code class="language-jsx">
     import React from 'react'
     import ReactDOM from 'react-dom'
@@ -853,11 +883,13 @@
       document.getElementById('app')
     )
   </code></pre>
-  
-  <p>See, <code class="language-jsx">React.DOM</code> exposed us an <code class="language-jsx">h1</code> component. Which other HTML tags are available?
-    All of them! You can inspect what <code class="language-jsx">React.DOM</code> offers by typing it in the Browser Console:</p>
+
+  <p>See, <code class="language-jsx">React.DOM</code> exposed us an <code class="language-jsx">h1</code> component.
+    Which other HTML tags are available?
+    All of them! You can inspect what <code class="language-jsx">React.DOM</code> offers by typing it in the Browser
+    Console:</p>
   <p><img src="img/img-6.png" alt="Browser console inspecting React.DOM" /></p>
-  
+
   <p>There are 2 ways to define a component in React.</p>
   <p>A function component:</p>
   <pre><code class="language-jsx">
@@ -885,8 +917,11 @@
       }
     }
   </code></pre>
-  <p>Up until recently, class components were the only way to define a component that had its own state, and could access the lifecycle methods so you could do things when the component was first rendered, updated or removed.</p>
-  <p>React Hooks changed this, so our function components are now much more powerful than ever and I believe we'll see fewer and fewer class components in the future, although it will still be perfectly valid way to create components.</p>
+  <p>Up until recently, class components were the only way to define a component that had its own state, and could
+    access the lifecycle methods so you could do things when the component was first rendered, updated or removed.</p>
+  <p>React Hooks changed this, so our function components are now much more powerful than ever and I believe we'll see
+    fewer and fewer class components in the future, although it will still be perfectly valid way to create components.
+  </p>
   <p>There is also a third syntax which uses the ES5 syntax, without the classes:</p>
   <pre><code class="language-jsx">
     import React from &#x27;react&#x27;
@@ -904,7 +939,7 @@
   </code></pre>
   <h3>CUSTOM COMPONENTS</h3>
   <p>A stateless component does not manage internal state, and is just a function:</p>
-  
+
   <pre><code class="language-jsx">
     const BlogPostExcerpt = () =&gt; {
         return (
@@ -917,7 +952,7 @@
   </code></pre>
 
   <p>A stateful component is a class, which manages state in its own properties:</p>
-  
+
   <pre><code class="language-jsx">
     import React, { Component } from 'react'
 
@@ -934,7 +969,7 @@
   </code></pre>
 
   <p>There is a third syntax which uses the <code class="language-jsx">ES5</code> syntax, without the classes:</p>
-  
+
   <pre><code class="language-jsx">
     import React from 'react'
 
@@ -959,18 +994,23 @@
   <p>In React, components created as JavaScript classes that extend React.Component may have both mutable and
     immutable state, whereas components created from functions(stateless functional components) only have access to
     immutable state (props).</p>
-  
+
   <h4>Presentational vs container components</h4>
-  <p>In React components are often divided into 2 big buckets: presentational components and container components. Each of
-    those have their unique characteristics. Presentational components are mostly concerned with generating some markup to
-    be outputted. They don't manage any kind of state, except for state related the the presentation. Container components
+  <p>In React components are often divided into 2 big buckets: presentational components and container components. Each
+    of
+    those have their unique characteristics. Presentational components are mostly concerned with generating some markup
+    to
+    be outputted. They don't manage any kind of state, except for state related the the presentation. Container
+    components
     are mostly concerned with the "backend" operations.
   </p>
-  <p>They might handle the state of various sub-components. They might wrap several presentational components. They might
+  <p>They might handle the state of various sub-components. They might wrap several presentational components. They
+    might
     interface with Redux. As a way to simplify the distinction, we can say presentational components are concerned with
     the look, container components are concerned with making things work.</p>
-  <p>For example, this is a presentational component. It gets data from its props, and just focuses on showing an element:</p>
-  
+  <p>For example, this is a presentational component. It gets data from its props, and just focuses on showing an
+    element:</p>
+
   <pre><code class="language-jsx">
     const Users = props =&#x3E; (
       &#x3C;ul&#x3E;
@@ -981,7 +1021,8 @@
     )
   </code></pre>
 
-  <p>On the other hand this is a container component. It manages and stores its own data, and uses the presentational component to display it.</p>
+  <p>On the other hand this is a container component. It manages and stores its own data, and uses the presentational
+    component to display it.</p>
   <pre><code class="language-jsx">
     class UsersContainer extends React.Component {
       constructor() {
@@ -1003,11 +1044,12 @@
   </code></pre>
 
 
-  
-  
-  
+
+
+
   <h2 id="reactProps">Props</h2>
-  <p> Props is how Components get their properties. Starting from the top component, every child component gets its props
+  <p> Props is how Components get their properties. Starting from the top component, every child component gets its
+    props
     from the parent. In a function component, props is all it gets passed, and they are available by adding props as the
     function argument:</p>
   <pre><code class="language-jsx">
@@ -1020,9 +1062,10 @@
         )
       }
     </code></pre>
-  <p>In a class component, props are passed by default. There is no need to add anything special, and they are accessible
+  <p>In a class component, props are passed by default. There is no need to add anything special, and they are
+    accessible
     as <code class="language-jsx">this.props</code> in a Component instance.</p>
-  
+
   <pre><code class="language-jsx">
       import React, { Component } from &#x27;react&#x27;
   
@@ -1037,7 +1080,7 @@
         }
       }
     </code></pre>
-  
+
   <p>Passing props down to child components is a great way to pass values around in your application. A component either
     holds data (has state) or receives data through its props.</p>
   <p class="list-heading"><strong>It gets complicated when:</strong></p>
@@ -1050,7 +1093,7 @@
   <!--p>System for passing data from a parent component to a child component to customize or configure a child component.</p-->
 
   <p>Props are immutable (not modifiable), so if you need to change data, you need mutable state. </p>
-  
+
   <!--p>Whether you declare a component as a function or a class, it must never modify its own props. </p>
 
   <p>In the components created by <code class="language-jsx">React.Component</code>, state is accessible from the <code class="language-jsx">this.state</code>
@@ -1090,10 +1133,12 @@
     }
   </code></pre>
 
-  <p>In a stateful component(class based), props are passed by default. There is no need to add anything special, and they are
+  <p>In a stateful component(class based), props are passed by default. There is no need to add anything special, and
+    they are
     accessible as <code class="language-jsx">this.props</code> in a Component instance.</p>
 
-  <p>In a stateless component(function based), props is all it gets passed, and they are available by adding <code class="language-jsx">props</code> as the
+  <p>In a stateless component(function based), props is all it gets passed, and they are available by adding <code
+      class="language-jsx">props</code> as the
     function argument:</p>
 
   <pre><code class="language-jsx">
@@ -1143,7 +1188,8 @@
     some propTypes not explicitly required.</p>
 
   <h4 id="children">Children</h4>
-  <p>A special prop is <code class="language-jsx">children</code>. That contains the value of anything that is passed in the
+  <p>A special prop is <code class="language-jsx">children</code>. That contains the value of anything that is passed in
+    the
     <code class="language-jsx">body</code>
     of the component, for example:</p>
 
@@ -1153,7 +1199,8 @@
     &lt;/BlogPostExcerpt&gt;
   </code></pre>
 
-  <p>In this case, inside <code class="language-jsx">BlogPostExcerpt</code> we could access &ldquo;Something&rdquo; by looking up
+  <p>In this case, inside <code class="language-jsx">BlogPostExcerpt</code> we could access &ldquo;Something&rdquo; by
+    looking up
     <code class="language-jsx">this.props.children</code>.</p>
 
   <p>While Props allow a Component to receive properties from its parent, be &ldquo;instructed&rdquo; to print some
@@ -1279,7 +1326,8 @@
   </code></pre>
 
   <h5 id="requiring-properties">Requiring properties</h5>
-  <p>Appending <code class="language-jsx">isRequired</code> to any PropTypes option will cause React to return an error if that property is
+  <p>Appending <code class="language-jsx">isRequired</code> to any PropTypes option will cause React to return an error
+    if that property is
     missing:</p>
   <pre><code class="language-js">
     PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -1291,18 +1339,21 @@
   <h2 id="reactState">State</h2>
   <p>State is similar to props, but it is private and fully controlled by the component.</p>
   <p>Only Components defined as classes have some Local state feature.</p>
-  <p>States are mutable. But can't be modified directlty. You need to use <code class="language-jsx">setState()</code>.</p>
+  <p>States are mutable. But can't be modified directlty. You need to use <code class="language-jsx">setState()</code>.
+  </p>
   <p>State can be pass down to child component via <strong>Props</strong>. When state value change, child component will
     be re-render automatically. </p>
 
   <h4>Adding Local State to a Class</h4>
   <ul>
     <li>Add a class constructor that assigns the initial this.state:</li>
-    <li>Use <code class="language-jsx">this.state.date</code> in the <code class="language-jsx">render()</code> method or component same as you used props.</li>
+    <li>Use <code class="language-jsx">this.state.date</code> in the <code class="language-jsx">render()</code> method
+      or component same as you used props.</li>
   </ul>
 
   <h4>Setting the default state</h4>
-  <p>In the Component constructor, initialize <code class="language-jsx">this.state</code>. For example the BlogPostExcerpt component might
+  <p>In the Component constructor, initialize <code class="language-jsx">this.state</code>. For example the
+    BlogPostExcerpt component might
     have a <code class="language-jsx">clicked</code> state:</p>
 
   <pre><code class="language-jsx">
@@ -1325,7 +1376,7 @@
 
   <h4>Accessing the state</h4>
   <p>The <em>clicked</em> state can be accessed by referencing <code class="language-jsx">this.state.clicked</code>:</p>
-  
+
   <pre><code class="language-jsx">
     class BlogPostExcerpt extends Component {
       constructor(props) {
@@ -1360,7 +1411,8 @@
   <p>The object can contain a subset, or a superset, of the state. Only the properties you pass will be mutated, the
     ones omitted will be left in their current state.</p>
 
-  <h4 id="why-you-should-always-use-setstate">Why you should always use <code class="language-jsx">setState()</code></h4>
+  <h4 id="why-you-should-always-use-setstate">Why you should always use <code class="language-jsx">setState()</code>
+  </h4>
   <p>The reason is that using this method, React knows that the state has changed. It will then start the series of
     events that will lead to the Component being re-rendered, along with any <strong>DOM</strong> update.</p>
 
@@ -1446,9 +1498,9 @@
     }
   </code></pre>
 
-  
-  
-  
+
+
+
   <h2 id="reactPropsVsState">Props vs State</h2>
   <p>What&#39;s the difference between state and props in React?</p>
   <p>In a React component, <strong>props</strong> are variables passed to it by its parent component.
@@ -1456,13 +1508,13 @@
     on the other hand is still variables, but directly initialized and managed by the component.</p>
   <p>The state can be initialized by props.</p>
   <p>For example, a parent component might include a child component by calling</p>
-  
+
   <pre><code class="language-jsx">
     &lt;ChildComponent /&gt;
   </code></pre>
-  
+
   <p>The parent can pass a prop by using this syntax:</p>
-  
+
   <pre><code class="language-jsx">
     &lt;ChildComponent color=green /&gt;
   </code></pre>
@@ -1478,7 +1530,7 @@
 
   <p>and any other method in this class can reference the props using <code class="language-jsx">this.props</code>.</p>
   <p>Props can be used to set the internal state based on a prop value in the constructor, like this:</p>
-  
+
   <pre><code class="language-jsx">
     class ChildComponent extends Component {
       constructor(props) {
@@ -1487,7 +1539,7 @@
       }
     }
   </code></pre>
-  
+
   <p>Of course a component can also initialize the state without looking at props.</p>
   <p>In this case there&rsquo;s nothing useful going on, but imagine doing something different based on the prop
     value,
@@ -1495,17 +1547,19 @@
   <p>Props should never be changed in a child component, so if there&rsquo;s something going on that alters some
     variable, that variable should belong to the component state.</p>
   <p>Props are also used to allow child components to access methods defined in the parent component. This is a good way
-    to centralize managing the state in the parent component, and avoid children to have the need to have their own state.
+    to centralize managing the state in the parent component, and avoid children to have the need to have their own
+    state.
   </p>
   <p>Most of your components will just display some kind of information based on the props they received, and
     stay <strong>stateless</strong>.</p>
 
-  
 
-  
+
+
   <h2 id="reactHandlingEvents">Handling Events</h2>
 
-  <p class="list-heading">Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic
+  <p class="list-heading">Handling events with React elements is very similar to handling events on DOM elements. There
+    are some syntactic
     differences:</p>
   <ul>
     <li>React events are named using camelCase, rather than lowercase.</li>
@@ -1521,7 +1575,7 @@
     &lt;button onClick={activateLasers}&gt;
       Activate Lasers
     &lt;/button&gt;
-  </code></pre>  
+  </code></pre>
 
   <pre><code class="language-jsx">
     const CurrencySwitcher = (props) =&gt; {
@@ -1540,7 +1594,8 @@
     you&rsquo;re passing a function, not a string.</p>
   <p>The actual event names are a little bit different because in React you use camelCase for everything, so
     <code class="language-jsx">onclick</code>
-    becomes <code class="language-jsx">onClick</code>, <code class="language-jsx">onsubmit</code> becomes <code class="language-jsx">onSubmit</code>.</p>
+    becomes <code class="language-jsx">onClick</code>, <code class="language-jsx">onsubmit</code> becomes <code
+      class="language-jsx">onSubmit</code>.</p>
   <p>For reference, this is old school HTML with JavaScript events mixed in:</p>
 
   <pre><code class="language-html">
@@ -1551,7 +1606,7 @@
 
   <h3>Event handlers</h3>
   <p>It&rsquo;s a convention to have event handlers defined as methods on the Component class:</p>
-  
+
   <pre><code class="language-jsx">
     class Converter extends React.Component {
       handleChangeCurrency = (event) =&gt; {
@@ -1566,7 +1621,7 @@
   <h3 id="bind-this-in-methods">Bind <code class="language-jsx">this</code> in methods</h3>
   <p>Don&rsquo;t forget to bind methods. The methods of ES6 classes by default are not bound. What this means is
     that <code class="language-jsx">this</code> is not defined unless you define methods as arrow functions:</p>
-  
+
   <pre><code class="language-jsx">
     class Converter extends React.Component {
       handleClick = (e) =&gt; { /* ... */ }
@@ -1574,9 +1629,10 @@
     }
   </code></pre>
 
-  <p>when using the the property initializer syntax with Babel (enabled by default in <code class="language-jsx">create-react-app</code>),
+  <p>when using the the property initializer syntax with Babel (enabled by default in <code
+      class="language-jsx">create-react-app</code>),
     otherwise you need to bind it manually in the constructor:</p>
-  
+
   <pre><code class="language-jsx">
     class Converter extends React.Component {
       constructor(props) {
@@ -1704,257 +1760,207 @@
 
 
   <h2 id="reactLifecycleEvents">Lifecycle events</h2>
-  
+
   <p>React class components can have hooks for several lifecycle events. Hooks allow function components to access them
     too, in a different way.</p>
   <p>During the lifetime of a component, there's a series of events that gets called, and to each event you can hook and
     provide custom functionality.</p>
-  
+
   <p class="list-heading">First, there are 3 phases in a React component lifecycle:</p>
   <ul>
     <li>Mounting</li>
     <li>Updating</li>
     <li>Unmounting</li>
   </ul>
-  
+
   <p>Let's see those 3 phases in detail and the methods that get called for each.</p>
-  
+
   <h3>Mounting</h3>
-  <p>When mounting you have 4 lifecycle methods before the component is mounted in the DOM: the <code>constructor</code>,
+  <p>When mounting you have 4 lifecycle methods before the component is mounted in the DOM: the
+    <code>constructor</code>,
     <code>getDerivedStateFromProps</code>, <code>render and componentDidMount</code>.</p>
-  
+
   <h4>Constructor</h4>
   <p>The constructor is the first method that is called when mounting a component.</p>
   <p>You usually use the constructor to set up the initial state using <code>this.state = ...</code></p>
-  
+
   <h4>getDerivedStateFromProps()</h4>
   <p>When the state depends on props, getDerivedStateFromProps can be used to update the state based on the props value.
   </p>
-  
+
   <p>It was added in React 16.3, aiming to replace the componentWillReceiveProps deprecated method.</p>
-  
+
   <p>In this method you haven't access to this as it's a static method.</p>
-  
-  <p>It's a pure method, so it should not cause side effects and should return the same output when called multiple times
+
+  <p>It's a pure method, so it should not cause side effects and should return the same output when called multiple
+    times
     with the same input.</p>
-  
+
   <p>Returns an object with the updated elements of the state (or null if the state does not change)</p>
-  
+
   <h4>render()</h4>
-  
+
   <p>From the render() method you return the JSX that builds the component interface.</p>
-  
-  <p>It's a pure method, so it should not cause side effects and should return the same output when called multiple times
+
+  <p>It's a pure method, so it should not cause side effects and should return the same output when called multiple
+    times
     with the same input.</p>
-  
+
   <h4>componentDidMount()</h4>
-  
+
   <p>This method is the one that you will use to perform API calls, or process operations on the DOM.</p>
-  
+
   <h3>Updating</h3>
-  
-  <p>When updating you have 5 lifecycle methods before the component is mounted in the DOM: the getDerivedStateFromProps,
+
+  <p>When updating you have 5 lifecycle methods before the component is mounted in the DOM: the
+    getDerivedStateFromProps,
     shouldComponentUpdate, render, getSnapshotBeforeUpdate and componentDidUpdate.</p>
-  
+
   <h4>getDerivedStateFromProps()</h4>
-  
+
   <p>See the above description for this method.</p>
-  
+
   shouldComponentUpdate()
-  
+
   <p>This method returns a boolean, true or false. You use this method to tell React if it should go on with the
     rerendering, and defaults to true. You will return false when rerendering is expensive and you want to have more
     control on when this happens.</p>
-  
+
   <h4>render()</h4>
-  
+
   <p>See the above description for this method.</p>
-  
+
   <h4>getSnapshotBeforeUpdate()</h4>
-  
+
   <p>In this method you have access to the props and state of the previous render, and of the current render.</p>
-  
+
   <p>Its use cases are very niche, and it's probably the one that you will use less.</p>
-  
+
   <h4>componentDidUpdate()</h4>
-  
+
   <p>This method is called when the component has been updated in the DOM. Use this to run any 3rd party DOM API or call
     APIs that must be updated when the DOM changes.</p>
-  
+
   <p>It corresponds to the componentDidMount() method from the mounting phase.</p>
-  
+
   <h3>Unmounting</h3>
-  
+
   <p>In this phase we only have one method, componentWillUnmount.</p>
-  
+
   <h4>componentWillUnmount()</h4>
-  
+
   <p>The method is called when the component is removed from the DOM. Use this to do any sort of cleanup you need to
     perform.</p>
-  
+
   <h4>Legacy</h4>
-  
+
   <p>If you are working on an app that uses componentWillMount, componentWillReceiveProps or componentWillUpdate, those
     were deprecated in React 16.3 and you should migrate to other lifecycle methods.</p>
 
-  
-  
+
+
   <h2 id="formHandling">Form Handling</h2>
   <p>There are two main ways of handling forms in React, which differ on a fundamental level: how data is managed.</p>
   <ul>
     <li>if the data is handled by the DOM, we call them <strong>uncontrolled components</strong></li>
     <li>if the data is handled by the components we call them <strong>controlled components</strong></li>
   </ul>
-  
+
   <p>As you can imagine, controlled components is what you will use most of the time. The component state is the single
     source of truth, rather than the DOM. But sometimes you are forced to use uncontroller components, for example when
     using some form fields that are inherently uncontrolled because of their behavior, like the
     <code>&lt;input type=&quot;file&quot;&gt;</code> field.</p>
-  
+
   <p>When an element state changes in a form field managed by a component, we track it using the <code
       class="language-js">onChange</code> attribute.</p>
-  
-  <pre><code class="language-jsx">
-      class Form extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = { username: '' }
-        }
-      
-        handleChange(event) {}
-      
-        render() {
-          return (
-            &lt;form&gt;
-              Username:
-              &lt;input
-                type=&quot;text&quot;
-                value={this.state.username}
-                onChange={this.handleChange}
-              /&gt;
-            &lt;/form&gt;
-          )
-        }
-      }
-    </code></pre>
-  
-  <p>With class components, in order to set the new state, we must bind <code>this</code> to the <code>handleChange</code>
-    method, otherwise <code>this</code> is not accessible from within that method:</p>
-  
-  <pre><code class="language-js">class Form extends React.Component {
+
+  <p>Similarly, we use the <code>onSubmit</code> attribute on the form to call the <code>handleSubmit</code> method when
+    the form is submitted:</p>
+
+  <pre><code class="language-js">
+    class Form extends React.Component {
       constructor(props) {
         super(props)
         this.state = { username: '' }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
       }
-  
+    
       handleChange(event) {
         this.setState({ value: event.target.value })
       }
-  
+    
+      handleSubmit(event) {
+        alert(this.state.username)
+        event.preventDefault()
+      }
+    
       render() {
         return (
-          &lt;form&gt;
-            &lt;input
-              type=&quot;text&quot;
-              value={this.state.username}
-              onChange={this.handleChange}
-            /&gt;
+          &lt;form onSubmit={this.handleSubmit}&gt;
+            &lt;input type=&quot;text&quot; value={this.state.username} onChange={this.handleChange} /&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
           &lt;/form&gt;
         )
       }
     }
-    </code></pre>
-  
-  <p>Similarly, we use the <code>onSubmit</code> attribute on the form to call the <code>handleSubmit</code> method when
-    the form is submitted:</p>
-  
-  <pre><code class="language-js">
-      class Form extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = { username: '' }
-          this.handleChange = this.handleChange.bind(this)
-          this.handleSubmit = this.handleSubmit.bind(this)
-        }
-      
-        handleChange(event) {
-          this.setState({ value: event.target.value })
-        }
-      
-        handleSubmit(event) {
-          alert(this.state.username)
-          event.preventDefault()
-        }
-      
-        render() {
-          return (
-            &lt;form onSubmit={this.handleSubmit}&gt;
-              &lt;input
-                type=&quot;text&quot;
-                value={this.state.username}
-                onChange={this.handleChange}
-              /&gt;
-              &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
-            &lt;/form&gt;
-          )
-        }
-      }
-    </code></pre>
-  
+  </code></pre>
+
   <p>Using hooks it&rsquo;s all much simpler:</p>
-  
+
   <pre><code class="language-js">
-      const Form = props =&gt; {
-        const [username, setUsername] = useState()
-      
-        const handleChangeUsername = e =&gt; {
-          setUsername(e.target.value)
-        }
-      
-        const handleSubmit = event =&gt; {
-          alert(username)
-          event.preventDefault()
-        }
-      
-        render() {
-          return (
-            &lt;form onSubmit={handleSubmit}&gt;
-              Username:
-              &lt;input
-                type=&quot;text&quot;
-                value={username}
-                onChange={handleChangeUsername}
-              /&gt;
-            &lt;/form&gt;
-          )
-        }
+    const Form = props =&gt; {
+      const [username, setUsername] = useState()
+    
+      const handleChangeUsername = e =&gt; {
+        setUsername(e.target.value)
       }
-    </code></pre>
-  
-  <p>Validation in a form can be handled in the <code>handleChange</code> method: you have access to the old value of the
+    
+      const handleSubmit = event =&gt; {
+        alert(username)
+        event.preventDefault()
+      }
+    
+      render() {
+        return (
+          &lt;form onSubmit={handleSubmit}&gt;
+            Username:
+            &lt;input type=&quot;text&quot; value={username} onChange={handleChangeUsername} /&gt;
+          &lt;/form&gt;
+        )
+      }
+    }
+  </code></pre>
+
+  <p>Validation in a form can be handled in the <code>handleChange</code> method: you have access to the old value of
+    the
     state, and the new one. You can check the new value and if not valid reject the updated value (and communicate it in
     some way to the user).</p>
-  
+
   <p>HTML Forms are inconsistent. They have a long history, and it shows. React however makes things more consistent for
     us, and you can get (and update) fields using its <code>value</code> attribute.</p>
-  
+
   <p>Here&rsquo;s a <code>textarea</code>, for example:</p>
-  
-  <pre><code class="language-html">&lt;textarea value={this.state.address} onChange={this.handleChange} /&gt;
+
+  <pre><code class="language-html">
+    &lt;textarea value={this.state.address} onChange={this.handleChange} /&gt;
   </code></pre>
-  
+
   <p>The same goes for the <code>select</code> tag:</p>
-  
-  <pre><code class="language-html">&lt;select value=&quot;{this.state.age}&quot; onChange=&quot;{this.handleChange}&quot;&gt;
-    &lt;option value=&quot;teen&quot;&gt;Less than 18&lt;/option&gt;
-    &lt;option value=&quot;adult&quot;&gt;18+&lt;/option&gt;
-  &lt;/select&gt;
+
+  <pre><code class="language-html">
+    &lt;select value=&quot;{this.state.age}&quot; onChange=&quot;{this.handleChange}&quot;&gt;
+      &lt;option value=&quot;teen&quot;&gt;Less than 18&lt;/option&gt;
+      &lt;option value=&quot;adult&quot;&gt;18+&lt;/option&gt;
+    &lt;/select&gt;
   </code></pre>
-  
-  <p>Previously we mentioned the <code>&lt;input type=&quot;file&quot;&gt;</code> field. That works a bit differently.</p>
-  
-  <p>In this case you need to get a reference to the field by assigning the <code>ref</code> attribute to a property defined in the constructor with <code>React.createRef()</code>, and use that to get the value of it in the submit handler:</p>
+
+  <p>Previously we mentioned the <code>&lt;input type=&quot;file&quot;&gt;</code> field. That works a bit differently.
+  </p>
+
+  <p>In this case you need to get a reference to the field by assigning the <code>ref</code> attribute to a property
+    defined in the constructor with <code>React.createRef()</code>, and use that to get the value of it in the submit
+    handler:</p>
 
   <pre><code class="language-js">
     class FileInput extends React.Component {
@@ -1979,12 +1985,13 @@
       }
     }
   </code></pre>
-  
-  <p>This is the <strong>uncontrolled components</strong> way. The state is stored in the DOM rather than in the component
+
+  <p>This is the <strong>uncontrolled components</strong> way. The state is stored in the DOM rather than in the
+    component
     state (notice we used <code>this.curriculum</code> to access the uploaded file, and have not touched the
     <code>state</code>.</p>
 
-  
+
 
 
 
@@ -2040,7 +2047,7 @@
     window.dump()
     window.scrollTo()
   </code></pre>
-  
+
   <p>React keeps a copy of the DOM representation, for what concerns the React rendering: the Virtual DOM</p>
   <h4>The Virtual DOM Explained</h4>
   <p>Every time the DOM changes, the browser has to do two intensive operations: repaint (visual or content
@@ -2051,7 +2058,8 @@
     the
     layout of a portion of the page - or the whole page layout).</p>
   <p>React uses a Virtual DOM to help the browser use less resources when changes need to be done on a page.</p>
-  <p>When you call <code class="language-jsx">setState()</code> on a Component, specifying a state different than the previous one,
+  <p>When you call <code class="language-jsx">setState()</code> on a Component, specifying a state different than the
+    previous one,
     React
     marks that Component as <strong>dirty</strong>. This is key: React only updates when a Component changes the
     state
@@ -2071,24 +2079,25 @@
     to
     render the changes are executed just once.</p>
 
-  
-  
-  
+
+
+
   <h2 id="reactContextAPI">The React Context API</h2>
   <p>The context api is a neat way to pass state across the app without having to use props.</p>
 
-  <p>The <strong>Context API</strong> was introduced to allow you to pass state (and allow to update the state) across
+  <p>The <strong>Context API</strong>was introduced to allow you to pass state (and enable the state to update) across
     the app, without having to use props for it.</p>
 
-  <p>The React team suggests to stick to props if you have just a few levels of children to pass, because it&rsquo;s
-    still a much less complicated API than the Context API.</p>
+  <p>The React team suggests to stick to props if you have just a few levels of children to pass, because it’s still a
+    much less complicated API than the Context API.</p>
 
-  <p>In many cases, it enables us to avoid using Redux, simplifying a lot our apps, and also learning how to use
-    React.</p>
+  <p>In many cases, it enables us to avoid using Redux, simplifying our apps a lot, and also learning how to use React.
+  </p>
 
   <p>How does it work?</p>
 
-  <p>You create a context using <code class="language-jsx">React.createContext()</code>, which returns a Context object.:</p>
+  <p>You create a context using <code class="language-jsx">React.createContext()</code>, which returns a Context
+    object.:</p>
 
   <pre><code class="language-js">
     const {Provider, Consumer} = React.createContext()
@@ -2127,7 +2136,7 @@
   </code></pre>
 
   <p>I used Container as the name of this component because this will be a global provider. You can also create
-      smaller contexts.</p>
+    smaller contexts.</p>
 
   <p>Inside a component that&rsquo;s wrapped in a Provider, you use a <strong>Consumer</strong> component can make use
     of the context:</p>
@@ -2188,13 +2197,14 @@
     //... use Context.Consumer
   </code></pre>
 
-  
-  
-  
-  
+
+
+
+
   <h2 id="reactFragment">Fragment</h2>
   <p>How to use React.Fragment to create invisible HTML tags</p>
-  <p>Notice how I wrapped the return values in a <code class="language-jsx">div</code>. This is because a component can only return
+  <p>Notice how I wrapped the return values in a <code class="language-jsx">div</code>. This is because a component can
+    only return
     one
     single element, and if you want more than one, you need to wrap it into another container tag.</p>
   <p>This however causes an unnecessary <code class="language-jsx">div</code> in the output. You can avoid this by using
@@ -2214,7 +2224,8 @@
     }
   </code></pre>
 
-  <p>which also has a very nice shorthand syntax <code class="language-jsx">&lt;&gt;&lt;/&gt;</code> that is supported only in recent
+  <p>which also has a very nice shorthand syntax <code class="language-jsx">&lt;&gt;&lt;/&gt;</code> that is supported
+    only in recent
     releases (and Babel 7+):</p>
 
   <pre><code class="language-jsx">
@@ -2247,7 +2258,8 @@
     }
   </code></pre>
 
-  <p>Now when rendering the JSX you can embed the <code class="language-jsx">items</code> array simply by wrapping it in curly braces:</p>
+  <p>Now when rendering the JSX you can embed the <code class="language-jsx">items</code> array simply by wrapping it in
+    curly braces:</p>
 
   <pre><code class="language-jsx">
     render() {
@@ -2282,9 +2294,9 @@
     }
   </code></pre>
 
-  
-  
-  
+
+
+
   <h2 id="reactRouter">Router</h2>
 
   <p>React at its core is a very simple library, and it does not dictate anything about routing.</p>
@@ -2324,19 +2336,23 @@
     https://application.com/dashboard   /* BrowserRouter */
     https://application.com/#/dashboard /* HashRouter    */
   </code></pre>
-  <p>Which one to use is mainly dictated by the browsers you need to support. <code class="language-jsx">BrowserRouter</code> uses the
+  <p>Which one to use is mainly dictated by the browsers you need to support. <code
+      class="language-jsx">BrowserRouter</code> uses the
     <strong>History API</strong></a>, which is relatively recent, and not supported in IE9 and below. If you
     don&rsquo;t have to worry about older browsers, it&rsquo;s the recommended choice.</p>
   <h2 id="components">Components</h2>
   <p>The 3 components you will interact the most when working with React Router are:</p>
   <ul>
-    <li><code class="language-jsx">BrowserRouter</code>, usually aliased as <code class="language-jsx">Router</code></li>
+    <li><code class="language-jsx">BrowserRouter</code>, usually aliased as <code class="language-jsx">Router</code>
+    </li>
     <li><code class="language-jsx">Link</code></li>
     <li><code class="language-jsx">Route</code></li>
   </ul>
   <p><code class="language-jsx">BrowserRouter</code> wraps all your Route components.</p>
-  <p><code class="language-jsx">Link</code> components are - as you can imagine - used to generate links to your routes</p>
-  <p><code class="language-jsx">Route</code> components are responsible for showing - or hiding - the components they contain.</p>
+  <p><code class="language-jsx">Link</code> components are - as you can imagine - used to generate links to your routes
+  </p>
+  <p><code class="language-jsx">Route</code> components are responsible for showing - or hiding - the components they
+    contain.</p>
   <h2 id="browserrouter">BrowserRouter</h2>
   <p>Here&rsquo;s a simple example of the BrowserRouter component. You import it from react-router-dom, and you
     use it
@@ -2359,7 +2375,8 @@
     <code class="language-jsx">div</code>
     element.</p>
   <h4>Link</h4>
-  <p>The Link component is used to trigger new routes. You import it from <code class="language-jsx">react-router-dom</code>, and you
+  <p>The Link component is used to trigger new routes. You import it from <code
+      class="language-jsx">react-router-dom</code>, and you
     can
     add the Link components to point at different routes, with the <code class="language-jsx">to</code> attribute:</p>
   <pre><code class="language-jsx">
@@ -2420,22 +2437,27 @@
     </code></pre>
   <p>Check this example on Glitch: <a
       href="https://flaviocopes-react-router-v4.glitch.me/">https://flaviocopes-react-router-v4.glitch.me/</a></p>
-  <p>When the route matches <code class="language-jsx">/</code>, the application shows the <strong>Dashboard</strong> component.</p>
-  <p>When the route is changed by clicking the &ldquo;About&rdquo; link to <code class="language-jsx">/about</code>, the Dashboard
+  <p>When the route matches <code class="language-jsx">/</code>, the application shows the <strong>Dashboard</strong>
+    component.</p>
+  <p>When the route is changed by clicking the &ldquo;About&rdquo; link to <code class="language-jsx">/about</code>, the
+    Dashboard
     component
     is removed and the <strong>About</strong> component is inserted in the DOM.</p>
-  <p>Notice the <code class="language-jsx">exact</code> attribute. Without this, <code class="language-jsx">path=&quot;/&quot;</code> would also match
+  <p>Notice the <code class="language-jsx">exact</code> attribute. Without this, <code
+      class="language-jsx">path=&quot;/&quot;</code> would also match
     <code class="language-jsx">/about</code>,
     since <code class="language-jsx">/</code> is contained in the route.</p>
   <h4>Match multiple paths</h4>
-  <p>You can have a route respond to multiple paths simply using a regex, because <code class="language-jsx">path</code> can be a
+  <p>You can have a route respond to multiple paths simply using a regex, because <code class="language-jsx">path</code>
+    can be a
     regular
     expressions string:</p>
   <pre><code class="language-jsx">
     &lt;Route path=&quot;/(about|who)/&quot; component={Dashboard} /&gt;
     </code></pre>
   <h4>Inline rendering</h4>
-  <p>Instead of specifying a <code class="language-jsx">component</code> property on <code class="language-jsx">Route</code>, you can set a <code class="language-jsx">render</code>
+  <p>Instead of specifying a <code class="language-jsx">component</code> property on <code
+      class="language-jsx">Route</code>, you can set a <code class="language-jsx">render</code>
     prop:</p>
   <pre><code class="language-jsx">
     &lt;Route
@@ -2475,9 +2497,12 @@
     
     &lt;Route exact path=&quot;/post/:id&quot; component={Post} /&gt;
     </code></pre>
-  <p>In your Route component you can lookup the dynamic parameters in <code class="language-jsx">match.params</code>.</p>
-  <p><code class="language-jsx">match</code> is also available in inline rendered routes, and this is especially useful in this case,
-    because we can use the <code class="language-jsx">id</code> parameter to lookup the post data in our data source before rendering
+  <p>In your Route component you can lookup the dynamic parameters in <code class="language-jsx">match.params</code>.
+  </p>
+  <p><code class="language-jsx">match</code> is also available in inline rendered routes, and this is especially useful
+    in this case,
+    because we can use the <code class="language-jsx">id</code> parameter to lookup the post data in our data source
+    before rendering
     Post:</p>
   <pre><code class="language-jsx">
     const posts = [
@@ -2507,43 +2532,334 @@
 
     var routes = &lt;Route path=&quot;/&quot; something={'here'} component={Index} /&gt;
     </code></pre>
-  <p>But in this way you need to modify how you access props, via <code class="language-jsx">this.props.route.*</code> instead than
+  <p>But in this way you need to modify how you access props, via <code class="language-jsx">this.props.route.*</code>
+    instead than
     the
     usual <code class="language-jsx">this.props</code>, which might or might not be acceptable.</p>
   <p>A way to fix this is to use:</p>
   <pre><code class="language-js">
-      const Index = props =&gt; (
-      &lt;h1&gt;{props.something}&lt;/h1&gt;
-    )
+    const Index = props =&gt; (
+    &lt;h1&gt;{props.something}&lt;/h1&gt;
+  )
 
-    &lt;Route path=&quot;/&quot; render={() =&gt; &lt;Index something={'here'} /&gt;} /&gt;
-    </code></pre>
-  <h2>Learn how to use Redux</h2>
-  <p>Redux is a state manager that&rsquo;s usually used along with React, but it&rsquo;s not tied to that
-    library.</p>
+  &lt;Route path=&quot;/&quot; render={() =&gt; &lt;Index something={'here'} /&gt;} /&gt;
+  </code></pre>
+
+
+  <h2 id="hooks">Hooks</h2>
+
+  <p>Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+  </p>
+  <h3>But what is a Hook?</h3>
+  <p>Hooks are functions that let you “hook into” React state and lifecycle features from function components. Hooks
+    don’t work inside classes — they let you use React without classes.</p>
+
+  <ul>
+    <li><strong>Completely opt-in</strong>. You can try Hooks in a few components without rewriting any existing code.
+      But you don’t have to learn or use Hooks right now if you don’t want to.</li>
+    <li><strong>100% backwards-compatible</strong>. Hooks don’t contain any breaking changes.</li>
+    <li>Hooks provide a more direct API to the React concepts you already know: props, state, context, refs, and
+      lifecycle. </li>
+  </ul>
+
+  <h3>Motivation</h3>
+  <ul>
+    <li><strong>It’s hard to reuse stateful logic between components</strong>
+      <p>React doesn’t offer a way to “attach” reusable behavior to a component (for example, connecting it to a store).
+        If you’ve worked with React for a while, you may be familiar with patterns like render props and higher-order
+        components that try to solve this. But these patterns require you to restructure your components when you use
+        them, which can be cumbersome and make code harder to follow. </p>
+      <p>With Hooks, you can extract stateful logic from a component so it can be tested independently and reused. Hooks
+        allow you to reuse stateful logic without changing your component hierarchy. This makes it easy to share Hooks
+        among many components or with the community.</p>
+    </li>
+    <li><strong>Complex components become hard to understand</strong>
+      <p>We’ve often had to maintain components that started out simple but grew into an unmanageable mess of stateful
+        logic and side effects. Each lifecycle method often contains a mix of unrelated logic. For example, components
+        might perform some data fetching in componentDidMount and componentDidUpdate. However, the same
+        componentDidMount
+        method might also contain some unrelated logic that sets up event listeners, with cleanup performed in
+        componentWillUnmount. </p>
+      <p>Hooks let you split one component into smaller functions based on what pieces are related (such as setting up a
+        subscription or fetching data), rather than forcing a split based on lifecycle methods. You may also opt into
+        managing the component’s local state with a reducer to make it more predictable.</p>
+    </li>
+    <li><strong>Classes confuse both people and machines</strong>
+      <p>Hooks let you use more of React’s features without classes. Conceptually, React components have always been
+        closer to functions. Hooks embrace functions, but without sacrificing the practical spirit of React. Hooks
+        provide access to imperative escape hatches and don’t require you to learn complex functional or reactive
+        programming techniques.</p>
+    </li>
+  </ul>
+
+  <h3>State Hook</h3>
+  <p><code></code>useState</code> is a Hook (we’ll talk about what this means in a moment). We call it inside a function
+    component to
+    add some local state to it. React will preserve this state between re-renders. <code>useState</code> returns a pair:
+    the
+    current state value and a function that lets you update it. You can call this function from an event handler or
+    somewhere else. It’s similar to <code>this.setState</code> in a class, except it doesn’t merge the old and new state
+    together.</p>
+  <p>The only argument to useState is the initial state. In the example above, it is 0 because our counter starts
+    from zero. Note that unlike this.state, the state here doesn’t have to be an object — although it can be if you
+    want. The initial state argument is only used during the first render.</p>
+
+  <pre><code class="language-jsx">
+  import React, { useState } from 'react'
+
+  function HookCounter() {
+    // Declare a new state variable, which we'll call &quot;count&quot;
+    const [count, setCount] = useState(0)
+
+    return (
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Count {count}&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  }
+
+  export default HookCounter
+  </code></pre>
+
+  <p>Above code as Class Component</p>
+
+  <pre><code class="language-jsx">
+  import React  from 'react'
+
+  class ClassCounter extends React.Component {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        count: 0
+      }
+    }
+
+    incrementCount = () =&gt; {
+      this.setState({
+        count: this.state.count + 1
+      })
+    }
+
+    render() {
+      return (
+        &lt;div&gt;
+          &lt;button onClick={this.incrementCount}&gt;Count {this.state.count}&lt;/button&gt;
+        &lt;/div&gt;
+      )
+    }
+  }
+
+  export default ClassCounter
+  </code></pre>
+
+
+
+  <p>You can use the State Hook more than once in a single component:</p>
+
+  <code><pre class="language-jsx">
+  function ExampleWithManyStates() {
+    // Declare multiple state variables!
+    const [age, setAge] = useState(42);
+    const [fruit, setFruit] = useState('banana');
+    const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+    // ...
+  }
+  </code></pre>
+
+
+  <p>Access and use "previous state"</p>
+
+  <pre><code class="language-jsx">
+  import React, { useState } from 'react'
+
+  function HookCounterTwo() {
+    const initialCount = 0
+    const [count, setCount] = useState(initialCount)
+    const incrementFive = () =&gt; {
+      for (let i = 0; i &lt; 5; i++) {
+        setCount(prevCount =&gt; prevCount + 1)
+      }
+    }
+    return (
+      &lt;&gt;
+        Count: {count}
+        &lt;button onClick={() =&gt; setCount(initialCount)}&gt;Reset&lt;/button&gt;
+        &lt;button onClick={() =&gt; setCount(prevCount =&gt; prevCount + 1)}&gt;
+          Increment
+        &lt;/button&gt;
+        &lt;button onClick={() =&gt; setCount(prevCount =&gt; prevCount - 1)}&gt;
+          Decrement
+        &lt;/button&gt;
+        &lt;button onClick={incrementFive}&gt;Increment 5&lt;/button&gt;
+      &lt;/&gt;
+    )
+  }
+
+  export default HookCounterTwo
+  </code></pre>
+
+  <p>Above code as class component</p>
+
+  <pre><code class="language-jsx">
+  import React  from 'react'
+
+  class ClassCounterTwo extends React.Component {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        count: 0
+      }
+    }
+
+    incrementCount = () =&gt; {
+      this.setState(prevState =&gt; {
+        return {
+          count: prevState.count + 1
+        }
+      })
+    }
+
+    render() {
+      return (
+        &lt;div&gt;
+          &lt;button onClick={this.incrementCount}&gt;Count {this.state.count}&lt;/button&gt;
+        &lt;/div&gt;
+      )
+    }
+  }
+
+  export default ClassCounterTwo
+
+  </code></pre>
+
+  <p>useState with Object</p>
+
+  <pre><code class="language-jsx">
+  import React, { useState } from 'react'
+
+  function HookCounterThree() {
+    const [name, setName] = useState({ firstName: '', lastName: '' })
+    return (
+      &lt;form&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={name.firstName}
+          onChange={e =&gt; setName({ ...name, firstName: e.target.value })}
+        /&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={name.lastName}
+          onChange={e =&gt; setName({ ...name, lastName: e.target.value })}
+        /&gt;
+        &lt;h2&gt;Your first name is - {name.firstName}&lt;/h2&gt;
+        &lt;h2&gt;Your last name is - {name.lastName}&lt;/h2&gt;
+        &lt;h2&gt;{JSON.stringify(name)}&lt;/h2&gt;
+      &lt;/form&gt;
+    )
+  }
+
+  export default HookCounterThree
+  </code></pre>
+
+  <p>State with Array</p>
+  <pre><code>
+  import React, { useState } from 'react'
+
+  function HookCounterFour() {
+    const [items, setItems] = useState([])
+
+    const addItem = () =&gt; {
+      setItems([
+        ...items,
+        {
+          id: items.length,
+          value: Math.floor(Math.random() * 10) + 1
+        }
+      ])
+    }
+
+    return (
+      &lt;div&gt;
+        &lt;button onClick={addItem}&gt;Add a number&lt;/button&gt;
+        &lt;ul&gt;
+          {items.map(item =&gt; (
+            &lt;li key={item.id}&gt;{item.value}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    )
+  }
+
+  export default HookCounterFour
+  </code></pre>
+
+  <h4>Effect Hook</h4>
+  <p>You’ve likely performed data fetching, subscriptions, or manually changing the DOM from React components
+    before. We call these operations “side effects” (or “effects” for short) because they can affect other
+    components and can’t be done during rendering.</p>
+  <p>The Effect Hook, <code>useEffect</code>, adds the ability to perform side effects from a function component. It
+    serves the
+    same purpose as <code>componentDidMount</code>, <code>componentDidUpdate</code>, and
+    <code>componentWillUnmount</code> in React classes, but unified
+    into a single API.</p>
+  <p>When you call <code>useEffect</code>, you’re telling React to run your “effect” function after flushing changes
+    to the DOM.
+    Effects are declared inside the component so they have access to its props and state. By default, React runs the
+    effects after every render — including the first render.</p>
+  <p>Effects may also optionally specify how to “clean up” after them by returning a function. For example, this
+    component uses an effect to subscribe to a friend’s online status, and cleans up by unsubscribing from it:</p>
+
+  <pre><code class="language-jsx">
+  import React, { useState, useEffect } from 'react';
+
+  function FriendStatus(props) {
+    const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() =&gt; {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+    return isOnline ? 'Online' : 'Offline';
+  }
+  </code></pre>
+
+
+
+  <h2 id="redux">Redux</h2>
+  <p>Redux is a state manager and a way to manage an application state, and move it to an <strong>external global
+      store</strong>.</p>
+
   <p>Moving the state up in the tree works in simple cases, but in a complex app you might find you moving almost
-    all
-    the state up, and then down using props.</p>
+    all the state up, and then down using props.</p>
   <p>React in version 16.3.0 introduced the <a href="/react/#the-context-api"><strong>Context API</strong></a>,
-    which
-    makes Redux redundant for the use case of accessing the state from different parts of your app, so consider
-    using
-    the Context API instead of Redux, unless you need a specific feature that Redux provides.</p>
-  <p>Redux is a way to manage an application state, and move it to an <strong>external global store</strong>.</p>
-  <p>There are a few concepts to grasp, but once you do, Redux is a very simple approach to the problem.</p>
-  <h4>When should you use Redux?</h4>
-  <p>Redux is ideal for medium to big apps, and you should only use it when you have trouble managing the state
-    with
-    the default state management of React, or the other library you use.</p>
-  <p>Simple apps should not need it at all (and there&rsquo;s nothing wrong with simple apps).</p>
+    which makes Redux redundant for the use case of accessing the state from different parts of your app, so
+    consider
+    using the Context API instead of Redux, unless you need a specific feature that Redux provides.</p>
+
   <h4>Immutable State Tree</h4>
   <p>In Redux, the whole state of the application is represented by <strong>one</strong> <strong>JavaScript</strong>
     object, called <strong>State</strong> or <strong>State Tree</strong>.</p>
   <p>We call it <strong>Immutable State Tree</strong> because it is read only: it can&rsquo;t be changed
     directly.</p>
   <p>It can only be changed by dispatching an <strong>Action</strong>.</p>
-  <h2 id="actions">Actions</h2>
-  <p>An <strong>Action</strong> is <strong>a JavaScript object that describes a change in a minimal way</strong> (just
+
+  <figure><img src="img/redux.png" alt="" /></figure>
+  <h3>Actions</h3>
+  <p>An <strong>Action</strong> is <strong>a JavaScript object that describes a change in a minimal way</strong>
+    (just
     with the information needed):</p>
   <pre><code class="language-js">
     {
@@ -2556,7 +2872,9 @@
       userId: 232
     }
     </code></pre>
-  <p>The only requirement of an action object is having a <code class="language-jsx">type</code> property, whose value is usually a
+  <p>The only requirement of an action object is having a <code class="language-jsx">type</code> property, whose
+    value
+    is usually a
     string.</p>
   <h4>Actions types should be constants</h4>
   <p>In a simple app an action type can be defined as a string, as I did in the example in the previous lesson.</p>
@@ -2605,7 +2923,8 @@
   <p>A reducer should be a pure function, so it should:</p>
   <ul>
     <li>never mutate its arguments</li>
-    <li>never mutate the state, but instead create a new one with <code class="language-jsx">Object.assign({}, ...)</code></li>
+    <li>never mutate the state, but instead create a new one with <code
+        class="language-jsx">Object.assign({}, ...)</code></li>
     <li>never generate side-effects (no API calls changing anything)</li>
     <li>never call non-pure functions, functions that change their output based on factors other than their input
       (e.g. <code class="language-jsx">Date.now()</code> or <code class="language-jsx">Math.random()</code>)</li>
@@ -2672,7 +2991,8 @@
     <li><strong>holds the state</strong> of the app</li>
     <li><strong>exposes the state</strong> via <code class="language-jsx">getState()</code></li>
     <li>allows to <strong>update the state</strong> via <code class="language-jsx">dispatch()</code></li>
-    <li>allows to (un)register as a <strong>state change listener</strong> using <code class="language-jsx">subscribe()</code></li>
+    <li>allows to (un)register as a <strong>state change listener</strong> using <code
+        class="language-jsx">subscribe()</code></li>
   </ul>
   <p>A store is <strong>unique</strong> in the app.</p>
   <p>Here is how a store for the listManager app is created:</p>
@@ -2702,12 +3022,14 @@
 
     unsubscribe()
     </code></pre>
-  <h2 id="data-flow">Data Flow</h2>
+  <h3>Data Flow</h3>
   <p>Data flow in Redux is always <strong>unidirectional</strong>.</p>
   <p>You call <code class="language-jsx">dispatch()</code> on the Store, passing an Action.</p>
   <p>The Store takes care of passing the Action to the Reducer, generating the next State.</p>
   <p>The Store updates the State and alerts all the Listeners.</p>
-  <h2>Introduction to Redux Saga</h2>
+
+
+  <h2 id="reduxSaga">Redux Saga</h2>
   <p>Redux Saga is a library used to handle side effects in Redux. When you fire an action something changes in
     the
     state of the app and you might need to do something that derives from this state change</p>
@@ -2729,21 +3051,23 @@
     way to
     have a clean codebase).</p>
   <p>Enter Redux Saga, a Redux middleware helping you with side effects.</p>
-  <h2 id="basic-example-of-using-redux-saga">Basic example of using Redux Saga</h2>
+
+  <h3>Redux Saga</h3>
   <p>To avoid diving into too much theory before showing some actual code, I briefly present how I solved a
-    problem I
-    faced when building a sample app.</p>
+    problem I faced when building a sample app.</p>
   <p>In a chat room, when a user writes a message I immediately show the message on the screen, to provide a
-    prompt
-    feedback. This is done through a <a href="/redux/#actions">Redux Action</a>:</p>
+    prompt feedback. This is done through a Redux Action:</p>
+
   <pre><code class="language-js">
     const addMessage = (message, author) =&gt; ({
       type: 'ADD_MESSAGE',
       message,
       author
     })
-    </code></pre>
+  </code></pre>
+
   <p>and the state is changed through a reducer:</p>
+
   <pre><code class="language-js">
     const messages = (state = [], action) =&gt; {
       switch (action.type) {
@@ -2756,16 +3080,19 @@
           return state
       }
     }
-    </code></pre>
+  </code></pre>
+
   <p>You initialize Redux Saga by first importing it, then by applying a <em>saga</em> as a middleware to the
-    Redux
-    Store:</p>
+    Redux Store:</p>
+
   <pre><code class="language-js">
     //...
     import createSagaMiddleware from 'redux-saga'
     //...
-    </code></pre>
+  </code></pre>
+
   <p>Then we create a middleware and we apply it to our newly created Redux Store:</p>
+
   <pre><code class="language-js">
     const sagaMiddleware = createSagaMiddleware()
 
@@ -2773,14 +3100,18 @@
       reducers,
       applyMiddleware(sagaMiddleware)
     )
-    </code></pre>
+  </code></pre>
+
   <p>The last step is running the saga. We import it and pass it to the run method of the middleware:</p>
+
   <pre><code class="language-js">
     import handleNewMessage from './sagas'
     //...
     sagaMiddleware.run(handleNewMessage)
-    </code></pre>
+  </code></pre>
+
   <p>We just need to write the saga, in <code class="language-jsx">./sagas/index.js</code>:</p>
+
   <pre><code class="language-js">
     import { takeEvery } from 'redux-saga/effects'
 
@@ -2792,12 +3123,14 @@
     }
 
     export default handleNewMessage
-    </code></pre>
-  <p>What this code means is: <strong>every time</strong> the <code class="language-jsx">ADD_MESSAGE</code> action fires, we send a
-    message
-    to the <a href="/websockets/">WebSockets</a> server, which responds in this case on <code class="language-jsx">localhost:8989</code>.
+  </code></pre>
+
+  <p>What this code means is: <strong>every time</strong> the <code class="language-jsx">ADD_MESSAGE</code> action
+    fires, we send a message to the <a href="/websockets/">WebSockets</a> server, which responds in this case on
+    <code class="language-jsx">localhost:8989</code>.
   </p>
-  <p>Notice the use of <code class="language-jsx">function*</code>, which is not a normal function, but a <a href="/es6/">generator</a>.
+  <p>Notice the use of <code class="language-jsx">function*</code>, which is not a normal function, but a <a
+      href="/es6/">generator</a>.
   </p>
   <h2 id="how-it-works-behind-the-scenes">How it works behind the scenes</h2>
   <p>Being a <a href="/redux/">Redux</a> Middleware, Redux Saga can intercept Redux Actions, and inject its own
@@ -2851,11 +3184,15 @@
 
     export default handleNewMessage
     </code></pre>
-  <p>When the <strong>middleware</strong> executes the <code class="language-jsx">handleNewMessage</code> saga, it <strong>stops</strong>
+  <p>When the <strong>middleware</strong> executes the <code class="language-jsx">handleNewMessage</code> saga, it
+    <strong>stops</strong>
     at
-    the <code class="language-jsx">yield takeEvery</code> instruction and <strong>waits</strong> (<em>asynchronously</em>, of course)
+    the <code class="language-jsx">yield takeEvery</code> instruction and <strong>waits</strong>
+    (<em>asynchronously</em>, of course)
     until
-    the <code class="language-jsx">ADD_MESSAGE</code> action is <strong>dispatched</strong>. Then it runs its callback, and the
+    the <code class="language-jsx">ADD_MESSAGE</code> action is <strong>dispatched</strong>. Then it runs its
+    callback,
+    and the
     <strong>saga</strong>
     can <strong>resume</strong>.</p>
   <h2 id="basic-helpers">Basic Helpers</h2>
@@ -2878,23 +3215,31 @@
       yield takeEvery('ADD_MESSAGE', postMessageToServer)
     }
     </code></pre>
-  <p>The <code class="language-jsx">watchMessages</code> generator pauses until an <code class="language-jsx">ADD_MESSAGE</code> action fires, and <strong>every
-      time</strong> it fires, it&rsquo;s going to call the <code class="language-jsx">postMessageToServer</code> function, infinitely,
+  <p>The <code class="language-jsx">watchMessages</code> generator pauses until an <code
+      class="language-jsx">ADD_MESSAGE</code> action fires, and <strong>every
+      time</strong> it fires, it&rsquo;s going to call the <code class="language-jsx">postMessageToServer</code>
+    function, infinitely,
     and
-    concurrently (there is no need for <code class="language-jsx">postMessageToServer</code> to terminate its execution before a new
+    concurrently (there is no need for <code class="language-jsx">postMessageToServer</code> to terminate its
+    execution
+    before a new
     once
     can run)</p>
   <h3 id="takelatest"><code class="language-jsx">takeLatest()</code></h3>
-  <p>Another popular helper is <code class="language-jsx">takeLatest()</code>, which is very similar to <code class="language-jsx">takeEvery()</code> but
+  <p>Another popular helper is <code class="language-jsx">takeLatest()</code>, which is very similar to <code
+      class="language-jsx">takeEvery()</code> but
     only
     allows one function handler to run at a time, avoiding concurrency. If another action is fired when the
     handler is
     still running, it will cancel the it, and run again with the latest data available.</p>
-  <p>As with <code class="language-jsx">takeEvery()</code>, the generator never stops and continues to run the effect when the
+  <p>As with <code class="language-jsx">takeEvery()</code>, the generator never stops and continues to run the
+    effect
+    when the
     specified
     action occurs.</p>
   <h3 id="take"><code class="language-jsx">take()</code></h3>
-  <p><code class="language-jsx">take()</code> is different in that it only waits a single time. When the action it&rsquo;s waiting for
+  <p><code class="language-jsx">take()</code> is different in that it only waits a single time. When the action
+    it&rsquo;s waiting for
     occurs, the promise resolves and the iterator is resumed, so it can go on to the next instruction set.</p>
   <h3 id="put"><code class="language-jsx">put()</code></h3>
   <p>Dispatches an action to the Redux store. Instead of passing in the Redux store or the dispatch action to the
@@ -2912,7 +3257,9 @@
   <pre><code class="language-js">
     delay(1000)
     </code></pre>
-  <p>but this does not play nice with tests. Instead, <code class="language-jsx">call()</code> allows you to wrap that function call
+  <p>but this does not play nice with tests. Instead, <code class="language-jsx">call()</code> allows you to wrap
+    that
+    function call
     and
     returns an object that can be easily inspected:</p>
   <pre><code class="language-js">
@@ -2923,7 +3270,8 @@
     { CALL: {fn: delay, args: [1000]}}
     </code></pre>
   <h2 id="running-effects-in-parallel">Running effects in parallel</h2>
-  <p>Running effects in parallel is possible using <code class="language-jsx">all()</code> and <code class="language-jsx">race()</code>, which are very
+  <p>Running effects in parallel is possible using <code class="language-jsx">all()</code> and <code
+      class="language-jsx">race()</code>, which are very
     different
     in what they do.</p>
   <h3 id="all"><code class="language-jsx">all()</code></h3>
@@ -2934,7 +3282,8 @@
     const todos = yield call(fetch, '/api/todos')
     const user = yield call(fetch, '/api/user')
     </code></pre>
-  <p>the second <code class="language-jsx">fetch()</code> call won&rsquo;t be executed until the first one succeeds.</p>
+  <p>the second <code class="language-jsx">fetch()</code> call won&rsquo;t be executed until the first one succeeds.
+  </p>
   <p>To execute them in parallel, wrap them into <code class="language-jsx">all()</code>:</p>
   <pre><code class="language-js">
       import { all, call } from 'redux-saga/effects'
@@ -2944,9 +3293,12 @@
       call(fetch, '/api/user')
     ])
     </code></pre>
-  <p><code class="language-jsx">all()</code> won&rsquo;t be resolved until both <code class="language-jsx">call()</code> return.</p>
+  <p><code class="language-jsx">all()</code> won&rsquo;t be resolved until both <code class="language-jsx">call()</code>
+    return.</p>
   <h3 id="race"><code class="language-jsx">race()</code></h3>
-  <p><code class="language-jsx">race()</code> differs from <code class="language-jsx">all()</code> by not waiting for all of the helpers calls to return.
+  <p><code class="language-jsx">race()</code> differs from <code class="language-jsx">all()</code> by not waiting
+    for
+    all of the helpers calls to return.
     It just
     waits for one to return, and it&rsquo;s done.</p>
   <p>It&rsquo;s a race to see which one finishes first, and then we forget about the other participants.</p>
@@ -2965,7 +3317,8 @@
       cancel: take('CANCEL_TASK')
     ])
     </code></pre>
-  <p>when the <code class="language-jsx">CANCEL_TASK</code> action is emitted, we stop the other task that would otherwise run
+  <p>when the <code class="language-jsx">CANCEL_TASK</code> action is emitted, we stop the other task that would
+    otherwise run
     forever.</p>
   <h2>Styled Components</h2>
   <p>Styled Components are one of the new ways to use CSS in modern JavaScript. It is the meant to be a successor
@@ -3017,7 +3370,9 @@
     import styled from &quot;styled-components&quot;;
     </code></pre>
   <h2 id="your-first-styled-component">Your first styled component</h2>
-  <p>With the <code class="language-jsx">styled</code> object imported, you can now start creating Styled Components. Here&rsquo;s the
+  <p>With the <code class="language-jsx">styled</code> object imported, you can now start creating Styled
+    Components.
+    Here&rsquo;s the
     first
     one:</p>
   <pre><code class="language-js">
@@ -3027,8 +3382,11 @@
       color: white;
     `;
     </code></pre>
-  <p><code class="language-jsx">Button</code> is now a <a href="/react/">React</a> Component in all its greatness.</p>
-  <p>We created it using a function of the styled object, called <code class="language-jsx">button</code> in this case, and passing
+  <p><code class="language-jsx">Button</code> is now a <a href="/react/">React</a> Component in all its greatness.
+  </p>
+  <p>We created it using a function of the styled object, called <code class="language-jsx">button</code> in this
+    case,
+    and passing
     some CSS
     properties in a <a href="/ecmascript/#template-literals">template literal</a>.</p>
   <p>Now this component can be rendered in our container using the normal React syntax:</p>
@@ -3037,18 +3395,21 @@
       &lt;Button /&gt;
     )
     </code></pre>
-  <p>Styled Components offer other functions you can use to create other components, not just <code class="language-jsx">button</code>,
-    like <code class="language-jsx">section</code>, <code class="language-jsx">h1</code>, <code class="language-jsx">input</code> and many others.</p>
+  <p>Styled Components offer other functions you can use to create other components, not just <code
+      class="language-jsx">button</code>,
+    like <code class="language-jsx">section</code>, <code class="language-jsx">h1</code>, <code
+      class="language-jsx">input</code> and many others.</p>
   <p>The syntax used, with the backtick, might be weird at first, but it&rsquo;s called <a
       href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Tagged
       Templates</a>, it&rsquo;s plain JavaScript and it&rsquo;s a way to pass an argument to the function.</p>
   <h2 id="using-props-to-customize-components">Using props to customize components</h2>
   <p>When you pass some props to a Styled Component, it will pass them down to the <a href="/dom/">DOM</a> node
     mounted.</p>
-  <p>For example here&rsquo;s how we pass the <code class="language-jsx">placeholder</code> and <code class="language-jsx">type</code> props to an
+  <p>For example here&rsquo;s how we pass the <code class="language-jsx">placeholder</code> and <code
+      class="language-jsx">type</code> props to an
     <code class="language-jsx">input</code>
     component:</p>
-    
+
   <pre><code class="language-js">
     const Input = styled.input`
       //...
@@ -3132,7 +3493,8 @@
     yarn add eslint-plugin-react
   </code></pre>
 
-  <p>Now, create a <code class="language-jsx">.eslintrc.json</code> file in the root of your project, and add the following lines to
+  <p>Now, create a <code class="language-jsx">.eslintrc.json</code> file in the root of your project, and add the
+    following lines to
     have a
     basis ESLint configuration that works for React development, with <a href="/jsx/">JSX</a> support:</p>
 
@@ -3157,14 +3519,1173 @@
     npm install -g prettier-eslint --save-dev
   </code></pre>
   <p>Next we&rsquo;re going to add a few rules to the VS Code configuration, to apply Prettier on every save, and
-    integrate it with ESLint. Press <code class="language-jsx">cmd+,</code> (on Mac) and the VS Code configuration should show up.
+    integrate it with ESLint. Press <code class="language-jsx">cmd+,</code> (on Mac) and the VS Code configuration
+    should show up.
     Enter this at the end:</p>
-  
+
   <pre><code class="language-json">
     &quot;editor.formatOnSave&quot;: true,
     &quot;javascript.format.enable&quot;: false,
     &quot;prettier.eslintIntegration&quot;: true
   </code></pre>
+
+
+  <h2 id="reduxTutorial">Redux Tutorial</h2>
+
+  <pre><code class="language-bash">
+    npx create-react-app redux-with-react
+    npx create-react-app redux-with-react --template typescript
+  </code></pre>
+
+  <pre><code class="language-bash">
+    npm install --save redux
+    npm install --save react-redux
+    // npm install --save @types/react-redux
+    npm install --save redux-thunk
+    npm install --save redux-saga
+    // npm install @redux-saga/types
+  </code></pre>
+
+  <h3>Getting to know the Redux</h3>
+
+  <p>1. Create a directory for the store and create a new file, <strong>src/redux/store/index.js</strong> and
+    initialize
+    the
+    store:</p>
+
+  <pre><code class="language-js">
+  // src/redux/store/index.js
+  import { createStore } from "redux";
+  import rootReducer from "../reducers/index";
+
+  const store = createStore(rootReducer);
+
+  export default store;
+  </code></pre>
+
+  <p>As you can see, store is the result of calling createStore, a function from the Redux library.
+    <code>createStore</code> takes a
+    reducer as the first argument and in our case we passed in rootReducer.</p>
+
+  <p>You may also pass an initial state to createStore, useful for server side rendering and state preloading. The
+    most
+    important concept to understand here is that the state in Redux comes from reducers or reducers
+    produce the state of your application.</p>
+
+  <h4>Reducers</h4>
+  <p>A Redux reducer is just a JavaScript function. It takes two parameters: the current state and action.</p>
+  <p>The third principle of Redux (as outlined by its creator) prescribes that the state is immutable and cannot
+    change
+    in place. In other words the reducer must be pure. A pure function is one that returns the exact same output for
+    the
+    given input. </p>
+
+  <p>2. Create a directory and file for the root reducer:</p>
+  <pre><code class="language-js">
+  // src/redux/reducers/index.js
+  const initialState = {
+    articles: []
+  };
+
+  function rootReducer(state = initialState, action) {
+    return state;
+  };
+
+  export default rootReducer;
+  </code></pre>
+
+  <p>Notice how the initial state is passed as a default parameter. But as of now our reducer does nothing, other
+    than
+    returning the initial state.</p>
+
+  <h4>Actions</h4>
+
+  <p>Redux reducers are without doubt the most important concept in Redux. Reducers produce the state of an
+    application.
+    But how does a reducer know when to generate the next state?</p>
+
+  <p>The second principle of Redux says the only way to change the state is by sending a signal to the store. This
+    signal is an action. So "dispatching an action" means sending out a signal to the store.</p>
+
+  <p>Redux actions are nothing more than JavaScript objects.</p>
+
+  <pre><code class="language-js">
+  {
+    type: 'ADD_ARTICLE',
+    payload: { title: 'React Redux Tutorial', id: 1 }
+  }
+  </code></pre>
+
+  <p>it's a JavaScript object with two properties: type and payload.</p>
+
+  <p>The type property drives how the state should change and it's always required by Redux. The payload property
+    instead describes what should change, and might be omitted if you don't have new data to save in the store.</p>
+
+  <p>As a best practice in Redux we wrap every action within a function, so that object creation is abstracted away.
+    Such function takes the name of action creator: let’s put everything together by creating a simple action
+    creator.
+  </p>
+
+  <p>3. Create a directory for actions:</p>
+
+  <pre><code class="language-js">
+  // src/redux/actions/index.js
+  export function addArticle(payload) {
+    return { type: "ADD_ARTICLE", payload }
+  };
+  </code></pre>
+
+  <p>You can notice that the type property is a string. Strings are prone to typos and duplicates and for this
+    reason
+    it's better to declare actions as constants. </p>
+
+  <p>4. Create a new folder and file.</p>
+
+  <pre><code class="language-js">
+  // src/constants/action-types.js
+  export const ADD_ARTICLE = "ADD_ARTICLE";
+  </code></pre>
+
+  <p>5. Now open up again src/redux/actions/index.js and update the action to use action types:</p>
+
+  <pre><code class="language-js">
+  // src/redux/actions/index.js
+  import { ADD_ARTICLE } from "../../constants/action-types";
+
+  export function addArticle(payload) {
+    return { type: ADD_ARTICLE, payload };
+  }
+  </code></pre>
+
+  <h4>Refactoring the reducer</h4>
+
+  <p>We left last section with the following question: how does a reducer know when to generate the next state? The
+    key
+    here is the Redux store. When an action is dispatched, the store forwards a message (the action object) to the
+    reducer.</p>
+
+  <p>At this point the reducer says "oh, let's look at the type property of this action". Then depending on the
+    action
+    type, the reducer produces the next state, eventually merging the action payload into the new state.</p>
+
+  <p>Earlier we created a reducer that does nothing. Let's fix it!</p>
+
+  <p>Open up <strong>src/redux/reducers/index.js</strong> and update the reducer with an if statement for checking
+    the
+    action
+    type:</p>
+  <pre><code class="language-js">
+  // src/redux/reducers/index.js
+  import { ADD_ARTICLE } from "../../constants/action-types";
+
+  const initialState = {
+    articles: []
+  };
+
+  function rootReducer(state = initialState, action) {
+    if (action.type === ADD_ARTICLE) {
+      state.articles.push(action.payload);
+    }
+    return state;
+  }
+
+  export default rootReducer;
+  </code></pre>
+
+  <p>There is also a line of code which pushes the action payload into the initial state. Seems the right thing to
+    do.
+    <strong>But it's wrong!</strong> Our reducer breaks the main Redux principle: <strong>immutability</strong>.</p>
+
+  <p>We need a fix. First we can return a new state with Object.assign, that is, a new JavaScript object. This way
+    we
+    keep the original state unaltered. Then we can use Array.prototype.concat in place of Array.prototype.push for
+    keeping the original array:</p>
+  <pre><code class="language-js">
+  import { ADD_ARTICLE } from "../../constants/action-types";
+
+  const initialState = {
+    articles: []
+  };
+
+  function rootReducer(state = initialState, action) {
+    if (action.type === ADD_ARTICLE) {
+      return Object.assign({}, state, {
+        articles: state.articles.concat(action.payload)
+      });
+    }
+    return state;
+  }
+
+  export default rootReducer;
+  </code></pre>
+
+  <p>Now the initial state is left in pristine conditions and the resulting state is just a copy of the initial
+    state.
+    Remember two key points for avoiding mutations in Redux:</p>
+  <ul>
+    <li>use concat(), slice(), or the spread operator for arrays</li>
+    <li>use Object.assign() or object spread of objects</li>
+  </ul>
+  </pre>
+
+  <h4>Redux store methods</h4>
+
+  <p>You might be surprised to know that Redux itself is a small library (2KB) and the most important methods are
+    just
+    three:</p>
+
+  <ul>
+    <li>getState for reading the current state of the application</li>
+    <li>dispatch for dispatching an action</li>
+    <li>subscribe for listening on state changes</li>
+  </ul>
+
+  <p>We will play in the browser’s console with them. To do so we need to export the store and the action we created
+    as
+    global variables. Now open up <strong>src/index.js</strong> and update it as follows:</p>
+
+  <pre><code class="language-js">
+    import store from "./redux/store/index";
+    import { addArticle } from "./actions/index";
+
+    window.store = store;
+    window.addArticle = addArticle;
+  </code></pre>
+
+  <p>Now run the development server with: <code>npm start</code>. Head over http://localhost:3000/ and open up the
+    console with F12. Start off by reading the current state:</p>
+
+  <pre><code class="language-js">
+    store.getState();
+    // output: {articles: Array(0)}
+  </code></pre>
+
+  <p>Zero articles. In fact we haven’t update the initial state yet. To make things interesting we can listen for
+    state
+    updates with subscribe.</p>
+
+  <p>The subscribe method accepts a callback that will fire whenever an action is dispatched. Dispatching an action
+    means notifying the store that we want to change the state.</p>
+
+  <pre><code class="language-js">
+  // Register the callback with:
+  store.subscribe(() => console.log('Look ma, Redux!!'));
+  </code></pre>
+  <p>To change the state in Redux we need to dispatch an action. To dispatch an action we'll call the dispatch
+    method.
+    We have one action for now: addArticle for adding a new item to the state. Let’s dispatch the action with:</p>
+
+  <pre><code class="language-js">
+  store.dispatch( addArticle({ title: 'React Redux Tutorial for Beginners', id: 1 }) );
+  </code></pre>
+
+  <p>Right after running the above code you should see "Look ma, Redux!!". To verify that the state changed run
+    again:
+  </p>
+
+  <pre><code class="language-js">
+  store.getState();
+  // output: {articles: Array(1)}
+  </code></pre>
+
+  <h3>Connecting React with Redux</h3>
+  <p>Redux is framework agnostic. You can use it with vanilla Javascript. Or with Angular. Or with React. There are
+    bindings for joining together Redux with your favorite framework/library.</p>
+
+  <p>For React there is <strong>react-redux</strong>, a library for which you need to learn just one method for now:
+    connect. What does
+    it do? Unsurprisingly it connects a React component with the Redux store.</p>
+
+
+  <p>You will use connect with two or three arguments depending on the use case:</p>
+  <ul>
+    <li>a <code>mapStateToProps</code> function (you can name it also "select")</li>
+    <li>a <code>mapDispatchToProps</code> function</li>
+  </ul>
+  <p><code>mapStateToProps</code> does exactly what its name suggests: <strong>it connects a part of the Redux state
+      to
+      the props of a
+      React component</strong>. By doing so a connected React component will have access to the exact part of the
+    store
+    it needs.
+  </p>
+
+
+  <p><code>mapDispatchToProps</code> does something similar, but for actions. mapDispatchToProps connects Redux
+    actions
+    to React
+    props. This way a connected React component will be able to send messages to the store.</p>
+
+  <p>In the next section we'll finally get our hands dirty. We'll build a super simple application made of three
+    components:</p>
+
+  <ul>
+    <li>an App component</li>
+    <li>a List component for displaying articles</li>
+    <li>a Form component for adding new articles</li>
+  </ul>
+
+  <h3>App component and Redux store</h3>
+
+  <p>Before starting off install react-redux with:</p>
+
+  <pre><code class="language-bash">
+  npm install react-redux --save
+  </code></pre>
+
+  <p>I said that <strong>mapStateToProps</strong> connects a portion of the Redux state to the props of a React
+    component. You may
+    wonder: is this enough for connecting Redux with React? No, it's not. We also need <strong>Provider</strong>, an
+    <strong>high order component</strong>
+    from react-redux.</p>
+
+  <p>Open up <strong>src/index.js</strong>, wipe out everything and update the file with the following code:</p>
+
+  <pre><code class="language-jsx">
+  import React from "react";
+  import ReactDOM from 'react-dom';
+  import { Provider } from "react-redux";
+  import store from "./redux/store/index";
+  import App from "./components/App";
+
+  ReactDOM.render(
+    &lt;Provider store={store}&gt;
+      &lt;App /&gt;
+    &lt;/Provider&gt;,
+    document.getElementById(&quot;root&quot;)
+  );
+  </code></pre>
+
+  <p>As you can see Provider wraps up your React application and makes it aware of the entire Redux's store.</p>
+
+  <p>Now let's create the App component. It’s nothing special: App should import a List component and render itself.
+    Create a directory for holding components:</p>
+
+  <pre><code class="language-jsx">
+  // src/components/App.js
+  import React from "react";
+  import List from "./List";
+
+  const App = () => (
+    &lt;div&gt;
+      &lt;h2&gt;Articles&lt;/h2&gt;
+        &lt;List /&gt;
+    &lt;/div&gt;
+  );
+
+  export default App;
+  </code></pre>
+
+  <p>A brief recap: the key for connecting a React component with Redux is connect. Connect takes at least one
+    argument.
+  </p>
+
+  <p>Since we want List to get a list of articles it's a matter of connecting state.articles with the component.
+    How?
+    With mapStateToProps. Note that "mapStateToProps" is just a convention, most developers for example use
+    "select".
+  </p>
+
+  <pre><code class="language-jsx">
+  // src/components/List.js
+  import React from "react";
+  import { connect } from "react-redux";
+
+  const mapStateToProps = state => {
+    return { articles: state.articles };
+  };
+
+  const ConnectedList = ({ articles }) => (
+    &lt;ul&gt;
+      {articles.map(el =&gt; (
+        &lt;li key={el.id}&gt;{el.title}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+
+  const List = connect(mapStateToProps)(ConnectedList);
+
+  export default List;
+  </code></pre>
+
+  <p>The List component receives the prop articles which is a copy of the articles array we saw in the Redux state.
+    It
+    comes from the reducer:</p>
+
+  <pre><code class="language-jsx">
+  const initialState = {
+    articles: []
+  };
+  
+  function rootReducer(state = initialState, action) {
+    if (action.type === ADD_ARTICLE) {
+      return Object.assign({}, state, {
+        articles: state.articles.concat(action.payload)
+      });
+    }
+    return state;
+  }
+  </code></pre>
+
+  <p>Always remember: the state in redux comes from reducers.</p>
+
+  <p>Finally the component gets exported as List. List is the result of connecting the stateless component
+    ConnectedList
+    with the Redux store.</p>
+
+  <p>Still confused? Understanding how connect works will take some time.</p>
+
+  <h4>Form component and Redux actions</h4>
+
+  <p>The class component will help keeping some local state, like form inputs. It has also logic for updating the
+    local
+    state on form submission.</p>
+
+  <p>It receives a Redux action as well. This way it can update the global state by dispatching the addArticle
+    action.
+  </p>
+
+  <p>Create a new file in <strong>src/components/Form.js</strong> with the following code:</p>
+
+  <pre><code class="language-jsx">
+    // src/js/components/Form.jsx
+    import React from "react";
+    import { connect } from "react-redux";
+    import { addArticle } from "../redux/actions/index";
+    
+    function mapDispatchToProps(dispatch) {
+      return {
+        addArticle: article => dispatch(addArticle(article))
+      };
+    }
+    
+    class ConnectedForm extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          title: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+    
+      handleChange(event) {
+        this.setState({ [event.target.id]: event.target.value });
+      }
+    
+      handleSubmit(event) {
+        event.preventDefault();
+        const { title } = this.state;
+        this.props.addArticle({ title });
+        this.setState({ title: "" });
+      }
+      render() {
+        const { title } = this.state;
+        return (
+          &lt;form onSubmit={this.handleSubmit}&gt;
+            &lt;div&gt;
+              &lt;label htmlFor=&quot;title&quot;&gt;Title&lt;/label&gt;
+              &lt;input
+                type=&quot;text&quot;
+                id=&quot;title&quot;
+                value={title}
+                onChange={this.handleChange}
+              /&gt;
+            &lt;/div&gt;
+            &lt;button type=&quot;submit&quot;&gt;SAVE&lt;/button&gt;
+          &lt;/form&gt;
+        );
+      }
+    }
+    
+    const Form = connect( null, mapDispatchToProps )(ConnectedForm);
+    
+    export default Form;
+  </code></pre>
+
+  <h4>A brief explanation of the component:</h4>
+
+  <ul>
+    <li>besides mapDispatchToProps and connect it's standard React stuff</li>
+    <li>mapDispatchToProps connects Redux actions to React props</li>
+    <li>the <strong>action is dispatched in the handleSubmit method</strong></li>
+  </ul>
+
+  <p>Finally the component gets exported as Form. Form is the result of connecting ConnectedForm with the Redux
+    store.
+  </p>
+
+  <p>Note: the first argument for connect must be null when mapStateToProps is absent like in our example. Or you'll
+    get
+    TypeError: dispatch is not a function.</p>
+
+  <p>Our components are all set! Now update App to include the Form component:</p>
+
+  <pre><code class="language-jsx">
+  import React from "react";
+
+  import List from "./List";
+  import Form from "./Form";
+
+  const App = () => (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Articles&lt;/h2&gt;
+        &lt;List /&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Add a new article&lt;/h2&gt;
+        &lt;Form /&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+
+  export default App;
+  </code></pre>
+
+  <p><strong>In the next section we'll look at Redux middleware.</strong></p>
+
+  <h4>What is a Redux middleware?</h4>
+
+  <p>So far we saw the building blocks of Redux: <strong>store</strong>, the traffic policeman in Redux. The
+    <strong>reducer</strong>, which makes the state in Redux.</p>
+
+  <p>Then there are <strong>actions, plain JavaScript objects, acting as messengers in your application</strong>.
+    Finally we have <strong>action creators, functions for creating those messages</strong>.</p>
+
+  <p>Now, imagine the following scenario: you need to prevent users from creating articles with particular words
+    inside
+    the title. Let’s take a look at handleSubmit in Form.js:</p>
+
+  <pre><code class="language-js">
+  handleSubmit(event) {
+    event.preventDefault();
+    const { title } = this.state;
+    this.props.addArticle({ title });
+    this.setState({ title: "" });
+  }
+  </code></pre>
+
+  <p>We can just add a check before this.props.addArticle right? It could be something like:</p>
+  <pre><code class="language-js">
+  handleSubmit(event) {
+    event.preventDefault();
+    const { title } = this.state;
+    const forbiddenWords = ['spam', 'money'];
+    const foundWord = forbiddenWords.filter(word => title.includes(word) )
+    if (foundWord) {
+      return this.props.titleForbidden();
+    }
+    this.props.addArticle({ title });
+    this.setState({ title: "" });
+  }
+</code></pre>
+
+  <p>But wasn't the <strong>entire point of Redux to move the logic out of our React components</strong>? Yes! So
+    what?
+    Can we check the title property inside the reducer? Maybe! And while we're there let's dispatch another action
+    in
+    response to a forbidden word. But how I'm supposed to access dispatch inside a reducer?</p>
+
+  <p>It's clear that we want to reach for something different. Looks like we want to <strong>check the action
+      payload
+      (and the title property) before the action is passed to the reducer</strong>. There should be a way for
+    <strong>tapping into the application's flow</strong>. And guess what, that's <strong>exactly what a Redux
+      middleware
+      does</strong>.</p>
+
+  <p>A <strong>Redux middleware is a function that is able to intercept, and act accordingly, our actions, before
+      they
+      reach the reducer</strong>. And while the theory is quite simple, a Redux middleware can look a bit confusing.
+    In
+    its basic form a Redux middleware is a function returning a function, which takes next as a parameter. Then the
+    inner function returns another function which takes action as a parameter and finally returns next(action).
+    Here’s
+    how it looks like:</p>
+
+  <pre><code class="language-js">
+    function forbiddenWordsMiddleware() {
+      return function(next){
+        return function(action){
+          // do your stuff
+          return next(action);
+        }
+      }
+    }
+  </code></pre>
+
+  <p>Middlewares in Redux are super important because they will hold the bulk of your application's logic. If you
+    think
+    about it there is no better place than a middleware for abstracting away business logic. And the nice thing is
+    that
+    while inside the middleware you can access getState and dispatch, like so:</p>
+
+  <pre><code class="language-js">
+  function forbiddenWordsMiddleware({ getState, dispatch }) {
+    return function(next){
+      return function(action){
+        // do your stuff
+        return next(action);
+      }
+    }
+  }
+  </code></pre>
+
+  <h4>Your first Redux middleware</h4>
+  <p>Armed with that knowledge we can create your first Redux middleware: it should check whether the action's
+    payload
+    has bad words into it. We’ll see the actual implementation into the next section.</p>
+
+  <p>The middleware we’re going to build should inspect the action's payload. There are a lot of <strong>benefits
+      from
+      using a Redux middleware</strong>:</p>
+  <ul>
+    <li>most of the logic can live outside the UI library</li>
+    <li>middlewares become reusable pieces of logic, easy to reason about</li>
+    <li>middlewares can be tested in isolation</li>
+  </ul>
+  <p>So, let's get our hands dirty. Create a new folder for the middleware:</p>
+
+  <p>Now create a new file. The structure of our first middleware should be like:</p>
+
+  <pre><code class="language-jsx">
+  // src/redux/middleware/index.js
+  function forbiddenWordsMiddleware({ dispatch }) {
+    return function(next){
+      return function(action){
+        // do your stuff
+        return next(action);
+      }
+    }
+  }
+  </code></pre>
+
+  <p>For now we don't need getState, we just get dispatch as the first parameter. Nice. Now we need to check the
+    action
+    payload, namely the title property. If the title matches one or more bad words we stop the user from adding the
+    article.</p>
+
+  <p>Also, the check should fire up only when the action is of type <strong>ADD_ARTICLE</strong>. It makes sense.
+    How
+    about this one:</p>
+
+  <pre><code class="language-js">
+  import { ADD_ARTICLE } from "../../constants/action-types";
+
+  const forbiddenWords = ["spam", "money"];
+
+  export function forbiddenWordsMiddleware({ dispatch }) {
+    return function(next) {
+      return function(action) {
+        // do your stuff
+        if (action.type === ADD_ARTICLE) {
+          
+          const foundWord = forbiddenWords.filter(word =>
+            action.payload.title.includes(word)
+          );
+
+          if (foundWord.length) {
+            return dispatch({ type: "FOUND_BAD_WORD" });
+          }
+        }
+        return next(action);
+      };
+    };
+  }
+  </code></pre>
+
+  <p>Here’s what the middleware does: when action type is <strong>ADD_ARTICLE</strong>, check if
+    action.payload.title
+    contains a bad
+    word. If it does then dispatch an action of type "FOUND</em>BAD_WORD", otherwise let the next action pass.</p>
+
+  <p>And this last point is really important: you should always return next(action) in your middleware. If you
+    forget to
+    return next(action) the application will stop, and no other action will reach the reducer.</p>
+
+  <p>Now, time to wire up <strong>forbiddenWordsMiddleware</strong> to the Redux store. For that we need to import
+    our
+    middleware,
+    another utility from Redux <strong>(applyMiddleware)</strong>, and then cook everything together.</p>
+
+  <p>Open up <strong>src/redux/store/index.js</strong> and modify the file like so:</p>
+
+  <pre><code class="language-jsx">
+  // src/redux/store/index.js
+
+  import { createStore, applyMiddleware } from "redux";
+  import rootReducer from "../reducers/index";
+  import { forbiddenWordsMiddleware } from "../middleware";
+
+  const store = createStore(
+    rootReducer,
+    applyMiddleware(forbiddenWordsMiddleware)
+  );
+
+  export default store;
+  </code></pre>
+
+  <p><strong>Note</strong>: if you want to enable Redux Dev Tools use <a
+      href="https://github.com/valentinogagliardi/react-redux-tutorial/blob/your-first-redux-middleware/src/redux/store/index.js"
+      target="_blank" rel="nofollow">this code</a>.</p>
+
+  <p>Save and close the file, run npm start and check if the middleware works. Try to add an article with "money" in
+    its
+    title and <strong>you won't see the new article appear in the list</strong>.</p>
+
+  <p>The middleware works! Good job! In the next sections we'll explore <strong>asynchronous actions in Redux with
+      Redux
+      Thunk and Redux Saga</strong>.</p>
+
+  <h3>Asynchronous actions in Redux, the naive way</h3>
+
+  <p>So far we were dealing with <strong>synchronous data</strong>. That is, <strong>dispatching an action is
+      synchronous</strong>. No AJAX, no promises. We return a plain object from our action creators. And when the
+    action
+    reaches the reducer we return the next state.</p>
+
+  <p>Now, suppose we want to <strong>fetch data from an API</strong>. In React you would put a call in
+    componentDidMount
+    and call it a day. But how about <strong>Redux? What's a good place for calling asynchronous functions</strong>?
+    Let’s think a moment about it.</p>
+
+  <p>Reducers? No way. Reducers should stay lean and clean. A reducer is not a good place for asynchronous logic.
+  </p>
+
+  <p>Actions? How I am supposed to do that? Actions in Redux are plain objects. And how about action creators? An
+    action
+    creator is a function, and it looks like a nice spot for calling an API! Let's give it a shot.</p>
+
+  <p>We'll create a new action named <strong>getData</strong>. This action calls an API with fetch and returns a
+    Redux
+    action.</p>
+
+  <p>Open up <strong>src/redux/actions/index.js</strong> and create a new action named getData:</p>
+
+  <pre><code class="language-jsx">
+  // src/redux/actions/index.js
+
+  // ...
+  // our new action creator. Will it work?
+  export function getData() {
+    return fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(json => {
+        return { type: "DATA_LOADED", payload: json };
+      });
+  }
+  </code></pre>
+
+  <p><strong>It makes sense. But will it work</strong>? Let's wire up a React component so it dispatches getData
+    from
+    componentDidMount. mapDispatchToProps (this time with the object shorthand form) will map Redux action creators
+    to
+    our component's props. Create a new React component in <strong>src/components/Posts.js</strong>:</p>
+
+  <pre><code class="language-jsx">
+  import React, { Component } from "react";
+  import { connect } from "react-redux";
+  import { getData } from "../actions/index";
+
+  export class Post extends Component {
+    constructor(props) {
+      super(props);
+    }
+
+    componentDidMount() {
+      // calling the new action creator
+      this.props.getData();
+    }
+
+    render() {
+      return null;
+    }
+  }
+
+  export default connect( null, { getData } )(Post);
+  </code></pre>
+
+  <p>Finally update <strong>src/components/App.js</strong> to use the new component:</p>
+
+  <pre><code class="language-jsx">
+  import React from "react";
+  import List from "./List";
+  import Form from "./Form";
+  import Post from "./Posts";
+
+  const App = () => (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Articles&lt;/h2&gt;
+        &lt;List /&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Add a new article&lt;/h2&gt;
+        &lt;Form /&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2&gt;API posts&lt;/h2&gt;
+        &lt;Post /&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+
+  export default App;
+  </code></pre>
+
+  <p>Save and close the files, run the app, and look at that:</p>
+
+  <p>Interesting! "Error: Actions must be plain objects. Use custom middleware for async actions". <strong>We cannot
+      call fetch from within an action creator in Redux</strong>. Now what?</p>
+
+  <p>For making things work we need a custom middleware. <strong>Luckily there's something ready for us:
+      redux-thunk</strong>.</p>
+
+
+  <h3>Asynchronous actions in Redux with Redux Thunk</h3>
+  <p>We just learned that <strong>calling fetch from an action creator does not work</strong>. That's because Redux
+    is
+    expecting objects as actions but we're trying to return a Promise. <strong>With redux-thunk we can overcome the
+      problem and return functions from action creators</strong>. Inside that function <strong>we can call APIs,
+      delay
+      the dispatch of an action, and so on</strong>.</p>
+
+  <pre><code class="language-bash">
+  npm install redux-thunk --save
+  </code></pre>
+
+  <p>Now let’s load the middleware in <strong>src/redux/store/index.js</strong>:</p>
+
+  <pre><code class="language-jsx">
+  import { createStore, applyMiddleware, compose } from "redux";
+  import rootReducer from "../reducers/index";
+  import { forbiddenWordsMiddleware } from "../middleware";
+  import thunk from "redux-thunk";
+
+  const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+  const store = createStore(
+    rootReducer,
+    storeEnhancers(applyMiddleware(forbiddenWordsMiddleware, thunk))
+  );
+
+  export default store;
+  </code></pre>
+
+  <p>At this point we need to refactor getData to use redux-thunk. Open up <strong>src/redux/actions/index.js and
+      update
+      the
+      action creator</strong> like so:</p>
+
+  <pre><code class="language-jsx">
+  export function getData() {
+    return function(dispatch) {
+      return fetch("https://jsonplaceholder.typicode.com/posts")
+        .then(response => response.json())
+        .then(json => {
+          dispatch({ type: "DATA_LOADED", payload: json });
+        });
+    };
+  }
+  </code></pre>
+
+  <p>That's redux-thunk!</p>
+
+  <p>A few things worth noting in the new version of getData: the <strong>fetch call gets returned from an outer
+      function and the outer function has dispatch as a parameter</strong> (basically it's a <a
+      href="https://github.com/valentinogagliardi/Little-JavaScript-Book/blob/v1.0.0/manuscript/chapter4.md"
+      target="_blank" rel="nofollow">JavaScript closure</a>). If you want to access the state inside the action
+    creator
+    you can add getState in the parameter's list.</p>
+
+  <p>Also, notice the use of dispatch inside "then". We need to explicitly call dispatch inside the async function
+    for
+    dispatching the next action.</p>
+
+  <p>With that in place we're ready to update our reducer with the new action type. Open up
+    <strong>src/redux/reducers/index.js</strong> and add a new if statement. We can also add a new key inside
+    initialState for
+    saving the articles from the API:</p>
+
+  <pre><code class="language-jsx">
+  import { ADD_ARTICLE } from "../../constants/action-types";
+
+  const initialState = {
+    articles: [],
+    remoteArticles: []
+  };
+
+  function rootReducer(state = initialState, action) {
+    if (action.type === ADD_ARTICLE) {
+      return Object.assign({}, state, {
+        articles: state.articles.concat(action.payload)
+      });
+    }
+
+    if (action.type === "DATA_LOADED") {
+      return Object.assign({}, state, {
+        remoteArticles: state.remoteArticles.concat(action.payload)
+      });
+    }
+    return state;
+  }
+
+  export default rootReducer;
+  </code></pre>
+
+  <p>(I know, DATA_LOADED should be its own named costant. I left it as an exercise for you. Hope you don't mind!)
+  </p>
+
+  <p>Finally we're ready to update our Post component for displaying our "remote" posts. We will use mapStateToProps
+    (again, feel free to call this function select) for selecting ten posts:</p>
+
+  <pre><code class="language-jsx">
+  import React, { Component } from "react";
+  import { connect } from "react-redux";
+  import { getData } from "../actions/index";
+
+  export class Post extends Component {
+    constructor(props) {
+      super(props);
+    }
+
+    componentDidMount() {
+      this.props.getData();
+    }
+
+    render() {
+      return (
+        &lt;ul&gt;
+          {this.props.articles.map(el =&gt; (
+            &lt;li key={el.id}&gt;{el.title}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      );
+    }
+  }
+
+  function mapStateToProps(state) {
+    return {
+      articles: state.remoteArticles.slice(0, 10)
+    };
+  }
+
+  export default connect( mapStateToProps, { getData } )(Post);
+  </code></pre>
+
+  <p>Save and close the files, run the app, and <strong>everything should work fine</strong>! Good job!</p>
+
+  <p>To recap: <strong>Redux does not understand other types of action than a plain object</strong>. If you want to
+    move
+    asynchronous logic from React to Redux and being able to return functions instead of plain objects you have to
+    use a
+    custom middleware.</p>
+
+  <p><strong>redux-thunk is a middleware for Redux</strong>. With redux-thunk you can return functions from action
+    creators, not only objects. You can do asynchronous work inside your actions and dispatch other actions in
+    response
+    to AJAX calls.</p>
+
+  <p>When to use redux-thunk? redux-thunk is a nice middleware that works very well for simpler use cases. But if
+    your
+    asynchronous logic involves more complex scenarios then redux saga might be a better fit.</p>
+
+  <h3>Introducing Redux Saga</h3>
+
+  <p>redux-thunk makes perfect sense for a lot of project. You can also entirely skip redux-thunk and move your
+    <strong>asynchronous logic to a custom middleware</strong>. But in reality asynchronous actions can be trickier
+    to
+    test and organize.</p>
+
+  <p>For this reason most developers prefer an alternative approach: redux saga.</p>
+
+  <p><strong>What is redux saga</strong>? redux saga is a Redux <strong>middleware for managing side
+      effects</strong>.
+    With redux saga you can have a separate thread in your application for dealing with impure actions: <strong>API
+      calls, storage access</strong>, and more.</p>
+
+  <p>redux saga is different from an async action in terms of both syntax and code organization. With redux thunk
+    you
+    can put an API call directly inside an action creator while in <strong>redux saga you can have clear separation
+      between synchronous and asynchronous logic</strong>. And that logic will be totally separated from your Redux
+    code.</p>
+
+  <p>Worth noting, redux saga does not use regular JavaScript function. You will see a lot of asterisks and "yield"
+    in
+    your sagas. Those asterisks mark <strong>generator functions</strong>!</p>
+
+  <p><strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function"
+        target="_blank" rel="nofollow">Generator functions in JavaScript</a> are function which can be paused and
+      resumed on demand</strong>. redux saga relies heavily on generator functions but the good thing is that you
+    won't
+    need to call next() in your code. redux saga handles that for you under the hood.</p>
+
+  <h3>Writing your first Redux Saga</h3>
+  <p>In this section we will refactor our code to use a Redux saga instead of a thunk. </p>
+
+  <pre><code class="language-bash">
+  npm install redux-saga --save
+  </code></pre>
+
+  <p>Now we can refactor our async action and remove the fetch call. From now on our action creator will just
+    dispatch a
+    plain action. Open up <strong>src/redux/actions/index.js</strong> and modify getData to return a plain action
+    named
+    DATA_REQUESTED:</p>
+
+  <pre><code class="language-jsx">
+  export function getData() {
+    return { type: "DATA_REQUESTED" };
+  }
+  </code></pre>
+  <p>The <code>DATA_REQUESTED</code> action will be intercepted by Redux saga with the <strong>takeEvery</strong>
+    method. You can
+    imagine takeEvery taking every <code>DATA_REQUESTED</code> action passing inside our app and starting some work
+    in
+    response
+    to that action.</p>
+
+  <p>Now, how do you structure a saga? A <strong>redux saga could live in a single file containing</strong>:</p>
+
+  <ul>
+    <li>a <strong>worker function</strong></li>
+    <li>a <strong>watcher function</strong></li>
+  </ul>
+
+  <p>The <strong>watcher is a generator function watching for every action we are interested in</strong>. In
+    <strong>response to that action, the watcher will call a worker saga</strong>, which is another generator
+    function
+    for doing the actual API call.</p>
+
+  <p>The worker saga will call the remote API with the call method from redux-saga/effects. When the data is loaded
+    we
+    can dispatch another action from our saga with the put method, again, from redux-saga/effects. Makes sense?</p>
+
+  <p>Armed with this knowledge we can lay down our first redux saga! First create a new folder for holding your
+    sagas:
+  </p>
+
+  <p>Then create a new file named api-saga.js in src/sagas. And here's our saga:</p>
+
+  <pre><code class="language-jsx">
+  // src/sagas/api-saga.js
+  import { takeEvery, call, put } from "redux-saga/effects";
+
+  export default function* watcherSaga() {
+    yield takeEvery("DATA_REQUESTED", workerSaga);
+  }
+
+  function* workerSaga() {
+    try {
+      const payload = yield call(getData);
+      yield put({ type: "DATA_LOADED", payload });
+    } catch (e) {
+      yield put({ type: "API_ERRORED", payload: e });
+    }
+  }
+  </code></pre>
+
+  <h3>Demystifying your first redux saga</h3>
+  <p>Take a look at the code above. Here's how it works:</p>
+
+  <ol>
+    <li>take every action named DATA_REQUESTED and for each action spin a worker saga</li>
+    <li>inside the worker saga call a function named getData</li>
+    <li>if the function succeeds, then dispatch (put) a new action named DATA_LOADED alongside with a payload</li>
+    <li>if the function errors out, then dispatch (put) a new action named API_ERRORED, alongside with a payload
+      (the
+      error)</li>
+  </ol>
+
+  <p>The only thing we're missing in our code is the getData function. Open up
+    <strong>src/sagas/api-saga.js</strong>
+    again and add the function:</p>
+
+  <pre><code class="language-jsx">
+  import { takeEvery, call, put } from "redux-saga/effects";
+
+  export default function* watcherSaga() {
+    yield takeEvery("DATA_REQUESTED", workerSaga);
+  }
+
+  function* workerSaga() {
+    try {
+      const payload = yield call(getData);
+      yield put({ type: "DATA_LOADED", payload });
+    } catch (e) {
+      yield put({ type: "API_ERRORED", payload: e });
+    }
+  }
+
+  function getData() {
+    return fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
+      response.json()
+    );
+  }
+  </code></pre>
+  <p>And finally we can wire up redux saga to our redux store. Open up <strong>src/redux/store/index.js</strong> and
+    update
+    the store as follows:</p>
+
+  <pre><code class="language-jsx">
+  import { createStore, applyMiddleware, compose } from "redux";
+  import rootReducer from "../reducers/index";
+  import { forbiddenWordsMiddleware } from "../middleware";
+  import createSagaMiddleware from "redux-saga";
+  import apiSaga from "../sagas/api-saga";
+
+  const initialiseSagaMiddleware = createSagaMiddleware();
+
+  const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+  const store = createStore(
+  rootReducer,
+  storeEnhancers(
+    applyMiddleware(forbiddenWordsMiddleware, initialiseSagaMiddleware)
+  )
+  );
+
+  initialiseSagaMiddleware.run(apiSaga);
+
+  export default store;
+  </code></pre>
+
+  <p>Worth noting, the <strong>createSagaMiddleware method and initialiseSagaMiddleware.run for running our
+      saga</strong>. Now close and save the file. Run npm start and You should see the exact same output again with
+    the
+    remote posts correctly displaying in the browser.</p>
+
+  <p>Congratulations! <strong>You created your first redux saga</strong>! And now a couple of exercises for you:</p>
+
+  <ul>
+    <li>our reducer was ready for handling <code class="language-text">DATA_LOADED</code> alongside with its
+      payload.
+      Complete the reducer for dealing with <code class="language-text">API_ERRORED</code>.</li>
+    <li>move <code class="language-text">DATA_LOADED</code>, <code class="language-text">API_ERRORED</code>, and
+      <code class="language-text">DATA_REQUESTED</code> in named constants.</li>
+    <li>do we need to better account for fetch errors inside getData?</li>
+  </ul>
+
+  <p>CODE: you can access the complete example at <a href="https://github.com/valentinogagliardi/react-redux-tutorial"
+      target="_blank" rel="nofollow">react-redux-tutorial on Github</a>. Clone the repo and checkout the most recent
+    branch:</p>
+
+  <h2>Redux: where are we now?</h2>
+
+  <p>The Redux ecosystem is evolving. A couple of new APIs appeared since I first wrote this guide. </p>
+
+  <p>First, <a href="https://react-redux.js.org/api/hooks" target="_blank" rel="nofollow">react-redux gained
+      hooks</a>.
+    It's an alternative to using connect() for wiring your React components with Redux. The new API is
+    <strong>completely optional</strong>, suited for new React codebases relaying exclusively on <a
+      href="https://www.valentinog.com/blog/hooks/" target="_blank" rel="nofollow">functional components and
+      hooks</a>.
+  </p>
+
+  <p>A more interesting news is the rise of <a href="https://redux-starter-kit.js.org/" target="_blank"
+      rel="nofollow">redux-starter-kit</a>, an opinionated layer over the infamous Redux boilerplate. Check it out!
+  </p>
+
 </body>
 
 </html>
