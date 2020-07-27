@@ -1,0 +1,893 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>typeScript</title>
+  <link href="../assets/prism.css" type="text/css" rel="stylesheet" media="all" />
+  <link href="../assets/styles.css" type="text/css" rel="stylesheet" media="all" />
+  <script src="../assets/prism.js"></script>
+</head>
+
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="#typeScriptInstall">Installation</a></li>
+    </ul>
+  </nav>
+
+  <h1>typeScript</h1>
+  <p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces  like 'C#' to help you build robust components.</p>
+
+  <h2 id="typeScriptInstall">Installation</h2>
+
+
+  <p>Make a new folder, and create an <strong>app.ts</strong> file and type following code. ".ts" is the TypeScript file
+    extension.</p>
+
+  <pre><code class="language-js">
+    const greet = () => {
+      console.log('Hello world!')
+    }
+    greet()
+  </code></pre>
+  <pre><code class="language-js">
+    // run on cmd
+    tsc app.ts
+    // You can change the compilation target from default (ES5) to other versions
+    tsc app.ts --target ES2018:
+  </code></pre>
+  <pre><code class="language-js">
+    // above code convert into this.
+    var greet = function () {
+      console.log('Hello world!');
+    };
+    greet();
+  </code></pre>
+
+  <h3 id="typing">Typing</h3>
+
+  <p>Typing is the key TypeScript feature.</p>
+
+  <p>So far we compiled a <code>.ts</code> file, but we just compiled plain JavaScript.</p>
+
+  <p>You saw one first feature of TypeScript: you can use modern JavaScript and compile it to ES5 (or higher), kind of
+    what <strong>Babel</strong> does.</p>
+
+  <p>We didn&rsquo;t use any of the TypeScript functionalities.</p>
+
+  <p>The most important piece of functionality provided by TypeScript is the type system: static types, interfaces, type
+    inference, enums, hybrid types, generics, union/intersection types, access modifiers, null checking.</p>
+
+  <p>If you ever used a typed language, like Go or C, you already know how this works. If not, and you only programmed
+    in a dynamic language like Python or Ruby, this is all new to you but don&rsquo;t worry.</p>
+
+  <p>The type system allows you, for example, to add types to your variables, function arguments and function return
+    types, giving a more rigid structure to your programs.</p>
+
+  <p>The advantages are better tooling: the compiler (and editors like editors like <strong>VS Code</strong>) can
+    help you a lot during development, pointing out bugs as you write the code. Bugs that couldn&rsquo;t possibly be
+    detected if you didn&rsquo;t have types. Also, teamwork gets easier because the code is more explicit.</p>
+
+  <p>The resulting JavaScript code that we compile to does not have types, of course: they are lost during the
+    compilation phase, but the compiler will point out any error it finds.</p>
+
+  <p>Here is how you define a string variable in TypeScript:</p>
+
+  <pre><code class="language-ts">const greeting : string = &quot;hello!&quot;
+</code></pre>
+
+  <p>Type inference lets us avoid writing the type in obvious cases like this:</p>
+
+  <pre><code class="language-ts">const greeting = &quot;hello!&quot;
+</code></pre>
+
+  <p>The type is determined by TS.</p>
+
+  <p>This is how a function accepts an argument of a specific type:</p>
+
+  <pre><code class="language-ts">const multiply = (a: number, b: number) =&gt; {
+  return a * b
+}
+</code></pre>
+
+  <p>If you pass a string to <code>multiply()</code>, the compiler will give you an error.</p>
+
+  <p>Here is how functions declare their return value:</p>
+
+  <pre><code class="language-ts">
+    const multiply = (a: number, b: number): number =&gt; {
+      return a * b
+    }
+  </code></pre>
+
+  <p>Valid types are</p>
+
+  <ul>
+    <li><code>number</code></li>
+    <li><code>string</code></li>
+    <li><code>boolean</code></li>
+    <li><code>enum</code></li>
+    <li><code>Array</code></li>
+    <li><code>any</code></li>
+    <li><code>never</code></li>    
+    <li><code>undefined</code></li>
+    <li><code>null</code></li>
+    <li><code>void</code></li>
+    <li><code>tuple</code></li>
+    <li><code>union</code></li>
+  </ul>
+
+  <p><code>any</code> is a catch-all type that identifies, as its name says, any type.</p>
+
+
+  <h3>Enums</h3>
+
+  <p>Enums or enumerations are a new data type supported in TypeScript. Most object-oriented languages like Java and C#
+    use enums. This is now available in TypeScript too.</p>
+
+  <p>In simple words, enums allow us to declare a set of named constants i.e. a collection of related values that can be
+    numeric or string values.</p>
+
+  <p>There are three types of enums:</p>
+
+  <ol>
+    <li>Numeric enum</li>
+    <li>String enum</li>
+    <li>Heterogeneous enum</li>
+  </ol>
+
+  <h4>Numeric Enum</h4>
+
+  <p>Numeric enums are number-based enums i.e. they store string values as numbers. </p>
+
+  <p>Enums can be defined using the keyword enum. Let's say we want to store a set of print media types. The
+    corresponding enum in TypeScript would be:</p>
+
+  <pre><code class="language-js">
+    PrintMedia {
+      Newspaper,
+      Newsletter,
+      Magazine,
+      Book
+    }
+  </code></pre>
+
+  <p>In the above example, we have an enum named PrintMedia. The enum has four values: Newspaper, Newsletter, Magazine,
+    and Book. Here, enum values start from zero and increment by 1 for each member. It would be represented as:</p>
+
+  <pre><code class="language-js">
+    Newspaper = 0
+    Newsletter = 1
+    Magazine = 2
+    Book = 3
+  </code></pre>
+
+  <p>Enums are always assigned numeric values when they are stored. The first value always takes the numeric value of 0,
+    while the other values in the enum are incremented by 1.</p>
+
+  <p>We also have the option to initialize the first numeric value ourselves. For example, we can write the same enum
+    as:</p>
+
+  <pre><code class="language-js">
+    PrintMedia {
+      Newspaper = 1,
+      Newsletter,
+      Magazine,
+      Book
+    }
+  </code></pre>
+
+  <p>The first member, Newspaper, is initialized with the numeric value 1. The remaining members will be incremented by
+    1 from the numeric value of the first value. Thus, in the above example, Newsletter would be 2, Magazine would be 3
+    and Book would be 4. </p>
+  <p>It is not necessary to assign sequential values to Enum members. They can have any values.</p>
+
+  <pre><code class="language-js">
+    PrintMedia {
+      Newspaper = 1,
+      Newsletter = 5,
+      Magazine = 5,
+      Book = 10
+    }
+  </code></pre>
+
+  <p>The enum can be used as a function parameter or return type, as shown below:</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper = 1,
+      Newsletter,
+      Magazine,
+      Book
+    }
+
+    function getMedia(mediaName: string): PrintMedia {
+        if (  mediaName === 'Forbes' || mediaName === 'Outlook') {
+            return PrintMedia.Magazine;
+        }
+    }
+
+    let mediaType: PrintMedia = getMedia('Forbes'); // returns Magazine
+  </code></pre>
+
+  <p> In the above example, we declared an enum <code>PrintMedia</code>. Next, we declare a function
+    <code>getMedia()</code> that takes in an input parameter <code>mediaName</code> of the type string. This function
+    returns an enum <code>PrintMedia</code>. In the function, we check for the type of media.
+    If the media name matches 'Forbes' or 'Outlook', we return enum member <code>PrintMedia.Magazine</code>.
+  </p>
+
+  <h4>Computed Enums:</h4>
+
+  <p>Numeric enums can include members with computed numeric value. The value of an enum member can be either a constant
+    or computed. The following enum includes members with computed
+    values.</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper = 1,
+      Newsletter = getPrintMediaCode('newsletter'),
+      Magazine = Newsletter * 3,
+      Book = 10
+    }
+
+    function getPrintMediaCode(mediaName: string): number {
+        if (mediaName === 'newsletter') {
+            return 5;
+        }
+    }
+
+    PrintMedia.Newsetter; // returns 5
+    PrintMedia.Magazine; // returns 15
+  </code></pre>
+
+  <p>When the enum includes computed and constant members, then uninitiated enum members either must come first or must
+    come after other initialized members with numeric constants. The following will give an error.</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newsletter = getPrintMediaCode('newsletter'),
+      Newspaper, // Error: Enum member must have initializer
+      Book,
+      Magazine = Newsletter * 3,
+    }
+  </code></pre>
+
+  <p>The above enum can be declared as below.</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper,
+      Book,
+      Newsletter = getPrintMediaCode('newsletter'),
+      Magazine = Newsletter * 3
+    }
+    // or
+    enum PrintMedia {
+        Newsletter = getPrintMediaCode('newsletter'),
+        Magazine = Newsletter * 3,
+        Newspaper = 0,
+        Book,
+    }
+  </code></pre>
+
+  <h4>String Enum</h4>
+
+  <p>String enums are similar to numeric enums, except that the enum values are initialized with string values rather
+    than numeric values.</p>
+
+  <p>The benefits of using string enums is that string enums offer better readability. If we were to debug a program, it
+    is easier to read string values rather than numeric values.</p>
+
+  <p>Consider the same example of a numeric enum, but represented as a string enum:</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper = "NEWSPAPER",
+      Newsletter = "NEWSLETTER",
+      Magazine = "MAGAZINE",
+      Book = "BOOK"
+    }
+    // Access String Enum 
+    PrintMedia.Newspaper; //returns NEWSPAPER
+    PrintMedia['Magazine'];//returns MAGAZINE
+  </code></pre>
+
+  <p>In the above example, we have defined a string enum, PrintMedia, with the same values as the numeric enum above,
+    with the difference that these enum values are initialized with string literals. The difference between numeric and
+    string enums is that numeric enum values are auto-incremented, while string enum values need to be individually
+    initialized.</p>
+
+  <h4>Heterogeneous Enum</h4>
+
+  <p>Heterogeneous enums are enums that contain both string and numeric values.</p>
+
+  <pre><code class="language-js">
+    enum Status { 
+      Active = 'ACTIVE', 
+      Deactivate = 1, 
+      Pending
+    }
+  </code></pre>
+
+  <h4>Reverse Mapping</h4>
+
+  <p>Enum in TypeScript supports reverse mapping. It means we can access the value of a member and also a member name
+    from its value. Consider the following example.</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper = 1,
+      Newsletter,
+      Magazine,
+      Book
+    }
+    
+    PrintMedia.Magazine;   // returns  3
+    PrintMedia["Magazine"];// returns  3
+    PrintMedia[3];         // returns  Magazine
+  </code></pre>
+
+  <p>As you can see in the above example, <code>PrintMedia[3]</code> returns its member name "Magazine". This is because
+    of reverse mapping. Let's see how TypeScript implements reverse mapping using the following example.</p>
+
+  <pre><code class="language-js">
+    enum PrintMedia {
+      Newspaper = 1,
+      Newsletter,
+      Magazine,
+      Book
+    }
+    console.log(PrintMedia)
+  </code></pre>
+
+  <p>The above example gives the following output in the browser console.</p>
+
+  <pre><code class="language-js">
+    {
+      '1': 'Newspaper',
+      '2': 'Newsletter',
+      '3': 'Magazine',
+      '4': 'Book',
+      Newspaper: 1,
+      Newsletter: 2,
+      Magazine: 3,
+      Book: 4 
+    }
+  </code></pre>
+
+  <p>You will see that each value of the enum appears twice in the internally stored enum object. We know that num
+    values can be retrieved using the corresponding enum member value. But it is also true that enum members can be
+    retrieved using their values. This is called reverse mapping.</p>
+  <p>TypeScript can compile the above enum into the following JavaScript function.</p>
+
+  <pre><code class="language-js">
+    var PrintMedia;
+    (function (PrintMedia) {
+      PrintMedia[PrintMedia["Newspaper"] = 1] = "Newspaper";
+      PrintMedia[PrintMedia["Newsletter"] = 2] = "Newsletter";
+      PrintMedia[PrintMedia["Magazine"] = 3] = "Magazine";
+      PrintMedia[PrintMedia["Book"] = 4] = "Book";
+    })(PrintMedia || (PrintMedia = {}));
+  </code></pre>
+
+  <p><code>PrintMedia</code> is an object in JavaScript which includes both value and name as properties and that's why
+    enum in TypeScript supports reverse mapping. </p>
+
+  <p>So, both the following mappings are true to enums: name -> value, and value -> name.</p>
+
+  <p class="note"> Reverse mapping is not supported for string enum members. For the heterogeneous enum, reverse mapping
+    is only supported for numeric type members but not for string type members.</p>
+
+
+
+
+  <h3>Classes</h3>
+
+  <p><strong>ES2015/ES6</strong> added <strong>classes</strong> to JavaScript, as a simple
+    syntactic sugar over the <strong>prototypal inheritance</strong>.</p>
+
+  <p>Like it or not, under the hoods JavaScript is still using prototypal inheritance, with all its unique features and
+    quirks.</p>
+
+  <p>TypeScript classes are a little bit different than JavaScript classes. The reason is that TypeScript introduced
+    classes before JavaScript had them (they were introduced in ES2015/ES6).</p>
+
+  <p>Like in JavaScript, you declare classes in this way:</p>
+
+  <pre><code class="language-ts">class Car {
+
+}
+</code></pre>
+
+  <p>This is how you define class fields:</p>
+
+  <pre><code class="language-ts">class Car {
+  color: string
+}
+</code></pre>
+
+  <p>All fields are <strong>public</strong> by default. You can set a field to be <strong>private</strong> or
+    <strong>protected</strong>:</p>
+
+  <pre><code class="language-ts">class Car {
+  public color: string
+  private name: string
+  protected brand: string
+}
+</code></pre>
+
+  <p>Like it happens in other programming languages, private fields can only be accessed in the class that declares
+    them. Protected fields can only be accessed by deriving classes as well.</p>
+
+  <p>You can also declare static fields, which are class fields rather than object fields:</p>
+
+  <pre><code class="language-ts">class Car {
+  static numberOfWheels = 4
+}
+</code></pre>
+
+  <p>You can initialize fields with a constructor:</p>
+
+  <pre><code class="language-ts">class Car {
+  color: string
+  constructor(theColor: string) {
+    this.color = theColor
+  }
+}
+</code></pre>
+
+  <p>This shorthand syntax makes it simpler:</p>
+
+  <pre><code class="language-ts">class Car {
+  constructor(public color: string) {}
+
+  printColor() {
+    alert(this.color)
+  }
+}
+
+(new Car('red')).printColor()
+</code></pre>
+
+  <p>Notice how we referenced the class field using <code>this.x</code>.</p>
+
+  <p>A field can also be <strong>read only</strong>:</p>
+
+  <pre><code class="language-ts">class Car {
+  readonly color: string
+}
+</code></pre>
+
+  <p>and in this case its value can only be set in the constructor.</p>
+
+  <p>Classes have methods:</p>
+
+  <pre><code class="language-ts">class Car {
+  color: string
+  constructor(public color: string) {
+    this.color = color
+  }
+  drive() {
+    console.log('You are driving the car')
+  }
+}
+</code></pre>
+
+  <p>Like in plain JavaScript, you create objects from those classes, using the <code>new</code> keyword:</p>
+
+  <pre><code class="language-ts">const myCar = new Car('red')
+</code></pre>
+
+  <p>and you can extend an existing class using the <code>extend</code> keyword:</p>
+
+  <pre><code class="language-ts">class ElectricCar extends Car {
+  //...
+}
+</code></pre>
+
+  <p>You can call <code>super()</code> in the constructor and in methods to call the extended class corresponding
+    method.</p>
+
+  <h3 id="accessors">Accessors</h3>
+
+  <p>Fields can have getters and setters. Example:</p>
+
+  <pre><code class="language-ts">class Car {
+  private _color: string
+
+  get color(): string {
+    return this._color
+  }
+
+  set color(color: string) {
+    this._color = color
+  }
+}
+</code></pre>
+
+  <h3 id="abstract-classes">Abstract classes</h3>
+
+  <p>Classes can be defined as abstract, which means there needs to be a class that extends it, and implements its
+    eventual abstract methods:</p>
+
+  <pre><code class="language-ts">abstract class Car {
+  abstract drive()
+}
+
+class SportsCar extends Car {
+  drive() {
+    console.log('You are driving a sports car')
+  }
+}
+</code></pre>
+
+  <h3 id="interfaces">Interfaces</h3>
+
+  <p>Interfaces build upon basic types. You can use an interface as a type, and this interface can contain other type
+    definitions:</p>
+
+  <pre><code class="language-ts">interface SetOfNumbers {
+  a: number;
+  b: number;
+}
+
+const multiply = (set: SetOfNumbers) =&gt; {
+  return set.a * set.b
+}
+
+multiply({ a:1, b: 2 })
+</code></pre>
+
+  <p>An interface can also be an interface for a class implementation:</p>
+
+  <pre><code class="language-ts">interface Car {
+  name: 'string'
+  new (brand: string)
+  drive(): void
+}
+
+class SportsCar implements Car {
+  public name
+  construtor(public brand: string) {
+    //...
+  }
+  drive() {
+    console.log('You are driving a sports car')
+  }
+}
+</code></pre>
+
+  <h3 id="functions-features">Functions features</h3>
+
+  <p>Functions can have optional parameters using the <code>?</code> symbol after the parameter name:</p>
+
+  <pre><code class="language-ts">class Car {
+  drive(kilometers?: number) {
+    if (kilometers) {
+      console.log(`Drive the car for ${kilometers} kilometers`)
+    } else {
+      console.log(`Drive the car`)
+    }
+  }
+}
+</code></pre>
+
+  <p>and parameters can also have default values:</p>
+
+  <pre><code class="language-ts">class Car {
+  drive(kilometers = 10) {
+    console.log(`Drive the car for ${kilometers} kilometers`)
+  }
+}
+</code></pre>
+
+  <p>A function can accept a varying number of parameters by using rest parameters:</p>
+
+  <pre><code class="language-ts">
+    class Car {
+      drive(kilometers = 10, ...occupants: string[]) {
+        console.log(`Drive the car for ${kilometers} kilometers, with those people on it:`)
+        occupants.map((person) =&gt; console.log(person))
+      }
+    }
+    (new Car()).drive(20, 'Flavio', 'Roger', 'Syd')
+  </code></pre>
+
+  
+
+
+  <h3>Generics</h3>
+
+  <p>Generics offer a way to create reusable components. Generics provide a way to make components work with any data
+    type and not restrict to one data type. So, components can be called or used with a variety of data types.
+    Generics
+    in TypeScript is almost similar to C# generics.</p>
+
+  <p>Generics uses the type variable &lt;T&gt;, a special kind of variable that denotes types. The type variable
+    remembers the type that the user provides and works with that particular type only. This is called preserving the
+    type
+    information.</p>
+
+  <pre><code class="language-ts">
+    // find same function below in Generic
+    function getArray(items : any[] ) : any[] {
+      return new Array().concat(items);
+    }
+
+    let myNumArr = getArray([100, 200, 300]);
+    let myStrArr = getArray([&quot;Hello&quot;, &quot;World&quot;]);
+
+    myNumArr.push(400); // OK
+    myStrArr.push(&quot;Hello TypeScript&quot;); // OK
+
+    myNumArr.push(&quot;Hi&quot;); // OK
+    myStrArr.push(500); // OK
+
+    console.log(myNumArr); // [100, 200, 300, 400, &quot;Hi&quot;]
+    console.log(myStrArr); // [&quot;Hello&quot;, &quot;World&quot;, &quot;Hello TypeScript&quot;, 500]
+  </code></pre>
+
+  <p>The above function can be rewritten as a generic function as below.</p>
+
+  <pre><code class="language-ts">
+    function getArray&lt;T&gt;(items : T[] ) : T[] {
+      return new Array&lt;T&gt;().concat(items);
+    }
+
+    let myNumArr = getArray&lt;number&gt;([100, 200, 300]);
+    let myStrArr = getArray&lt;string&gt;([&quot;Hello&quot;, &quot;World&quot;]);
+
+    myNumArr.push(400); // OK
+    myStrArr.push(&quot;Hello TypeScript&quot;); // OK
+
+    myNumArr.push(&quot;Hi&quot;); // Compiler Error
+    myStrArr.push(500); // Compiler Error
+  </code></pre>
+
+  <p>In the above example, the type variable T is specified with the function in the angle brackets getArray&lt;T&gt;.
+    The type variable T is also used to specify the type of the arguments and the return value. This means that the
+    data
+    type which will be specified at the time of a function call, will also be the data type of the arguments and of
+    the return value.</p>
+
+  <p>Generics can be applied to the function's argument, a function's return type, and a class fields or methods.</p>
+
+  <pre><code class="language-ts">
+    // Multiple Type Variables:
+    function displayType&lt;T, U&gt;(id:T, name:U): void { 
+      console.log(typeof(id) + &quot;, &quot; + typeof(name));  
+    }
+
+    displayType&lt;number, string&gt;(1, &quot;Steve&quot;); // number, string
+  </code></pre>
+
+  <p>Generic type can also be used with other non-generic types.</p>
+
+  <pre><code class="language-ts">
+    function displayType&lt;T&gt;(id:T, name:string): void { 
+      console.log(typeof(id) + &quot;, &quot; + typeof(name));  
+    }
+
+    displayType&lt;number&gt;(1, &quot;Steve&quot;); // number, string
+  </code></pre>
+
+  <h4>Methods and Properties of Generic Type</h4>
+
+  <p>When using type variables to create generic components, TypeScript forces us to use only general methods which
+    are
+    available for every type.</p>
+
+  <pre><code class="language-ts">
+    function displayType&lt;T, U&gt;(id:T, name:U): void {
+      id.toString(); // OK
+      name.toString(); // OK
+
+      id.toFixed();  // Compiler Error: 'toFixed' does not exists on type 'T'
+      name.toUpperCase(); // Compiler Error: 'toUpperCase' does not exists on type 'U'
+
+      console.log(typeof(id) + &quot;, &quot; + typeof(name));
+    }
+  </code></pre>
+
+  <p>In the above example, <code class="language-ts">id.toString()</code> and <code
+      class="language-ts">name.toString()</code> method calls are correct because the <code
+      class="language-ts">toString()</code> method is available for all types. However, type specific methods such as
+    <code class="language-ts">toFixed()</code> for
+    number type or <code class="language-ts">toUpperCase()</code> for
+    string type cannot be called. The compiler will give an error.</p>
+
+  <pre><code class="language-ts">
+    // You can use array methods for the generic array.
+    function displayNames&lt;T&gt;(names:T[]): void { 
+        console.log(names.join(&quot;, &quot;));  
+    }
+  
+    displayNames&lt;string&gt;([&quot;Steve&quot;, &quot;Bill&quot;]); // Steve, Bill
+  </code></pre>
+
+  <h4>Generic Constraints</h4>
+
+  <p>As mentioned above, the generic type allows any data type. However, we can restrict it to certain types using
+    constraints. Consider the following example:</p>
+
+  <pre><code class="language-ts">
+    class Person {
+      firstName: string;
+      lastName: string;
+
+      constructor(fname:string,  lname:string) { 
+          this.firstName = fname;
+          this.lastName = lname;
+      }
+    }
+
+    function display&lt;T extends Person&gt;(per: T): void {
+        console.log(`${ per.firstName} ${per.lastName}` );
+    }
+    var per = new Person(&quot;Bill&quot;, &quot;Gates&quot;);
+    display(per); //Output: Bill Gates
+
+    display(&quot;Bill Gates&quot;);//Compiler Error
+  </code></pre>
+
+  <p>In the above example, the display function is a generic function with constraints. A constraint is specified
+    after
+    the generic type in the angle brackets. The constraint <T extends Person> specifies that the generic type T must
+      extend the class Person. So, the Person class or any other class that extends the Person class can be set as
+      generic type while calling the display function, otherwise the compiler will give an error.</p>
+
+  <h4>Generic Interface</h4>
+
+  <p>The generic type can also be used with the interface. The following is a generic interface.</p>
+
+  <pre><code class="language-ts">
+    interface IProcessor&lt;T&gt; { 
+        result:T;
+        process(a: T, b: T) =&gt; T;
+    }
+  </code></pre>
+
+  <p>The above IProcessor is a generic interface because we used type variable &lt;T&gt;. The IProcessor interface
+    includes the generic field result and the generic method process() that accepts two generic type parameters and
+    returns a generic type.</p>
+
+  <pre><code class="language-ts">
+    interface KeyPair&lt;T, U&gt; {
+        key: T;
+        value: U;
+    }
+
+    let kv1: KeyPair&lt;number, string&gt; = { key:1, value:&quot;Steve&quot; }; // OK
+    let kv2: KeyPair&lt;number, number&gt; = { key:1, value:12345 }; // OK
+  </code></pre>
+
+  <p>As you can see in the above example, by using generic interface as type, we can specify the data type of key and
+    value.</p>
+
+  <p>Generic interface can also be used as the function type.</p>
+
+  <pre><code class="language-ts">
+    interface KeyValueProcessor&lt;T, U&gt; {
+        (key: T, val: U): void;
+    };
+
+    function processNumKeyPairs(key:number, value:number):void { 
+        console.log('processNumKeyPairs: key = ' + key + ', value = ' + value)
+    }
+
+    function processStringKeyPairs(key: number, value:string):void { 
+        console.log('processStringKeyPairs: key = '+ key + ', value = ' + value)
+    }
+        
+    let numKVProcessor: KeyValueProcessor&lt;number, number&gt; = processNumKeyPairs;
+    numKVProcessor(1, 12345); //Output: processNumKeyPairs: key = 1, value = 12345 
+
+    let strKVProcessor: KeyValueProcessor&lt;number, string&gt; = processStringKeyPairs;
+    strKVProcessor(1, &quot;Bill&quot;); //Output: processStringKeyPairs: key = 1, value = Bill 
+  </code></pre>
+
+  <p>In the above example, generic interface KeyValueProcessor includes the generic signature of a method without the
+    method name. This will allow us to use any function with the matching signature. The generic type will be set at
+    the
+    time of creating a variable such as numKVProcessor and strKVProcessor.</p>
+
+  <p>The above example can be re-written as below.</p>
+
+  <pre><code class="language-ts">
+    interface KeyValueProcessor&lt;T, U&gt; {
+        (key: T, val: U): void;
+    };
+
+    function processKeyPairs&lt;T, U&gt;(key:T, value:U):void { 
+        console.log(`processKeyPairs: key = ${key}, value = ${value}`)
+    }
+
+    let numKVProcessor: KeyValueProcessor&lt;number, number&gt; = processKeyPairs;
+    numKVProcessor(1, 12345); //Output: processKeyPairs: key = 1, value = 12345 
+
+    let strKVProcessor: KeyValueProcessor&lt;number, string&gt; = processKeyPairs;
+    strKVProcessor(1, &quot;Bill&quot;); //Output: processKeyPairs: key = 1, value = Bill 
+  </code></pre>
+
+  <p>As you can see, we declared a function type numKVProcessor as let numKVProcessor: KeyValueProcessor&lt;number,
+    number&gt; =
+    processKeyPairs;. The type number will be used as the underlaying type of generic functionprocessKeyPairs. This
+    will remove the need of defining separate functions for different data types.</p>
+
+  <p>The generic interface can also be implemented in the class, same as the non-generic interface, as shown below.
+  </p>
+
+  <pre><code class="language-ts">
+    interface IKeyValueProcessor&lt;T, U&gt; {
+        process(key: T, val: U): void;
+    };
+
+    class kvProcessor implements IKeyValueProcessor&lt;number, string&gt; { 
+        process(key:number, val:string):void { 
+            console.log(`Key = ${key}, val = ${val}`);
+        }
+    }
+
+    let proc: IKeyValueProcessor&lt;number, string&gt; = new kvProcessor();
+    proc.process(1, 'Bill'); //Output: processKeyPairs: key = 1, value = Bill 
+  </code></pre>
+
+  <p>In the above example, the generic type parameters are being set at the time of implementing an interface e.g
+    class kvProcessor implements IKeyValueProcessor&lt;number, string&gt;. This will force us to implement the method
+    process() with number and string parameters.</p>
+
+  <h4>Generic Class</h4>
+
+  <p>TypeScript supports generic classes. The generic type parameter is specified in angular brackets after the name
+    of the class. A generic class can have generic fields (member variables) or methods.</p>
+
+  <pre><code class="language-ts">
+    class KeyValuePair&lt;T,U&gt; { 
+        private key: T;
+        private val: U;
+  
+        setKeyValue(key: T, val: U): void { 
+            this.key = key;
+            this.val = val;
+        }
+  
+        display():void { 
+            console.log(`Key = ${this.key}, val = ${this.val}`);
+        }
+    }
+  
+    let kvp1 = new KeyValuePair&lt;number, string&gt;();
+    kvp1.setKeyValue(1, &quot;Steve&quot;);
+    kvp1.display(); //Output: Key = 1, Val = Steve 
+  
+    let kvp2 = new KayValuePair&lt;string, string&gt;();
+    kvp2.SetKeyValue(&quot;CEO&quot;, &quot;Bill&quot;); 
+    kvp2.display(); //Output: Key = CEO, Val = Bill
+  </code></pre>
+
+  <p>The generic class can also implement a generic interface.</p>
+
+  <pre><code class="language-ts">
+    interface IKeyValueProcessor&lt;T, U&gt; {
+        process(key: T, val: U): void;
+    };
+
+    class kvProcessor&lt;T, U&gt; implements IKeyValueProcessor&lt;T, U&gt; { 
+        process(key:T, val:U):void { 
+            console.log(`Key = ${key}, val = ${val}`);
+        }
+    }
+
+    let proc: IKeyValueProcessor&lt;number, string&gt; = new kvProcessor();
+    proc.process(1, 'Bill'); //Output: processKeyPairs: key = 1, value = Bill 
+  </code></pre>
+
+  <p>In the above example, the generic class kvProcessor implements the generic interface IKeyValueProcessor. It does
+    not specify the type parameters T and U, instead it allows users to set them themselves. Thus, kvProcessor class
+    can be used with any type of key and value. A variable is defined as generic interface type with underlying types
+    for T and U. So, you don't need to set the generic types for kvProcessor.</p>
+
+</body>
+
+</html>
