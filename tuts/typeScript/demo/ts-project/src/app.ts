@@ -1,3 +1,16 @@
+const greet = () => {
+    console.log('Hello world!')
+  }
+  greet()
+
+  function add(x: number, y: number): number {
+    return x + y;
+  }
+
+  add(4, 2);
+
+
+
 //let message: string = 'Hello World';
 //console.log(message);
 

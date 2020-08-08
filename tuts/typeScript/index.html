@@ -17,32 +17,211 @@
   </nav>
 
   <h1>typeScript</h1>
-  <p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces  like 'C#' to help you build robust components.</p>
-
+  <p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and
+    interfaces like 'C#' to help you build robust components.</p>
+  
   <h2 id="typeScriptInstall">Installation</h2>
+  <pre><code class="language-bash">
+    npm install -D typescript
+  </code></pre>
+
+  <p>Once that install is done, we need to tell TypeScript what to do with our code, so let’s create a new file called <code>tsconfig.json</code> and add this:</p>
+
+  <pre><code class="language-ts">
+    {
+      "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": ["es2017", "dom"],
+        "allowJs": true,
+        "checkJs": true,
+        "noEmit": true,
+        "strict": false,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true
+      },
+      "include": [ src/**/*, "script", "test" ],
+      "exclude": [ "node_modules" ]
+    }
+  </code></pre>
+  <p>or with minimum config</p>
+  <pre><code class="language-ts">
+    {
+      "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "sourceMap": true
+      },
+      "include": [
+          "src/**/*"
+      ],
+      "exclude": [
+          "node_modules",
+          "**/*.spec.ts"
+      ]
+    }
+  </code></pre>
+
+  <p>For our purposes, the important lines of this config file are the allowJs and checkJs options, which are both set to true. These tell TypeScript that we want it to evaluate our JavaScript code.</p>
 
 
-  <p>Make a new folder, and create an <strong>app.ts</strong> file and type following code. ".ts" is the TypeScript file
+  <p>Make a new folder <code>src</code>, and create an <strong>app.ts</strong> file and type following code. ".ts" is the TypeScript file
     extension.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     const greet = () => {
       console.log('Hello world!')
     }
     greet()
+
+    function add(x: number, y: number): number {
+      return x + y;
+    }
+
+    add(4, 2);
   </code></pre>
-  <pre><code class="language-js">
+
+  <pre><code class="language-ts">
     // run on cmd
     tsc app.ts
     // You can change the compilation target from default (ES5) to other versions
     tsc app.ts --target ES2018:
   </code></pre>
-  <pre><code class="language-js">
+
+  <pre><code class="language-ts">
     // above code convert into this.
     var greet = function () {
       console.log('Hello world!');
     };
     greet();
+    function add(x, y) {
+        return x + y;
+    }
+    add(4, 2);
+  </code></pre>
+
+  
+  <h3>Basic Types</h3>
+
+  <h4>Boolean</h4>
+  <pre><code class="language-ts">
+    let isDone: boolean = false;
+  </code></pre>
+
+  <h4>Number</h4>
+  <p>As in JavaScript, all numbers in TypeScript are either floating point values or BigIntegers. These floating point numbers get the type number, while BigIntegers get the type bigint. In addition to hexadecimal and decimal literals, TypeScript also supports binary and octal literals introduced in ECMAScript 2015.</p>
+
+  <pre><code class="language-ts">
+    let decimal: number = 6;
+    let hex: number = 0xf00d;
+    let binary: number = 0b1010;
+    let octal: number = 0o744;
+    let big: bigint = 100n;
+  </code></pre>
+  <h4>String</h4>
+
+  <pre><code class="language-ts">
+    let color: string = "blue";
+  </code></pre>
+
+  <p>You can also use template strings, which can span multiple lines and have embedded expressions. These strings are surrounded by the backtick/backquote (`) character, and embedded expressions are of the form ${ expr }.</p>
+
+  <pre><code class="language-ts">
+    let fullName: string = `Bob Bobbington`;
+    let age: number = 37;
+    let sentence: string = `Hello, my name is ${fullName}. I'll be ${age + 1} years old next month.`;
+    let sentence: string = "Hello, my name is " + fullName + ".\n\n" + "I'll be " + (age + 1) + " years old next month.";
+  </code></pre>
+
+  <h4>Array</h4>
+  <pre><code class="language-ts">
+    let list: number[] = [1, 2, 3];
+  </code></pre>
+
+  <p>The second way uses a generic array type, Array<elemType>:</p>
+  
+  <pre><code class="language-ts">
+    let list: Array<number> = [1, 2, 3];
+  </code></pre>
+
+  <h4>Tuple</h4>
+  <p>Tuple types allow you to express an array with a fixed number of elements whose types are known, but need not be the same. For example, you may want to represent a value as a pair of a string and a number:</p>
+
+  <pre><code class="language-ts">
+  // Declare a tuple type
+  let x: [string, number];
+  // Initialize it
+  x = ["hello", 10]; // OK
+  // Initialize it incorrectly
+  x = [10, "hello"]; // Error - Type 'number' is not assignable to type 'string'. Type 'string' is not assignable to type 'number'.
+  </code></pre>
+
+  <p>When accessing an element with a known index, the correct type is retrieved:</p>
+
+  <pre><code class="language-ts">
+  // OK
+  console.log(x[0].substring(1));
+
+  console.log(x[1].substring(1)); // roperty 'substring' does not exist on type 'number'.
+
+  x[3] = "world";
+  Tuple type '[string, number]' of length '2' has no element at index '3'.
+
+  console.log(x[5].toString()); //Object is possibly 'undefined'. Tuple type '[string, number]' of length '2' has no element at index '5'.
+  </code></pre>
+
+
+  <h4>Any</h4>
+  <p>In some situations, not all type information is available or it’s declaration would take an inappropriate amount of effort. These may occur for values from code that has been written without TypeScript or a 3rd party library. In these cases, we might want to opt-out of type checking. To do so, we label these values with the any type:</p>
+
+ <pre><code class="language-ts">
+    declare function getValue(key: string): any;
+    // OK, return value of 'getValue' is not checked
+    const str: string = getValue("myString");
+  </code></pre>
+
+  <p>The any type is a powerful way to work with existing JavaScript, allowing you to gradually opt-in and opt-out of type checking during compilation.</p>
+
+  <p>Unlike unknown, variables of type any allow you to access arbitrary properties, even ones that don’t exist. These properties include functions and TypeScript will not check their existence or type:</p>
+
+  <pre><code class="language-ts">
+    let looselyTyped: any = 4;
+    // OK, ifItExists might exist at runtime
+    looselyTyped.ifItExists();
+    // OK, toFixed exists (but the compiler doesn't check)
+    looselyTyped.toFixed();
+
+    let strictlyTyped: unknown = 4;
+    strictlyTyped.toFixed();
+    Object is of type 'unknown'.
+  </code></pre>
+
+  <p>The any will continue to propagate through your objects:</p>
+
+  <pre><code class="language-ts">
+    let looselyTyped: any = {};
+    let d = looselyTyped.a.b.c.d;
+    //  ^ = let d: any
+  </code></pre>
+
+  <h4>Void</h4>
+  <p>void is a little like the opposite of any: the absence of having any type at all. You may commonly see this as the return type of functions that do not return a value:</p>
+
+  <pre><code class="language-ts">
+    function warnUser(): void {
+      console.log("This is my warning message");
+    }
+  </code></pre>
+
+  <p>Declaring variables of type void is not useful because you can only assign null (only if --strictNullChecks is not specified, see next section) or undefined to them:</p>
+
+  <pre><code class="language-ts">
+    let unusable: void = undefined;
+    // OK if `--strictNullChecks` is not given
+    unusable = null;
   </code></pre>
 
   <h3 id="typing">Typing</h3>
@@ -74,22 +253,25 @@
 
   <p>Here is how you define a string variable in TypeScript:</p>
 
-  <pre><code class="language-ts">const greeting : string = &quot;hello!&quot;
-</code></pre>
+  <pre><code class="language-ts">
+    const greeting : string = &quot;hello!&quot;
+  </code></pre>
 
   <p>Type inference lets us avoid writing the type in obvious cases like this:</p>
 
-  <pre><code class="language-ts">const greeting = &quot;hello!&quot;
-</code></pre>
+  <pre><code class="language-ts">
+    const greeting = &quot;hello!&quot;
+  </code></pre>
 
   <p>The type is determined by TS.</p>
 
   <p>This is how a function accepts an argument of a specific type:</p>
 
-  <pre><code class="language-ts">const multiply = (a: number, b: number) =&gt; {
-  return a * b
-}
-</code></pre>
+  <pre><code class="language-ts">
+    const multiply = (a: number, b: number) =&gt; {
+    return a * b
+  }
+  </code></pre>
 
   <p>If you pass a string to <code>multiply()</code>, the compiler will give you an error.</p>
 
@@ -110,7 +292,7 @@
     <li><code>enum</code></li>
     <li><code>Array</code></li>
     <li><code>any</code></li>
-    <li><code>never</code></li>    
+    <li><code>never</code></li>
     <li><code>undefined</code></li>
     <li><code>null</code></li>
     <li><code>void</code></li>
@@ -144,7 +326,7 @@
   <p>Enums can be defined using the keyword enum. Let's say we want to store a set of print media types. The
     corresponding enum in TypeScript would be:</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     PrintMedia {
       Newspaper,
       Newsletter,
@@ -156,7 +338,7 @@
   <p>In the above example, we have an enum named PrintMedia. The enum has four values: Newspaper, Newsletter, Magazine,
     and Book. Here, enum values start from zero and increment by 1 for each member. It would be represented as:</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     Newspaper = 0
     Newsletter = 1
     Magazine = 2
@@ -169,7 +351,7 @@
   <p>We also have the option to initialize the first numeric value ourselves. For example, we can write the same enum
     as:</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     PrintMedia {
       Newspaper = 1,
       Newsletter,
@@ -183,7 +365,7 @@
     and Book would be 4. </p>
   <p>It is not necessary to assign sequential values to Enum members. They can have any values.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     PrintMedia {
       Newspaper = 1,
       Newsletter = 5,
@@ -194,7 +376,7 @@
 
   <p>The enum can be used as a function parameter or return type, as shown below:</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper = 1,
       Newsletter,
@@ -223,7 +405,7 @@
     or computed. The following enum includes members with computed
     values.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper = 1,
       Newsletter = getPrintMediaCode('newsletter'),
@@ -244,7 +426,7 @@
   <p>When the enum includes computed and constant members, then uninitiated enum members either must come first or must
     come after other initialized members with numeric constants. The following will give an error.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newsletter = getPrintMediaCode('newsletter'),
       Newspaper, // Error: Enum member must have initializer
@@ -255,7 +437,7 @@
 
   <p>The above enum can be declared as below.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper,
       Book,
@@ -281,7 +463,7 @@
 
   <p>Consider the same example of a numeric enum, but represented as a string enum:</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper = "NEWSPAPER",
       Newsletter = "NEWSLETTER",
@@ -302,7 +484,7 @@
 
   <p>Heterogeneous enums are enums that contain both string and numeric values.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum Status { 
       Active = 'ACTIVE', 
       Deactivate = 1, 
@@ -315,7 +497,7 @@
   <p>Enum in TypeScript supports reverse mapping. It means we can access the value of a member and also a member name
     from its value. Consider the following example.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper = 1,
       Newsletter,
@@ -331,7 +513,7 @@
   <p>As you can see in the above example, <code>PrintMedia[3]</code> returns its member name "Magazine". This is because
     of reverse mapping. Let's see how TypeScript implements reverse mapping using the following example.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     enum PrintMedia {
       Newspaper = 1,
       Newsletter,
@@ -343,7 +525,7 @@
 
   <p>The above example gives the following output in the browser console.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     {
       '1': 'Newspaper',
       '2': 'Newsletter',
@@ -361,7 +543,7 @@
     retrieved using their values. This is called reverse mapping.</p>
   <p>TypeScript can compile the above enum into the following JavaScript function.</p>
 
-  <pre><code class="language-js">
+  <pre><code class="language-ts">
     var PrintMedia;
     (function (PrintMedia) {
       PrintMedia[PrintMedia["Newspaper"] = 1] = "Newspaper";
@@ -594,7 +776,7 @@ class SportsCar implements Car {
     (new Car()).drive(20, 'Flavio', 'Roger', 'Syd')
   </code></pre>
 
-  
+
 
 
   <h3>Generics</h3>
