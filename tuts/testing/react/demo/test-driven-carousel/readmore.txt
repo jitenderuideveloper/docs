@@ -1,0 +1,16 @@
+npm install @babel/core --save-dev
+npm install @babel/preset-env --save-dev
+npm install @babel/preset-react --save-dev
+npm install babel-jest --save-dev
+
+npm install enzyme --save-dev
+npm install enzyme-adapter-react-16 --save-dev
+
+npm install eslint --save-dev
+npm install eslint-plugin-react --save-dev
+
+npm install jest --save-dev
+npm install prettier-eslint-cli --save-dev
+
+npm install react --save
+npm install react-dom --save

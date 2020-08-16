@@ -1,0 +1,4 @@
+npm i jest --save-dev
+npm i eslint --save-dev
+npm i eslint-plugin-jest --save-dev
+npm i prettier-eslint-cli --save-dev
