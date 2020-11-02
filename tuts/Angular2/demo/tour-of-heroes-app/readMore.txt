@@ -1,0 +1,12 @@
+// https://angular.io/generated/zips/toh-pt6/toh-pt6.zip
+
+ng new tour-of-heroes-app
+
+ng generate service shared/services
+
+npm install angular-in-memory-web-api --save
+
+
+ng serve --o // http://localhost:4200/
+
+

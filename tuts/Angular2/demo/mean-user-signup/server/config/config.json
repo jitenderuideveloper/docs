@@ -1,0 +1,10 @@
+{
+    "development": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb+srv://jitender:jitu1234@cluster-mean-signup.0q9zf.mongodb.net/mean_test?retryWrites=true&w=majority"
+    },
+    "production": {
+        "PORT": 80,
+        "MONGODB_URI": "mongodb+srv://jitender:jitu1234@cluster-mean-signup.0q9zf.mongodb.net/mean_test?retryWrites=true&w=majority"
+    }
+}
