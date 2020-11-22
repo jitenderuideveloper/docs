@@ -1,0 +1,5 @@
+<span class="setup">Given Number</span>
+<h1 class="punchline">{{ data }}</h1>
+<button type="button" class="btn btn-success" (click)="fnAddNumber()"> Add NUmber </button>
+
+<app-life-cycle-child [name]="name" (newNumEvent)="deleteNumber($event)"></app-life-cycle-child>

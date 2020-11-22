@@ -10,6 +10,9 @@
 </head>
 
 <body>
+
+
+
   <h2>Form</h2>
   <h3>Setup in reactive form</h3>
   <p>Simple</p>
@@ -24,7 +27,8 @@
       })
       </code></pre>
     </li>
-    <li>To register a single form control in app.component.ts, import the FormControl class and create a new instance of FormControl to save as a class property. <br />
+    <li>To register a single form control in app.component.ts, import the FormControl class and create a new instance of
+      FormControl to save as a class property. <br />
       <pre><code class="language-js">
       import { FormControl } from '@angular/forms'; <br />
       
@@ -77,7 +81,7 @@
   <h3>Grouping form controls </h3>
   <ol>
     <li>Create a FormGroup instance.<br />
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     import { FormGroup, FormControl } from '@angular/forms';
 
     profileForm = new FormGroup({
@@ -88,14 +92,14 @@
     </li>
 
     <li>Associate the FormGroup model and view.<br />
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     &lt;form [formGroup]=&quot;profileForm&quot;&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;firstName&quot;&gt;
     </code></pre>
     </li>
 
     <li>Save the form data. <br />
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     &lt;form [formGroup]=&quot;profileForm&quot; (ngSubmit)=&quot;onSubmit()&quot;&gt;&lt;/form&gt;
 
     onSubmit() {
@@ -104,11 +108,11 @@
     }
 
     &lt;button type=&quot;submit&quot; [disabled]=&quot;!profileForm.valid&quot;&gt;Submit&lt;/button&gt;
-    </code></pre>   
+    </code></pre>
     </li>
 
     <li>Updating parts of the data model <br />
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     this.profileForm.patchValue({
       firstName: 'Nancy',
       address: {
@@ -122,7 +126,7 @@
   <h4>Creating nested form groups</h4>
   <ol>
     <li>
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     Create a nested group.
     import { FormGroup, FormControl } from '@angular/forms';
 
@@ -140,27 +144,28 @@
     </li>
 
     <li>Group the nested form in the template.
-    <pre><code class="language-js">
+      <pre><code class="language-js">
     &lt;div formGroupName=&quot;address&quot;&gt;
       &lt;input type=&quot;text&quot; formControlName=&quot;street&quot;&gt;
       &lt;input type=&quot;text&quot; formControlName=&quot;city&quot;&gt;
     </code></pre>
     </li>
-    
+
   </ol>
 
 
-    <h4>Using the FormBuilder service to generate controls ( using the form builder to creating the instances manually.)</h4>
-    <ol>
-      <li>Import the FormBuilder class and Inject the FormBuilder service <br />
-        <pre><code class="language-js">
+  <h4>Using the FormBuilder service to generate controls ( using the form builder to creating the instances manually.)
+  </h4>
+  <ol>
+    <li>Import the FormBuilder class and Inject the FormBuilder service <br />
+      <pre><code class="language-js">
         import { FormBuilder } from '@angular/forms';
 
         constructor(private fb: FormBuilder) { }
         </code></pre>
-      </li>
+    </li>
 
-      <li>Inject the FormBuilder service.<br />
+    <li>Inject the FormBuilder service.<br />
       <pre><code class="language-js">
       profileForm = this.fb.group({
         firstName: [''],
@@ -173,19 +178,19 @@
         })
       })
       </code></pre>
-      </li>
+    </li>
 
-      <li>Generate the form contents.</li>
-    </ol>
+    <li>Generate the form contents.</li>
+  </ol>
 
-    <h4>Validating form input</h4>
-    <ol>
-      <li>Import a validator function in your form component. <br />
+  <h4>Validating form input</h4>
+  <ol>
+    <li>Import a validator function in your form component. <br />
       <pre><code class="language-js">
       import { Validators } from '@angular/forms';
       </code></pre>
-      </li>
-      <li>Add the validator to the field in the form and display form status. <br />
+    </li>
+    <li>Add the validator to the field in the form and display form status. <br />
       <pre><code class="language-js">
       profileForm = this.fb.group({
         firstName: ['', Validators.required],
@@ -202,13 +207,154 @@
 
       &lt;p&gt; Form Status: {{ profileForm.status }} &lt;/p&gt;
       </code></pre>
-      </li>
-    </ol>
-
+    </li>
+  </ol>
+  
+  <ul>
+    <li>Angular CLI</li>
+    <li>NgModules</li>
+    <li>Components
+      <ul>
+        <li>class</li>
+        <li>template</li>
+        <li>metadata</li>
+        <li>template syntax</li>
+        <li>interpolation</li>
+        <li>property binding</li>
+        <li>event binding</li>
+        <li>two way binding</li>
+        <li>pipes
+          <ul>
+            <li>pure pipe (default)</li>
+            <li>impure pipe</li>
+          </ul>
+        </li>
+        <li>template reference variables</li>
+      </ul>
+    </li>
+    <li>Directives
+      <ul>
+        <li>Structural 
+          <ul>
+            <li>ngIf, ngSwitch, ngFor</li>
+          </ul>
+        </li>
+        <li>Attribute 
+          <ul>
+            <li>NgClass, NgStyle</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Component Styling
+      <ul>
+        <li>Class binding</li>
+        <li>Style binding</li>
+      </ul>
+    </li>
+    <li>Component Interaction - Lifecycle Methods</li>
+    <li>Services
+      <ul>
+        <li>Depedency Injection</li>
+        <li>Providing Services</li>
+      </ul>
+    </li>
+    <li>Observables
+      <ul>
+        <li>Creating Observables</li>
+        <li>Subscribing to Observables</li>
+        <li>Executing Observables</li>
+        <li>Disposing Observables</li>
+        <li>Operators</li>
+      </ul>
+    </li>
+    <li>HTTP Client
+      <ul>
+        <li>HttpClient</li>
+        <li>Get, Post, Put, Delete</li>
+        <li>Typed Response</li>
+        <li>Error Handling</li>
+        <li>Interceptors</li>
+      </ul>
+    </li>	
+    <li>Forms
+      <ul>
+        <li>Template Driven Forms
+          <ul>
+            <li>FormsModule</li>
+            <li>NgForm</li>
+            <li>NgModel</li>
+            <li>NgModelGroup</li>
+            <li>Tracking State & Validity</li>
+            <li>Validation & Error Messages</li>
+            <li>ngSubmit</li>
+          </ul>
+        </li>
+        <li>
+          <ul>Reactive Forms
+            <li>ReactiveFormsModule</li>
+            <li>FormControl</li>
+            <li>FormGroup</li>
+            <li>setValue & patchValue</li>
+            <li>FormBuilder Service</li>
+            <li>Validator Functions</li>
+            <li>FormArray</li>
+            <li>ngSubmit</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Routing
+      <ul>
+        <li>RouterModule</li>
+        <li>Configuring Routes</li>
+        <li>RouterOutlet</li>
+        <li>RouterLink</li>
+        <li>Wildcard Routes</li>
+        <li>Redirecting Routes</li>
+        <li>Route Parameters</li>
+        <li>Nested Routes</li>
+        <li>Relative Paths</li>
+        <li>Lazy Loading Routes</li>
+        <li>Route Guards</li>
+      </ul>
+    </li>	
+    <li>Animations</li>
+  </ul>
+  <ul>Ecosystem
+    <li>State Management
+      <ul>
+        <li>ngRx</li>
+      </ul>
+    </li>
+    <li>UI Library
+      <ul>
+        <li>Angular Material</li>
+      </ul>
+    </li>
+    <li>Server Side Rendering
+      <ul>
+        <li>Angular Universal</li>
+      </ul>
+    </li>
+    <li>Testing
+      <ul>
+        <li>Jasmine & Karma</li>
+        <li>Protractor</li>
+      </ul>
+    </li>
+    <li>Miscellaneous
+      <ul>
+        <li>i18n</li>
+        <li>Accessibility</li>
+      </ul>
+    </li>
+  </ul>
 
   <nav class="site-nav">
     <ul>
       <li><a href="#ngInstallation">Installation</a></li>
+      <li><a href="#ngLifeCycles">Lifecycles</a></li>
       <li><a href="#ngNgModules">NgModules</a></li>
       <li><a href="#ngComponents">Components</a></li>
       <li><a href="#ngPipes">Pipes</a></li>
@@ -219,7 +365,7 @@
       <li><a href="#ngRxjs">RxJs</a></li>
       <li><a href="#ngDirective">Directive</a></li>
       <li><a href="#ngForm">Form</a>
-        <ul>          
+        <ul>
           <li><a href="#templateDriven">template-driven</a></li>
           <li><a href="#formReactive">Reactive</a></li>
         </ul>
@@ -229,8 +375,9 @@
 
   <p>Best Practices:-</p>
   <ul>
-    <li>When you bootstrap with the AppComponent class (in main.ts), Angular looks for a &lt;app-root&gt; in the index.html,
-        finds it, instantiates an instance of AppComponent, and renders it inside the &lt;app-root&gt; tag.</li>
+    <li>When you bootstrap with the AppComponent class (in main.ts), Angular looks for a &lt;app-root&gt; in the
+      index.html,
+      finds it, instantiates an instance of AppComponent, and renders it inside the &lt;app-root&gt; tag.</li>
     <li>Component should focus on presenting data and delegate data access to a service.</li>
     <li>The component plays the part of the controller/viewmodel, and the template represents the view.</li>
     <li>{{1+1}} the text between the braces is a template expression that Angular first evaluates and then converts to
@@ -248,7 +395,8 @@
   <h1>Angular 2</h1>
   <p>The basic building blocks of an Angular application are NgModules, which provide a compilation context for
     components. NgModules collect related code into functional sets; an Angular app is defined by a set of NgModules.
-    An app always has at least a root module that enables bootstrapping, and typically has many more feature modules.</p>
+    An app always has at least a root module that enables bootstrapping, and typically has many more feature modules.
+  </p>
   <ul>
     <li>Components define views, which are sets of screen elements that Angular can choose among and modify according
       to your program logic and data.</li>
@@ -555,6 +703,164 @@
   <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
   </code></pre>
 
+  <h2 id="ngLifeCycles">Lifecycles</h2>
+  <figure><img src="img/lifecycle.jpg" alt="" /></figure>
+  <table>
+    <tr>
+      <td>Lifecycle hook</td>
+      <td>Purpose and Timing</td>
+      <td>Use Case</td>
+      <td>Differences</td>
+    </tr>
+    <tr>
+      <td>ng OnCh anges</td>
+      <td>
+        <ul>
+          <li>This callback function is sought after when the data-bound property variations happen for a component
+            (when an input or output binding value changes) </li>
+          <li>The ngOnChanges(..) gets an object that contains every @Input property of component as key and a
+            SimpleChange object as according value. </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>It can be utilized practically mall the components that have input. </li>
+          <li>Gets invoked whenever the input value gets changed. </li>
+        </ul>
+      </td>
+      <td>ngOnChanges vs ngDoCheck:
+        <ul>
+          <li>ngOnChanges is called when data-bound property has changed</li>
+          <li>ngDoCheck is called when change detection runs so you can implement your custom change detection action.
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>ngOnInIt</td>
+      <td>
+        <ul>
+          <li>Called only after the first ngOnChanges, but only once. It basically fires when the component is ready for
+            use when all queries (content child and view child queries) and inputs have been resolved.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>It's the place to perform complex initializations shortly after construction. </li>
+          <li>This hook initializes data for a component</li>
+        </ul>
+      </td>
+      <td>constructor vs ngOninit:
+        <ul>
+          <li>Constructor is a default method of the class that is executed when the class is instantiated and ensures
+            proper initialization of fields in the class and its subclasses. <strong>Should use constructor() to setup
+              Dependency Injection and not </strong><strong>much else.</strong></li>
+          <li>Should use ngOnlnit for all the initialization/declaration and avoid stuff to work in the constructor.
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>ngDoCheck</strong></td>
+      <td>
+        <ul>
+          <li>This is fired each time anything that can trigger change detection has fired.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Detect and act upon changes that Angular can't or won't detect on its own (mutating objects not
+            reference). </li>
+        </ul>
+      </td>
+      <td>ngOnChanges vs ngDoCheck:
+        <ul>
+          <li>ngOnChanges won't be triggered when we mutate a (non-immutable) JavaScript object. Instead it triggers
+            only when we reference-change the data-bound input Property. </li>
+          <li>We can use ngDoCheck for such scenarios, that allows us to do a very fine-grained check of which property
+            on our object changed. </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>ngAfterContentlnit</td>
+      <td>
+        <ul>
+          <li>Called after external content has been projected into the component.</li>
+          <li>This method is also called when the properties get clearly demarcated as ContentChild and ContentChildren
+            and are fully initialized, which means <strong>content queries like </strong>@ContentChildren <strong>and
+              @ContentChild are set before the hook callback is called.</strong></li>
+          <li>In the total lifecycle of a component, this hook gets <strong>call only for once.</strong></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Do some logical work when the projection content ready or the @ContentChildren/@ContetChild is ready.
+          </li>
+        </ul>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ngAfterContentChecked</td>
+      <td>
+        <ul>
+          <li><strong>It gets its call after ngAftercontentlnit and gets executed after every execution of
+            </strong>ngDoCheck.<strong> </strong></li>
+          <li>This hook method accomplishes its work by investigating the modification in the content of the component
+            using Angular change detection apparatus, and it still performs its task even if there is not at all any
+            modification. </li>
+        </ul>
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ngAfterViewlnit</td>
+      <td>
+        <ul>
+          <li>This lifecycle method gets its call after ngAfterContentChecked</li>
+          <li>Respond after Angular initializes the component's views and child views / the view that a directive is in.
+          </li>
+          <li>Called <strong><em>once </em></strong><strong>after the first </strong>ngAfterContentChecked().</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Perfect for initializing event third party library, that needs the view be composed before taking any
+            action </li>
+        </ul>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ngAfterViewChecked</td>
+      <td>
+        <ul>
+          <li>This method gets its call after ngAfterViewlnit and then for every ngAfterContentChecked method. </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>When something is awaited from the child component, this component van be helpful. </li>
+        </ul>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ngOnDestory</td>
+      <td>
+        <ul>
+          <li>This lifecycle hook gets its call after Angular destroys all the components or directives. This is the
+            place where you can use your clean up logic and unsubscribe from all observable and detach from event
+            handlers, by doing so you can prevent memory leakage.</li>
+        </ul>
+      </td>
+      <td>•</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+
   <h2 id="ngNgModules">NgModules</h2>
   <p>Angular apps are modular and Angular has its own modularity system called NgModules. NgModules are containers for
     a
@@ -599,7 +905,8 @@
   </code></pre>
 
   <h2 id="ngComponents">Components</h2>
-  <p>Individual components  define and control a patch of screen called a view. Component class interacts with the view through an API of properties and methods.</p>
+  <p>Individual components define and control a patch of screen called a view. Component class interacts with the view
+    through an API of properties and methods.</p>
 
   <pre><code class="language-js">
   import { Component } from '@angular/core';
@@ -615,7 +922,10 @@
   }
   </code></pre>
 
-  <p>For example, HeroListComponent has a heroes property that holds an array of heroes. Its selectHero() method sets a selectedHero property when the user clicks to choose a hero from that list. The component acquires the heroes from a service, which is a TypeScript parameter property on the constructor. The service is provided to the component through the dependency injection system.</p>
+  <p>For example, HeroListComponent has a heroes property that holds an array of heroes. Its selectHero() method sets a
+    selectedHero property when the user clicks to choose a hero from that list. The component acquires the heroes from a
+    service, which is a TypeScript parameter property on the constructor. The service is provided to the component
+    through the dependency injection system.</p>
 
   <pre><code class="language-js">
   import { Component } from '@angular/core';
@@ -636,9 +946,12 @@
 
   <h3>Metadata</h3>
 
-  <p>The metadata for a component tells Angular where to get the major building blocks that it needs to create and present the component and its view. In particular, it associates a template with the component, either directly with inline code, or by reference. Together, the component and its template describe a view.</p>
+  <p>The metadata for a component tells Angular where to get the major building blocks that it needs to create and
+    present the component and its view. In particular, it associates a template with the component, either directly with
+    inline code, or by reference. Together, the component and its template describe a view.</p>
 
-  <p>The @Component decorator identifies the class immediately below it as a component class, and specifies its metadata.  Class is not a component until you mark it as one with the @Component decorator.</p>
+  <p>The @Component decorator identifies the class immediately below it as a component class, and specifies its
+    metadata. Class is not a component until you mark it as one with the @Component decorator.</p>
 
   <pre><code class="language-js">
   @Component({
@@ -660,12 +973,17 @@
 
   <h3>Template</h3>
   <p>A template is a form of HTML that tells Angular how to render the component.</p>
-  <p>A template looks like regular HTML, except that it also contains Angular template syntax, which alters the HTML based on your app's logic and the state of app and DOM data.  Template can use data binding to coordinate the app and DOM data, pipes to transform data before it is displayed, and directives to apply app logic to what gets displayed.</p>
+  <p>A template looks like regular HTML, except that it also contains Angular template syntax, which alters the HTML
+    based on your app's logic and the state of app and DOM data. Template can use data binding to coordinate the app and
+    DOM data, pipes to transform data before it is displayed, and directives to apply app logic to what gets displayed.
+  </p>
 
   <h4>Data binding</h4>
-  <p>Angular supports two-way data binding, a mechanism for coordinating the parts of a template with the parts of a component. Add binding markup to the template HTML to tell Angular how to connect both sides.</p>
+  <p>Angular supports two-way data binding, a mechanism for coordinating the parts of a template with the parts of a
+    component. Add binding markup to the template HTML to tell Angular how to connect both sides.</p>
 
-  <p>The following diagram shows the four forms of data binding markup. Each form has a direction: to the DOM, from the DOM, or both.</p>
+  <p>The following diagram shows the four forms of data binding markup. Each form has a direction: to the DOM, from the
+    DOM, or both.</p>
 
   <p><img src="img/databinding.png" alt="" /></p>
 
@@ -677,30 +995,39 @@
   </code></pre>
 
   <ul>
-    <li>The {{hero.name}} <strong>interpolation</strong> displays the component's hero.name property value within the &lt;li&gt;
+    <li>The {{hero.name}} <strong>interpolation</strong> displays the component's hero.name property value within the
+      &lt;li&gt;
       element.</li>
-    <li>The [hero] <strong>property binding</strong> passes the value of selectedHero from the parent HeroListComponent to the hero
+    <li>The [hero] <strong>property binding</strong> passes the value of selectedHero from the parent HeroListComponent
+      to the hero
       property of the child HeroDetailComponent.</li>
-    <li>The (click) <strong>event binding</strong> calls the component's selectHero method when the user clicks a hero's name.</li>
+    <li>The (click) <strong>event binding</strong> calls the component's selectHero method when the user clicks a hero's
+      name.</li>
   </ul>
 
-  <p>Two-way data binding (used mainly in template-driven forms) combines property and event binding in a single notation. </p>
-  
-  <p>In two-way binding, a data property value flows to the input box from the component as with property binding. The user's changes also flow back to the component, resetting the property to the latest value, as with event binding.</p>
+  <p>Two-way data binding (used mainly in template-driven forms) combines property and event binding in a single
+    notation. </p>
 
-  <p>Angular processes all data bindings once for each JavaScript event cycle, from the root of the application component tree through all child components.</p>
+  <p>In two-way binding, a data property value flows to the input box from the component as with property binding. The
+    user's changes also flow back to the component, resetting the property to the latest value, as with event binding.
+  </p>
+
+  <p>Angular processes all data bindings once for each JavaScript event cycle, from the root of the application
+    component tree through all child components.</p>
   <p><img src="img/component-databinding.png" alt="" /></p>
-  <p>Data binding plays an important role in communication between a template and its component, and is also important for communication between parent and child components.</p>
+  <p>Data binding plays an important role in communication between a template and its component, and is also important
+    for communication between parent and child components.</p>
   <p><img src="img/parent-child-binding.png" alt="" /></p>
-  
+
   <h4 id="ngPipes">Pipes</h4>
   <p>Angular pipes let you declare display-value transformations in your template HTML. A class with the @Pipe
     decorator defines a function that transforms input values to output values for display in a view.</p>
 
-  <p>Angular defines various pipes, such as the date pipe and currency pipe; for a complete list, see the <a href="https://angular.io/api?type=pipe">Pipes API list</a>. You can also define new pipes.</p>
+  <p>Angular defines various pipes, such as the date pipe and currency pipe; for a complete list, see the <a
+      href="https://angular.io/api?type=pipe">Pipes API list</a>. You can also define new pipes.</p>
 
   <p>To specify a value transformation in an HTML template, use the pipe operator (|).</p>
-  
+
   <code>{{interpolated_value | pipe_name}}</code>
   <p>You can chain pipes, sending the output of one pipe function to be transformed by another pipe function. A pipe
     can also take arguments that control how it performs its transformation.</p>
@@ -718,7 +1045,8 @@
 
   <h4 id="ngDirectives">Directives</h4>
 
-  <p>Angular templates are dynamic. When Angular renders them, it transforms the DOM according to the instructions given by directives. A directive is a class with a @Directive() decorator.</p>
+  <p>Angular templates are dynamic. When Angular renders them, it transforms the DOM according to the instructions given
+    by directives. A directive is a class with a @Directive() decorator.</p>
 
 
   <p>A component is technically a directive. However, components are so distinctive and central to Angular applications
@@ -729,12 +1057,12 @@
   <h5>Structural directives</h5>
   <p>Structural directives alter layout by adding, removing, and replacing elements in the DOM. The example template
     uses two built-in structural directives to add application logic to how the view is rendered. 1. *ngFor 2. *ngIf</p>
-  
+
   <pre><code class="language-html">
   &lt;li *ngFor="let hero of heroes"&gt;&lt;/li&gt;
   &lt;app-hero-detail *ngIf="selectedHero"&gt;&lt;/app-hero-detail&gt;
   </code></pre>
-  
+
   <h5>Attribute directives</h5>
 
   <p>Attribute directives alter the appearance or behavior of an existing element. In templates they look like regular
@@ -771,7 +1099,7 @@
   </code></pre>
 
   <h4>2. Configure an injector with a service provider</h4>
-  
+
   <ol>
     <li>In the @Injectable() decorator for the service itself.</li>
     <li>In the @NgModule() decorator for an NgModule.</li>
@@ -807,7 +1135,8 @@
 
 
   <p>Angular distinguishes components from services to increase modularity and reusability. By separating a component's
-    view-related functionality from other kinds of processing, you can make your component classes lean and efficient.</p>
+    view-related functionality from other kinds of processing, you can make your component classes lean and efficient.
+  </p>
 
   <p>A component can delegate certain tasks to services, such as fetching data from the server, validating user input,
     or logging directly to the console. By defining such processing tasks in an injectable service class, you make
@@ -822,7 +1151,8 @@
     <li>The <em>injector</em> is the main mechanism. Angular creates an application-wide injector for you during the
       bootstrap
       process, and additional injectors as needed. You don't have to create injectors.</li>
-    <li>An injector creates dependencies, and maintains a container of dependency instances that it reuses if possible.</li>
+    <li>An injector creates dependencies, and maintains a container of dependency instances that it reuses if possible.
+    </li>
     <li>A provider is an object that tells an injector how to obtain or create a dependency.</li>
   </ul>
   <p>For any dependency that you need in your app, you must register a provider with the app's injector, so that the
@@ -1033,7 +1363,8 @@
     <li>Registering the reactive forms module</li>
     <li>Import the FormControl class into your component and create a new instance of the form control to save as a
       class property.</li>
-    <li>Registering the control in the template by using the <code>formControl</code> binding provided by <code>FormControlDirective</code>
+    <li>Registering the control in the template by using the <code>formControl</code> binding provided by
+      <code>FormControlDirective</code>
       included in <code>ReactiveFormsModule</code>.</li>
   </ol>
 
@@ -1199,7 +1530,7 @@
   <h3>Creating nested form groups</h3>
   <ol>
     <li>Step 1: Creating a nested group <br />
-  <pre><code class="language-js">
+      <pre><code class="language-js">
   import { Component } from '@angular/core';
   import { FormGroup, FormControl } from '@angular/forms';
   
@@ -1221,10 +1552,10 @@
     });
   }  
   </code></pre>
-  </li>
-  
-  <li>Step 2: Grouping the nested form in the template<br />
-  <pre><code class="language-js">
+    </li>
+
+    <li>Step 2: Grouping the nested form in the template<br />
+      <pre><code class="language-js">
   &lt;div formGroupName=&quot;address&quot;&gt;
   &lt;h3&gt;Address&lt;/h3&gt;
   &lt;label&gt; Street:
@@ -1241,7 +1572,7 @@
   &lt;/label&gt;
   &lt;/div&gt;    
   </code></pre>
-  </li>
+    </li>
   </ol>
   <h3>Partial model updates</h3>
   <p>When updating the value for a form group instance that contains multiple controls, you may only want to update
@@ -1389,4 +1720,5 @@
   </code></pre>
 
 </body>
+
 </html>

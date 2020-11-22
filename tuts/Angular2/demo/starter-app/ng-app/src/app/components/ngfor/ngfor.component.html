@@ -1,0 +1,28 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Annual Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--  -->
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.code }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.salary }}</td>
+      </tr>
+      <tr *ngIf="!employees || employees.length == 0">
+        <td colspan="4">No employees to display</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <button class="btn btn-primary" (click)="getEmployees()">
+    Refresh Employees
+  </button>
+</div>

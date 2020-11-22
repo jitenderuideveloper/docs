@@ -1,0 +1,14 @@
+<h2>Child lifecycle</h2>
+<h4>Hello {{ name }}!</h4>
+<label>Decrease Number: <input type="text" value="" #newNum /></label>
+<button type="button" class="btn btn-danger" (click)="decreaseNumber(newNum.value)">Update</button>
+
+<div>
+  <h2>Pure/Impure Pipe</h2>
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Enter name" /> <br />
+  <button (click)="changeByProperty()">change by Property</button> <br />
+  <button (click)="changeByReference()">change by Reference</button>
+  <ul>
+    <li *ngFor="let user of users | filter: searchTerm">{{ user.name }}</li>
+  </ul>
+</div>

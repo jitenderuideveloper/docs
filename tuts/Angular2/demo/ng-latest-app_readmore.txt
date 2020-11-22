@@ -1,0 +1,2 @@
+//strict, routing, scss :: accceot
+ng new ng-latest-app

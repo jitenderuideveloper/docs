@@ -1,11 +1,14 @@
 require('./config/config'); // set process.env.MONGODB_URI and process.env.port
 
 const express = require('express');
+const path = require('path');
 const cors = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const routesIndex = require('./routes/index.router');
+//----------- Routes
+const routesThing = require("./routes/thing.router");
+const routesUser = require('./routes/user.router');
 //const referralRouter = require('./routes/referralRoutes.js');
 //const connectDB = require('./DB/Conncection');
 
@@ -27,5 +30,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(express.json({ extended: false }));
 
-app.use('/api', routesIndex);
+app.use('/api/auth', routesUser);
+app.use("/api/product", routesThing);
+app.use("/images", express.static(path.join(__dirname,'images')));
 app.listen(process.env.PORT, () => console.log('Server is running...'));
