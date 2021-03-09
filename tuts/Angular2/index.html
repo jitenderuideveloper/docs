@@ -173,6 +173,8 @@
           <li><a href="#formReactive">Reactive</a></li>
         </ul>
       </li>
+      <li><a href="#bootstrap4">Bootstrap 4</a></li>
+      <li><a href="#materialUi">Material-ui</a></li>
     </ul>
   </nav>
 
@@ -1748,6 +1750,86 @@
     </li>
   </ol>
 
+
+  <h2 id="bootstrap4">Bootstrap 4</h2>
+
+  <h3>1. Adding bootrap via 'ng-bootstrap' package </h3>
+  <p>'ng-bootstrap' replaced jquery need with javascript code so dont need to include jQuery. </p>
+
+  <p>1. install Bootstrap 4 and  'ng-bootstrap' package.</p>
+
+  <pre><code class="language-bash">
+    npm install bootstrap
+    npm install --save @ng-bootstrap/ng-bootstrap
+  </code></pre>
+
+  <p>2. Need to inclue package and import into the @NgModule's import array</p>
+
+  <pre><code class="language-bash">
+    // app.module.ts
+    import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+    
+    @NgModule({
+      imports: [
+        NgbModule.forRoot()
+      ]
+    })
+  </code></pre>
+    <p>3. Inclue bootstrap stylsheet in styles array in 'angular.json' file. </p>
+    <pre><code class="language-js">
+    "architect": {
+      "build": {
+        "options": {
+          "styles": [
+            "src/styles.scss",
+            "./node_modules/bootstrap/scss/bootstrap.scss
+            // "./node_modules/bootstrap/dist/css/bootstrap.css"
+          ]
+        }
+      }
+    }
+  </code></pre>
+
+  <p>3.1 or inclue bootstrap stylsheet in 'src/styles.scss' file. </p>
+  <pre><code class="language-js">
+    // if need customization
+    @import "~bootstrap/scss/bootstrap";    
+    // @import "./assets/styles/bootstrap_customizations.scss";
+    // @import "./node_modules/bootstrap/scss/bootstrap.scss";
+  </code></pre>
+  
+  <h3>2. Adding bootrap Using Schematics </h3> 
+  <pre><code class="language-html">
+    ng add @ng-bootstrap/schematics
+  </code></pre>
+  
+  <h3>3. Adding bootrap via 'index.html' package </h3>  
+  
+  <pre><code class="language-html">
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; integrity=&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot; crossorigin=&quot;anonymous&quot;&gt;
+  &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js&quot; integrity=&quot;sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+  </code></pre>
+
+  <p class="note">'ngx-bootstrap' uses separate modules for components to reduce the final app size. But its a jquery dependent package.</p>
+
+  <h2>Material-UI</h2>
+
+  <p>1. Use the Angular CLI's installation schematic to set up your Angular Material</p>
+  <pre><code class="language-bash">
+    ng add @angular/material
+  </code></pre>
+
+  <p>2. Include and import specific module. </p>
+  <pre><code>
+    //src/app/app.module.ts
+    import {MatButtonModule} from '@angular/material/button';
+    @NgModule({
+      imports: [ 
+        MatButtonModule 
+      ]
+    })
+  </code></pre>
 </body>
 
 </html>
