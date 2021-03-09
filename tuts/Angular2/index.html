@@ -1813,7 +1813,7 @@
 
   <p class="note">'ngx-bootstrap' uses separate modules for components to reduce the final app size. But its a jquery dependent package.</p>
 
-  <h2>Material-UI</h2>
+  <h2 id="materialUi">Material-UI</h2>
 
   <p>1. Use the Angular CLI's installation schematic to set up your Angular Material</p>
   <pre><code class="language-bash">
@@ -1821,7 +1821,7 @@
   </code></pre>
 
   <p>2. Include and import specific module. </p>
-  <pre><code>
+  <pre><code class="language-js">
     //src/app/app.module.ts
     import {MatButtonModule} from '@angular/material/button';
     @NgModule({
